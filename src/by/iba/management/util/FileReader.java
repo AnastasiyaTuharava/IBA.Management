@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class FileReader {
     private static final Logger logger = LogManager.getRootLogger();
     public static ArrayList<String> readFile(String filePath) throws IOException {
-        ArrayList<String> projectsList = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         File file = new File(filePath);
         try (FileInputStream in = new FileInputStream(file)) {
             XSSFWorkbook workbook = new XSSFWorkbook(in);
@@ -29,11 +29,11 @@ public class FileReader {
                     Cell cell = cellIterator.next();
                     str = str.concat(cell.getStringCellValue()).concat(" ");
                 }
-                projectsList.add(str);
+                list.add(str);
             }
         } catch (ReadFileIOException e) {
             logger.error("File error or IO error: ", e);
         }
-        return projectsList;
+        return list;
     }
 }
