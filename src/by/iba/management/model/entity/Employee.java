@@ -187,7 +187,7 @@ public class Employee {
         int result = (int) (employeeId ^ (employeeId >>> 32));
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = (int) (projectId ^ (projectId >>> 32));
+        result = 31 * result + (int) (projectId ^ (projectId >>> 32));
         result = 31 * result + (teamLead ? 1 : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (englishLanguageLevel != null ? englishLanguageLevel.hashCode() : 0);

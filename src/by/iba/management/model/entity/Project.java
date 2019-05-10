@@ -14,8 +14,14 @@ public class Project {
     private String projectDescription;
     private ArrayList<Employee> teamList = new ArrayList<>();
 
+    public Project(String projectName, String projectDescription) {
+        this.projectId = ProjectIdGenerator.getNewProjectId();
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+    }
+
     public Project(long projectId, String projectName, String projectDescription) {
-        this.projectId = ProjectIdGenerator.getProjectId();
+        this.projectId = projectId;
         this.projectName = projectName;
         this.projectDescription = projectDescription;
     }
@@ -59,7 +65,7 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                ", projectId= " + projectId +
+                "projectId= " + projectId +
                 ", projectName = " + projectName + '\'' +
                 ", projectDescription = " + projectDescription + '\'' +
                 '}';
