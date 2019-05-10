@@ -15,14 +15,14 @@ public class Main {
             System.out.println(p);
         }
         DataWriterProject.writeProjectToFile(ProjectsRepository.getProjectList());
-        ArrayList<Employee> employeeList = new ArrayList<>();
+        /*ArrayList<Employee> employeeList = new ArrayList<>();
         employeeList.add(new Employee(EmployeeIdGenerator.getEmployeeId(), "Bob", "Marley",
                 7, true, Position.JUNIOR_QA, EnglishLanguageLevel.C1,
                 new ProgrammingLanguage(true, false, false, false, false),
                 new Skills(true, true, true, true, false),
                 new Testing(false, false,false, false),
                 new Tools(true, true, false, true)));
-        DataWriterEmployee.writeEmployeeToFile(employeeList, p1);
+        DataWriterEmployee.writeEmployeeToFile(employeeList, p1);*/
 
     }
 }

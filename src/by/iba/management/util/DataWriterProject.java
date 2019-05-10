@@ -19,15 +19,15 @@ public class DataWriterProject {
     }
 
     public static void writeProjectToFile(List<Project> projectList){
-        ArrayList<String> projectsList = new ArrayList<>();
         File file = new File(FILE_PATH);
         try (FileInputStream in = new FileInputStream(file)) {
             XSSFWorkbook workbook = new XSSFWorkbook(in);
             XSSFSheet mySheet = workbook.getSheetAt(0);
 
-            int rowIndex = mySheet.getLastRowNum();
+            int rowIndex = 0;
+                    //mySheet.getLastRowNum();
             for (Project project : projectList) {
-                Row row = mySheet.createRow(++rowIndex);
+                Row row = mySheet.createRow(rowIndex++);
                 int cellIndex = 0;
                 row.createCell(cellIndex++).setCellValue(String.valueOf(project.getProjectId()));
                 row.createCell(cellIndex++).setCellValue(project.getProjectName());
