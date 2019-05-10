@@ -1,6 +1,6 @@
 package by.iba.management.model.entity;
 
-import by.iba.management.util.DataParserProjects;
+import by.iba.management.util.DataParserProject;
 import by.iba.management.util.FileReader;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -17,7 +17,7 @@ public class ProjectsRepository {
     private static final Logger logger = LogManager.getRootLogger();
     private ProjectsRepository() {
         try {
-            projectsList = DataParserProjects.parseStringToCreateProject(FileReader.readFile(FILE_PATH));
+            projectsList = DataParserProject.parseStringToCreateProject(FileReader.readFile(FILE_PATH));
         } catch (IOException e) {
             logger.error("Error reading file: ", e);
         }
