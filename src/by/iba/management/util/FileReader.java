@@ -27,7 +27,7 @@ public class FileReader {
                 String str = "";
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    str = str.concat(cell.getStringCellValue()).concat(" .");
+                    str = str.concat(cell.getStringCellValue()).concat(" ");
                 }
                 list.add(str);
             }
