@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="EmployeeProfile" prefHeight="670.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.model.logic.impl.EditEmployeeImpl">
+   <children>
+      <TitledPane fx:id="ProjectProfile" animated="false" prefHeight="781.0" prefWidth="1100.0" text="Employee Profile">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="38.0" layoutY="96.0" text="First Name: " />
+                  <Label layoutX="38.0" layoutY="50.0" text="Employee ID: " />
+                  <TextField fx:id="fxFirstName" layoutX="247.0" layoutY="90.0" />
+                  <TextField fx:id="fxEmployeeId" layoutX="247.0" layoutY="45.0" />
+                  <Button fx:id="fxSaveEmployeeButton" layoutX="999.0" layoutY="663.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="fxCancelEmployeeEditAddButton" layoutX="877.0" layoutY="663.0" mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="fxDeleteEmployeeButton" layoutX="646.0" layoutY="663.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="183.0" text="Delete Employee" />
+                  <TextField fx:id="fxLastName" layoutX="247.0" layoutY="135.0" />
+                  <TextField fx:id="fxProjectName" layoutX="247.0" layoutY="180.0" />
+                  <Label layoutX="38.0" layoutY="141.0" text="Last Name" />
+                  <Label layoutX="36.0" layoutY="186.0" text="Project assigned (if any):" />
+                  <Group fx:id="fxDevGroup">
+                     <children>
+                        <CheckBox fx:id="fxIsCplusPlus" layoutX="796.0" layoutY="124.0" mnemonicParsing="false" text="C++" />
+                        <CheckBox fx:id="fxIsJquery" layoutX="910.0" layoutY="259.0" mnemonicParsing="false" text="jQuery" />
+                        <CheckBox fx:id="fxIsCss" layoutX="910.0" layoutY="225.0" mnemonicParsing="false" text="CSS" />
+                        <CheckBox fx:id="fxIsPhp" layoutX="909.0" layoutY="90.0" mnemonicParsing="false" text="PHP" />
+                        <CheckBox fx:id="fxIsHtml" layoutX="797.0" layoutY="294.0" mnemonicParsing="false" text="HTML" />
+                        <Label layoutX="582.0" layoutY="225.0" text="Skills:" />
+                        <CheckBox fx:id="fxIsJava" layoutX="797.0" layoutY="90.0" mnemonicParsing="false" text="Java" />
+                        <CheckBox fx:id="fxIsDotNet" layoutX="909.0" layoutY="124.0" mnemonicParsing="false" text=".Net" />
+                        <CheckBox fx:id="fxIsVisualStudio" layoutX="794.0" layoutY="358.0" mnemonicParsing="false" text="Visual Studio" />
+                        <Label layoutX="583.0" layoutY="45.0" text="For DEV only:" />
+                        <CheckBox fx:id="fxIsIdea" layoutX="793.0" layoutY="392.0" mnemonicParsing="false" text="IntelliJ IDEA" />
+                        <CheckBox fx:id="fxIsEclipse" layoutX="943.0" layoutY="358.0" mnemonicParsing="false" text="Eclipse" />
+                        <Label layoutX="578.0" layoutY="358.0" text="Tools:" />
+                        <CheckBox fx:id="fxIsSql" layoutX="798.0" layoutY="225.0" mnemonicParsing="false" text="SQL" />
+                        <CheckBox fx:id="fxIsNetBeans" layoutX="943.0" layoutY="392.0" mnemonicParsing="false" text="NetBeans" />
+                        <Label layoutX="581.0" layoutY="86.0" text="Programming Languages:" />
+                        <CheckBox fx:id="fxIsCsharp" layoutX="796.0" layoutY="159.0" mnemonicParsing="false" text="C#" />
+                        <CheckBox fx:id="fxIsJavaScript" layoutX="797.0" layoutY="259.0" mnemonicParsing="false" text="JavaScript" />
+                     </children>
+                  </Group>
+                  <Label layoutX="35.0" layoutY="266.0" text="Position:" />
+                  <Label layoutX="34.0" layoutY="307.0" text="English Level:" />
+                  <Label layoutX="35.0" layoutY="225.0" text="Team Lead?" />
+                  <CheckBox fx:id="fxIsTeamLead" layoutX="247.0" layoutY="225.0" mnemonicParsing="false" text=" " />
+                  <ChoiceBox fx:id="fxEnglishLevel" layoutX="247.0" layoutY="305.0" prefWidth="150.0" />
+                  <Group fx:id="fxQaGroup">
+                     <children>
+                        <Label layoutX="583.0" layoutY="483.0" text="For QA only:" />
+                        <Label layoutX="584.0" layoutY="517.0" text="Testig:" />
+                        <Group>
+                           <children>
+                              <RadioButton fx:id="fxIsQa" layoutX="938.0" layoutY="519.0" mnemonicParsing="false" text="Automational" />
+                              <RadioButton fx:id="fxIsManual" layoutX="794.0" layoutY="517.0" mnemonicParsing="false" text="Manual" />
+                           </children>
+                        </Group>
+                        <Group>
+                           <children>
+                              <RadioButton fx:id="fxIsMobile" layoutX="938.0" layoutY="563.0" mnemonicParsing="false" text="Mobile" />
+                              <RadioButton fx:id="fxIsDesktop" layoutX="794.0" layoutY="561.0" mnemonicParsing="false" text="Desktop" />
+                           </children>
+                        </Group>
+                     </children>
+                  </Group>
+                  <ChoiceBox fx:id="fxPosition" layoutX="247.0" layoutY="258.0" prefWidth="150.0" />
+                  <Accordion layoutX="86.0" layoutY="399.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>

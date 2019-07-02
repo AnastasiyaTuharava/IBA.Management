@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface FindProject {
 
-    List<Project> findProjectById(long projectId);
-    List<Project> findProjectByName(String projectName);
+     List<Project> findProjectById(long projectId);
+     List<Project> findProjectByName(String projectName);
 }
 
 
