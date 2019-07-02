@@ -1,8 +1,6 @@
 package by.iba.management.util;
 
 import by.iba.management.model.exception.ReadFileIOException;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,9 +11,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileReader {
-    private static final Logger logger = LogManager.getRootLogger();
+    private static final Logger LOGGER = Logger.getLogger(FileReader.class.getName());
+
     public static ArrayList<String> readFile(String filePath) throws IOException {
         ArrayList<String> list = new ArrayList<>();
         File file = new File(filePath);
@@ -32,7 +33,7 @@ public class FileReader {
                 list.add(str);
             }
         } catch (ReadFileIOException e) {
-            logger.error("File error or IO error: ", e);
+            LOGGER.log(Level.FINE, "File error or IO error: ", e);
         }
         return list;
     }

@@ -26,6 +26,12 @@ public class Project {
         this.projectDescription = projectDescription;
     }
 
+    public Project(String projectId, String projectName, String projectDescription) {
+        this.projectId = Long.parseLong(projectId);
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+    }
+
     public long getProjectId() {
         return projectId;
     }

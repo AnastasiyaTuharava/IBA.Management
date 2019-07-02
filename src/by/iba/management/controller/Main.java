@@ -1,28 +1,30 @@
 package by.iba.management.controller;
 
-import by.iba.management.model.entity.*;
-import by.iba.management.util.DataWriterEmployee;
-import by.iba.management.util.DataWriterProject;
-import by.iba.management.util.EmployeeIdGenerator;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.StageStyle;
+import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
-public class Main {
-    public static void main(String[] args) {
-        Project p1 = new Project("HelloWorld", "First line");
-        ProjectsRepository.getProjectList().add(p1);
-        for (Project p : ProjectsRepository.getProjectList()) {
-            System.out.println(p);
-        }
-        DataWriterProject.writeProjectToFile(ProjectsRepository.getProjectList());
-        /*ArrayList<Employee> employeeList = new ArrayList<>();
-        employeeList.add(new Employee(EmployeeIdGenerator.getEmployeeId(), "Bob", "Marley",
-                7, true, Position.JUNIOR_QA, EnglishLanguageLevel.C1,
-                new ProgrammingLanguage(true, false, false, false, false),
-                new Skills(true, true, true, true, false),
-                new Testing(false, false,false, false),
-                new Tools(true, true, false, true)));
-        DataWriterEmployee.writeEmployeeToFile(employeeList, p1);*/
+public class Main extends Application {
 
+        public static void main(String[] args) {
+        launch(args);
     }
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        Stage stage = new Stage();
+        String name = "fxml/ProjectsList.fxml";
+        Parent root = FXMLLoader.load(getClass().getResource(name));
+        stage.setTitle("Projects List");
+        stage.setScene(new Scene(root));
+        stage.sizeToScene();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
+
 }

@@ -2,23 +2,26 @@ package by.iba.management.model.entity;
 
 import by.iba.management.util.DataParserProject;
 import by.iba.management.util.FileReader;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProjectsRepository {
-    private static ArrayList<Project> projectsList = new ArrayList<>();
     private static final String FILE_PATH = "data/ProjectsList.xlsx";
-    private static final Logger logger = LogManager.getRootLogger();
+    private static final Logger LOGGER = Logger.getLogger(ProjectsRepository.class.getName());
+    private static ArrayList<Project> projectsList = new ArrayList<>();
+
     static {
         try {
             projectsList = DataParserProject.parseStringToCreateProject(FileReader.readFile(FILE_PATH));
         } catch (IOException e) {
-            logger.error("Error reading file: ", e);
+            LOGGER.log(Level.FINE, "Error reading file: ", e);
         }
     }
-    private ProjectsRepository() {
+
+    public ProjectsRepository() {
     }
 
     public static ArrayList<Project> getProjectList() {
