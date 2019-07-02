@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="fxProjectsList" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1300.0" text="Projects List" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane fx:id="fxProjectsList" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1300.0" text="Projects List" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.ProjectsListController">
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -25,7 +25,7 @@
                   <Label layoutX="59.0" layoutY="23.0" text="Search:" />
                   <TextField fx:id="fxFindProjectTextField" layoutX="170.0" layoutY="17.0" />
                   <RadioButton fx:id="fxSearchByProjectName" layoutX="580.0" layoutY="26.0" mnemonicParsing="false" text="search by Name" />
-                  <Button fx:id="fxFindProjectButton" layoutX="790.0" layoutY="20.0" mnemonicParsing="false" text="Find Project" />
+                  <Button fx:id="fxFindProjectButton" layoutX="790.0" layoutY="20.0" mnemonicParsing="false" onAction="#findProject" text="Find Project" />
                   <RadioButton fx:id="fxSearchByProjectId" layoutX="428.0" layoutY="26.0" mnemonicParsing="false" text="search by ID" />
                   <Button fx:id="fxClearlProjectSearchButton" layoutX="936.0" layoutY="20.0" mnemonicParsing="false" text="Clear" />
                </children>
