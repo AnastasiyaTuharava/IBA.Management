@@ -7,10 +7,10 @@
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="poi-4.0.1" level="project" />
-    <orderEntry type="library" name="log4j-1.2.17" level="project" />
     <orderEntry type="library" name="commons-collections4-4.3-javadoc" level="project" />
     <orderEntry type="library" name="commons-compress-1.18-javadoc" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="project" />
     <orderEntry type="library" name="resolver" level="project" />
+    <orderEntry type="library" name="poi" level="project" />
   </component>
 </module>
