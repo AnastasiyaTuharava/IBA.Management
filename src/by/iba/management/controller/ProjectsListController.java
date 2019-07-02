@@ -1,4 +1,4 @@
-package by.iba.management.controller.controllersPack;
+package by.iba.management.controller;
 
 import by.iba.management.model.logic.impl.FindProjectImpl;
 import javafx.event.ActionEvent;
@@ -17,16 +17,17 @@ public class ProjectsListController {
 
     @FXML
     private void findEmployee(ActionEvent event){
-        String search = fxFindProjectTextField.getText();
+        String searchField = fxFindProjectTextField.getText();
         Boolean id = fxSearchByProjectId.isSelected();
         Boolean name = fxSearchByProjectName.isSelected();
+
         if (id){
             FindProjectImpl byId = new FindProjectImpl();
-            byId.findProjectById(Long.parseLong(search));
+            byId.findProjectById(Long.parseLong(searchField));
             }
         else if (name){
             FindProjectImpl byName = new FindProjectImpl();
-            byName.findProjectByName(search);
+            byName.findProjectByName(searchField);
         }
     }
 }

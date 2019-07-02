@@ -1,4 +1,4 @@
-package by.iba.management.controller.controllersPack;
+package by.iba.management.controller;
 
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.logic.FindEmployee;

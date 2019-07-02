@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Stage stage = new Stage();
-        String name = "fxml/ProjectsList.fxml";
+        String name = "/by/iba/management/view/fxml/ProjectsList.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(name));
         stage.setTitle("Projects List");
         stage.setScene(new Scene(root));
