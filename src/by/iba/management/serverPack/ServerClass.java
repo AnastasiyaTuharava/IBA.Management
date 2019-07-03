@@ -1,3 +1,5 @@
+package by.iba.management.serverPack;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -15,6 +17,7 @@ public class ServerClass {
                 System.out.println("server starting....");
                 clientAccepted = serverSocket.accept();
                 System.out.println("connection established....");
+
                 sois=new ObjectInputStream(clientAccepted.getInputStream());
                 soos=new ObjectOutputStream(clientAccepted.getOutputStream());
                 String clientMessageRecieved = (String) sois.readObject();
@@ -32,7 +35,7 @@ public class ServerClass {
                     if (clientAccepted != null)clientAccepted.close();
                     if (serverSocket != null) serverSocket.close();
                 } catch (IOException e) {
-                    System.out.println("Ресурсы не закрыты!!!");
+                    System.out.println("Resources are not closed!");
                 }
             }
         }

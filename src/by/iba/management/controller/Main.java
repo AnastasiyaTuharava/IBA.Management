@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 import javafx.stage.Stage;
 
@@ -39,8 +38,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
         String fxmlDocPath = "/by/iba/management/view/fxml/ProjectsList.fxml";
+        //FXMLLoader loader = new FXMLLoader();
         //FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
         //VBox root = (VBox) loader.load(fxmlStream);
         Parent root = FXMLLoader.load(getClass().getResource(fxmlDocPath));

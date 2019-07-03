@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class ProjectsListController {
@@ -30,23 +31,18 @@ public class ProjectsListController {
     private void displayProjectsList() {
         ObservableList<Project> projectsList =
                 FXCollections.observableArrayList(ProjectsRepository.getProjectList());
-        fxProjectId.setCellValueFactory(new PropertyValueFactory<Project, String>("projectId"));
-        fxProjectName.setCellValueFactory(new PropertyValueFactory<Project, String>("projectName"));
-        fxProjectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>("projectDescription"));
-        projectsListTable.setItems(projectsList);
+        for (Project p : projectsList) {
+            fxProjectId.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectId());
+            fxProjectName.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectName()));
+            fxProjectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectDescription()));
+            projectsListTable.setItems(projectsList);
+        }
     }
 
     @FXML
-    private void findProject() {
+    private void findProject(ActionEvent event) {
         fxFindProjectTextField.setPromptText("Search");
         ListView list = new ListView();
-        fxFindProjectTextField.textProperty().addListener(
-                new ChangeListener() {
-                    public void changed(ObservableValue observable,
-                                        Object oldVal, Object newVal) {
-                        handleSearchByKey2((String)oldVal, (String)newVal);
-                    }
-                });
 
         list.setMaxHeight(180);
         ObservableList<Project> projectsList =
