@@ -10,7 +10,7 @@
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TableView fx:id="fxProjectsListTable" editable="true" layoutY="81.0" prefHeight="563.0" prefWidth="1200.0">
+            <TableView fx:id="fxProjectsListTable" editable="true" layoutY="81.0" onSort="#displayProjectsList" prefHeight="563.0" prefWidth="1200.0">
                <columns>
                   <TableColumn fx:id="fxProjectId" prefWidth="76.0" text="ID" />
                   <TableColumn fx:id="fxProjectName" prefWidth="248.0" text="Project Name" />
