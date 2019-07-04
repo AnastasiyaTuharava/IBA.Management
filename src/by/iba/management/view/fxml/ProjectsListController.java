@@ -9,40 +9,65 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProjectsListController {
 
     @FXML
-    Button fxFindProjectButton;
-    RadioButton fxSearchByProjectId;
-    RadioButton fxSearchByProjectName;
-    TextField fxFindProjectTextField;
-    TableView projectsListTable;
-    TableColumn fxProjectId;
-    TableColumn fxProjectName;
-    TableColumn fxProjectDescription;
+    public void initialize(){
+        fxFindProjectTextField.setPromptText("Search");
+        ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
+        for (Project p: projectsList) {
+            projectId.setCellValueFactory(new PropertyValueFactory<Project, String>("projectId"));
+            projectName.setCellValueFactory(new PropertyValueFactory<Project, String>("projectName"));
+            projectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>("projectDescription"));
+
+        }
+        //List<String> projectsListStr = projectsList.stream().map(Project::toString).collect(Collectors.toList());
+        ObservableList<Project> projectsOList = FXCollections.observableList(projectsList);
+        System.out.println(projectsOList);
+        /*for (Project p: projectsList) {
+            projectId.setCellFactory(new PropertyValueFactory<Project, String>(Long.toString(p.getProjectId())));
+            projectName.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectName()));
+            projectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectDescription()));
+
+        }*/
+        fxProjectsListTable.setItems(projectsOList);
+    }
 
     @FXML
+    Button fxFindProjectButton;
+    @FXML
+    RadioButton fxSearchByProjectId;
+    @FXML
+    RadioButton fxSearchByProjectName;
+    @FXML
+    TextField fxFindProjectTextField;
+    @FXML
+    TableView<Project> fxProjectsListTable;
+    @FXML
+    TableColumn<Project, String> projectId;
+    @FXML
+    TableColumn<Project, String> projectName;
+    @FXML
+    TableColumn<Project, String> projectDescription;
+
+    /*@FXML
     private void displayProjectsList() {
         ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
         for (Project p: projectsList) {
-            fxProjectId.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectId());
-            fxProjectName.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectName()));
-            fxProjectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectDescription()));
-            projectsListTable.setItems((ObservableList) projectsList);
-        }
+            fxProjectId.setCellFactory(new PropertyValueFactory<Project, String>(Long.toString(p.getProjectId())));
+            fxProjectName.setCellFactory(new PropertyValueFactory<Project, String>(p.getProjectName()));
+            fxProjectDescription.setCellFactory(new PropertyValueFactory<Project, String>(p.getProjectDescription()));
 
-        /*ObservableList<Project> projectsList =
-                FXCollections.observableArrayList(ProjectsRepository.getProjectList());
-        for (Project p : projectsList) {
-            fxProjectId.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectId());
-            fxProjectName.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectName()));
-            fxProjectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>(p.getProjectDescription()));
-            projectsListTable.setItems(projectsList);
-        }*/
-    }
+        }
+        ObservableList<Project> projectsOList = FXCollections.observableList(projectsList);
+        System.out.println(projectsOList);
+        projectsListTable.setItems(projectsOList);
+    }*/
 
     @FXML
     private void findProject(ActionEvent event) {
@@ -51,16 +76,14 @@ public class ProjectsListController {
 
         list.setMaxHeight(180);
         ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
-        projectsListTable.setItems((ObservableList) projectsList);
+        fxProjectsListTable.setItems((ObservableList) projectsList);
 
         String searchField = fxFindProjectTextField.getText();
-        Boolean id = fxSearchByProjectId.isSelected();
-        Boolean name = fxSearchByProjectName.isSelected();
         ToggleGroup tg = new ToggleGroup();
         fxSearchByProjectId.setToggleGroup(tg);
         fxSearchByProjectName.setToggleGroup(tg);
 
-        fxFindProjectButton.setOnAction(ActionEvent event) {
+        fxFindProjectButton.setOnAction(event1 -> {
             RadioButton rb = (RadioButton)tg.getSelectedToggle();
             if (rb.equals(fxSearchByProjectId)){
                 FindProjectImpl searchReasultById = new FindProjectImpl();
@@ -70,6 +93,6 @@ public class ProjectsListController {
                 FindProjectImpl searchResultByName = new FindProjectImpl();
                 searchResultByName.findProjectByName(searchField);
             }
-        }
+        });
     }
 }
