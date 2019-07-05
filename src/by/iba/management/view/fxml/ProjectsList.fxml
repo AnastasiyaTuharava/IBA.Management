@@ -31,12 +31,12 @@
             <Button fx:id="fxGoHomeButton" layoutX="948.0" layoutY="646.0" mnemonicParsing="false" onAction="#backToMain" text="&lt;&lt; Back" />
             <Button fx:id="fxExportProjectsToExcelButton" layoutX="1080.0" layoutY="646.0" mnemonicParsing="false" text="Save to Excel" />
             <Label fx:id="projectIdLabel" layoutX="273.0" layoutY="435.0" text="N/A" />
-            <Label fx:id="projectNameLabel" layoutX="273.0" layoutY="483.0" text="N/A" />
-            <Label fx:id="projectDescriptionLabel" layoutX="273.0" layoutY="525.0" text="N/A" />
-            <Label layoutX="66.0" layoutY="525.0" text="Project Description:" />
-            <Label layoutX="66.0" layoutY="483.0" text="Project Name:" />
+            <Label fx:id="projectNameLabel" layoutX="273.0" layoutY="463.0" text="N/A" />
+            <Label fx:id="projectDescriptionLabel" layoutX="273.0" layoutY="489.0" text="N/A" />
+            <Label layoutX="66.0" layoutY="489.0" text="Project Description:" />
+            <Label layoutX="66.0" layoutY="463.0" text="Project Name:" />
             <Label layoutX="66.0" layoutY="435.0" text="Project ID:" />
-            <Label layoutX="66.0" layoutY="357.0" text="PROJECT INFO:" />
+            <Label layoutX="66.0" layoutY="388.0" text="PROJECT INFO:" />
          </children>
       </AnchorPane>
    </content>

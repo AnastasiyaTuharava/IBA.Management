@@ -30,12 +30,16 @@ public class ProjectsListController {
         fxFindProjectTextField.setPromptText("Search");
         ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
         for (Project p : projectsList) {
-            projectId.setCellValueFactory(new PropertyValueFactory<Project, String>("projectId"));
-            projectName.setCellValueFactory(new PropertyValueFactory<Project, String>("projectName"));
-            projectDescription.setCellValueFactory(new PropertyValueFactory<Project, String>("projectDescription"));
+            projectId.setCellValueFactory(new PropertyValueFactory<>("projectId"));
+            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+            projectDescription.setCellValueFactory(new PropertyValueFactory<>("projectDescription"));
         }
         ObservableList<Project> projectsOList = FXCollections.observableList(projectsList);
         fxProjectsListTable.setItems(projectsOList);
+        showProjectDetails(null);
+        fxProjectsListTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        showProjectDetails(newValue));
     }
 
     @FXML
