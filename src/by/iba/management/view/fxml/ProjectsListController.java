@@ -55,20 +55,6 @@ public class ProjectsListController {
     @FXML
     TableColumn<Project, String> projectDescription;
 
-    /*@FXML
-    private void displayProjectsList() {
-        ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
-        for (Project p: projectsList) {
-            fxProjectId.setCellFactory(new PropertyValueFactory<Project, String>(Long.toString(p.getProjectId())));
-            fxProjectName.setCellFactory(new PropertyValueFactory<Project, String>(p.getProjectName()));
-            fxProjectDescription.setCellFactory(new PropertyValueFactory<Project, String>(p.getProjectDescription()));
-
-        }
-        ObservableList<Project> projectsOList = FXCollections.observableList(projectsList);
-        System.out.println(projectsOList);
-        projectsListTable.setItems(projectsOList);
-    }*/
-
     @FXML
     private void openProjectProfile(ActionEvent event) throws IOException {
         String projectProfileLink = "/by/iba/management/view/fxml/ProjectProfile.fxml";
