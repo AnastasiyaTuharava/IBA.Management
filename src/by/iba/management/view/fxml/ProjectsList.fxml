@@ -10,17 +10,14 @@
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TableView fx:id="fxProjectsListTable" editable="true" layoutY="81.0" prefHeight="563.0" prefWidth="1200.0">
+            <TableView fx:id="fxProjectsListTable" layoutY="127.0" onMouseClicked="#openProjectProfile" prefHeight="428.0" prefWidth="1200.0">
                <columns>
-                  <TableColumn fx:id="projectId" prefWidth="76.0" text="ID" />
+                  <TableColumn fx:id="projectId" editable="false" prefWidth="76.0" text="ID" />
                   <TableColumn fx:id="projectName" prefWidth="248.0" text="Project Name" />
                   <TableColumn fx:id="projectDescription" prefWidth="792.0" text="Project Description" />
                </columns>
             </TableView>
-            <ScrollBar fx:id="scrollbar" layoutX="1200.0" layoutY="118.0" orientation="VERTICAL" prefHeight="527.0" prefWidth="22.0" />
-            <Button fx:id="fxExportProjectsToExcelButton" layoutX="1080.0" layoutY="660.0" mnemonicParsing="false" text="Save to Excel" />
-            <Button fx:id="fxGoHomeButton" layoutX="948.0" layoutY="660.0" mnemonicParsing="false" text="&lt;&lt; Back" />
-            <Group>
+            <Group layoutX="28.0" layoutY="54.0">
                <children>
                   <Label layoutX="59.0" layoutY="23.0" text="Search:" />
                   <TextField fx:id="fxFindProjectTextField" layoutX="162.0" layoutY="19.0" />
@@ -30,6 +27,9 @@
                   <Button fx:id="fxClearlProjectSearchButton" layoutX="936.0" layoutY="20.0" mnemonicParsing="false" text="Clear" />
                </children>
             </Group>
+            <Button fx:id="addNewProjectButton" layoutX="731.0" layoutY="581.0" mnemonicParsing="false" onAction="#openProjectProfile" text="Add New Project" />
+            <Button fx:id="fxGoHomeButton" layoutX="948.0" layoutY="581.0" mnemonicParsing="false" onAction="#backToMain" text="&lt;&lt; Back" />
+            <Button fx:id="fxExportProjectsToExcelButton" layoutX="1080.0" layoutY="581.0" mnemonicParsing="false" text="Save to Excel" />
          </children>
       </AnchorPane>
    </content>

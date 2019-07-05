@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="ProjectProfile" prefHeight="670.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.controller.ProjectsListController">
+<AnchorPane fx:id="ProjectProfile" prefHeight="670.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.ProjectProfileController">
    <children>
       <TitledPane fx:id="fxProjectProfile" animated="false" prefHeight="670.0" prefWidth="1100.0" text="Project Profile">
         <content>
@@ -15,15 +15,21 @@
                   <Label layoutX="38.0" layoutY="100.0" text="Project Name: " />
                   <Label layoutX="38.0" layoutY="150.0" text="Project Description: " />
                   <Label layoutX="38.0" layoutY="50.0" text="Project ID: " />
-                  <TextField fx:id="fxProjectDescription" layoutX="247.0" layoutY="145.0" prefHeight="161.0" prefWidth="689.0" />
-                  <TextField fx:id="fxProjectName" layoutX="247.0" layoutY="94.0" />
-                  <TextField fx:id="fxProjectId" layoutX="247.0" layoutY="44.0" />
+                  <TextField fx:id="projectDescription" layoutX="247.0" layoutY="145.0" prefHeight="161.0" prefWidth="689.0" />
+                  <TextField fx:id="projectName" layoutX="247.0" layoutY="94.0" />
+                  <TextField fx:id="projectId" layoutX="247.0" layoutY="44.0" />
                   <Button fx:id="fxSaveProjectButton" layoutX="870.0" layoutY="560.0" mnemonicParsing="false" text="Save" />
-                  <Button fx:id="fxCancelButton" layoutX="748.0" layoutY="560.0" mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="fxCancelButton" layoutX="748.0" layoutY="560.0" mnemonicParsing="false" onAction="#backToProjectsList" text="Cancel" />
                   <Button fx:id="fxDeleteProjectButton" layoutX="514.0" layoutY="560.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="183.0" text="Delete Project" />
                   <Label layoutX="38.0" layoutY="320.0" text="Team members:" />
-                  <ListView fx:id="fxTeamList" layoutX="247.0" layoutY="320.0" prefHeight="200.0" prefWidth="472.0" />
                   <Button fx:id="fxUnassignEmployeeButton" layoutX="732.0" layoutY="320.0" mnemonicParsing="false" text="Remove team member" />
+                  <TableView fx:id="fxTeamList" layoutX="247.0" layoutY="315.0" prefHeight="200.0" prefWidth="464.0">
+                    <columns>
+                      <TableColumn fx:id="employeeId" prefWidth="50.0" text="ID" />
+                        <TableColumn fx:id="firstName" prefWidth="180.0" text="First Name" />
+                      <TableColumn fx:id="lastName" prefWidth="230.0" text="Last Name" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </content>

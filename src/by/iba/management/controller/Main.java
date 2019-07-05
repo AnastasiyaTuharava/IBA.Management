@@ -38,12 +38,11 @@ public class Main extends Application {
         @Override
         public void start(Stage primaryStage) throws IOException {
                 Stage stage = new Stage();
-                String name = "/by/iba/management/view/fxml/ProjectsList.fxml";
-                Parent root = FXMLLoader.load(getClass().getResource(name));
-                stage.setTitle("Projects List");
+                String fxmlLink = "/by/iba/management/view/fxml/mainPage.fxml";
+                Parent root = FXMLLoader.load(getClass().getResource(fxmlLink));
+                stage.setTitle("Management Tool");
                 stage.setScene(new Scene(root));
                 stage.sizeToScene();
-                //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.show();
         }
 }
