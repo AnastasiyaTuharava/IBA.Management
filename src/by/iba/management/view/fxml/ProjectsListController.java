@@ -54,6 +54,12 @@ public class ProjectsListController {
     TableColumn<Project, String> projectName;
     @FXML
     TableColumn<Project, String> projectDescription;
+    @FXML
+    Label projectIdLabel;
+    @FXML
+    Label projectNameLabel;
+    @FXML
+    Label projectDescriptionLabel;
 
     @FXML
     private void openProjectProfile(ActionEvent event) throws IOException {
@@ -90,6 +96,19 @@ public class ProjectsListController {
                 searchResultByName.findProjectByName(searchField);
             }
         });
+    }
+
+    private void showProjectDetails(Project project) {
+        if (project != null) {
+            projectIdLabel.setText(String.valueOf(project.getProjectId()));
+            projectNameLabel.setText(project.getProjectName());
+            projectDescriptionLabel.setText(project.getProjectDescription());
+        }
+        else {
+            projectIdLabel.setText("empty");
+            projectNameLabel.setText("empty");
+            projectDescriptionLabel.setText("empty");
+        }
     }
 
     @FXML
