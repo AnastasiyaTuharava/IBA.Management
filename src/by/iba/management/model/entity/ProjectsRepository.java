@@ -27,4 +27,8 @@ public class ProjectsRepository {
     public static ArrayList<Project> getProjectList() {
         return projectsList;
     }
+
+    public static void removeProject (long projectId) {
+
+    }
 }
