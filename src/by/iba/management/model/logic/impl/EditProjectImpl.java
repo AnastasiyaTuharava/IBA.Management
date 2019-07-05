@@ -21,14 +21,11 @@ public class EditProjectImpl implements EditProject {
     }
     @Override
     public void removeProject(Project project, long projectId) {
-        //remove projectId from all assigned employees:
-        List<Employee> teamList = new ArrayList<>();
         for (Employee e : EmployeesRepository.getEmployeesList()) {
             if (e.getProjectId() == projectId) {
                 e.setProjectId(0);
             }
         }
-        //now remove the project:
         ProjectsRepository.getProjectList().remove(project);
     }
 }

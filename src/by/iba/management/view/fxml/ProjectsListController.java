@@ -2,6 +2,7 @@ package by.iba.management.view.fxml;
 
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.entity.ProjectsRepository;
+import by.iba.management.model.logic.impl.EditProjectImpl;
 import by.iba.management.model.logic.impl.FindProjectImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,6 +45,8 @@ public class ProjectsListController {
 
     @FXML
     Button fxFindProjectButton;
+    @FXML
+    Button fxDeleteProjectButton;
     @FXML
     RadioButton fxSearchByProjectId;
     @FXML
@@ -113,6 +116,14 @@ public class ProjectsListController {
             projectNameLabel.setText("empty");
             projectDescriptionLabel.setText("empty");
         }
+    }
+
+    @FXML
+    private void handleDeleteProject() {
+        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+        fxProjectsListTable.getItems().remove(line);
+        EditProjectImpl deleteProject = new EditProjectImpl();
+        //deleteProject.removeProject(line);
     }
 
     @FXML
