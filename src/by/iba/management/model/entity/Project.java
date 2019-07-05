@@ -14,6 +14,10 @@ public class Project {
     private String projectDescription;
     private ArrayList<Employee> teamList = new ArrayList<>();
 
+    public Project() {
+        this.projectId = ProjectIdGenerator.getNewProjectId();
+    }
+
     public Project(String projectName, String projectDescription) {
         this.projectId = ProjectIdGenerator.getNewProjectId();
         this.projectName = projectName;

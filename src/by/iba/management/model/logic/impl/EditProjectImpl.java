@@ -12,23 +12,20 @@ import java.util.List;
 
 public class EditProjectImpl implements EditProject {
     @Override
-    public void editProjectName (Project project, String newProjectName) {
-        project.setProjectName(newProjectName);
+    public void editProjectName (long projectId, String newProjectName) {
+        new FindProjectImpl().findProjectById(projectId).setProjectName(newProjectName);
     }
     @Override
-    public void editProjectDescription (Project project, String newProjectDescription) {
-        project.setProjectDescription(newProjectDescription);
+    public void editProjectDescription (long projectId, String newProjectDescription) {
+        new FindProjectImpl().findProjectById(projectId).setProjectDescription(newProjectDescription);
     }
     @Override
-    public void removeProject(Project project, long projectId) {
-        //remove projectId from all assigned employees:
-        List<Employee> teamList = new ArrayList<>();
+    public void removeProject(long projectId) {
         for (Employee e : EmployeesRepository.getEmployeesList()) {
             if (e.getProjectId() == projectId) {
                 e.setProjectId(0);
             }
         }
-        //now remove the project:
-        ProjectsRepository.getProjectList().remove(project);
+        ProjectsRepository.getProjectList().remove(new FindProjectImpl().findProjectById(projectId));
     }
 }

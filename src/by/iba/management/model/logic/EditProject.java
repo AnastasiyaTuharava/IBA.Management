@@ -6,7 +6,7 @@ import by.iba.management.model.entity.Project;
 import java.io.IOException;
 
 public interface EditProject {
-    void editProjectName(Project project, String newProjectName);
-    void editProjectDescription(Project project, String newProjectDescription);
-    void removeProject(Project project, long projectId) throws IOException;
+    void editProjectName(long projectId, String newProjectName);
+    void editProjectDescription(long projectId, String newProjectDescription);
+    void removeProject(long projectId) throws IOException;
 }
