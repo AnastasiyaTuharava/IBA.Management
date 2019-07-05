@@ -30,7 +30,7 @@ public class ProjectProfileController {
             lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         }
         ObservableList<Employee> fxOTeamList = FXCollections.observableList(allEmployeesList);
-        candidates.setItems(fxOTeamList);
+        this.allEmployeesListView.setItems(fxOTeamList);
     }
 
     @FXML
@@ -42,7 +42,7 @@ public class ProjectProfileController {
     @FXML
     TableView<Project> fxProjectsListTable;
     @FXML
-    TableView<Employee> candidates;
+    TableView<Employee> allEmployeesListView;
     @FXML
     TableColumn<Employee, String> employeeId;
     @FXML
@@ -84,21 +84,13 @@ public class ProjectProfileController {
 
     @FXML
     private void handleAssignEmployee() {
-        String candidate = fxOTeamList.getSelectionModel().getSelectedItem();
-        candidates.getItems().remove(candidate);
-        int selectedEmployee = teamList.getSelectionModel().getSelectedIndex();
-        //fxTeamList.getItems().add(selectedEmployee);
-
-
-
-        String potential = candidates.getSelectionModel().getSelectedItem();
-            if (potential != null) {
-                candidates.getSelectionModel().clearSelection();
-                candidates.remove(potential);
-                selected.add(potential);
+        String candidate = String.valueOf(allEmployeesListView.getSelectionModel().getSelectedItem());
+        this.allEmployeesListView.getItems().setAll();
+            if (candidate != null) {
+                allEmployeesListView.getSelectionModel().clearSelection();
+                allEmployeesListView.remove(candidate);
+                teamList.add(candidate);
             }
-        });
-
     }
 
     @FXML
