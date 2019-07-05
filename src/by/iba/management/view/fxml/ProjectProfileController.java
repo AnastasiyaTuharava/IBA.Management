@@ -88,8 +88,8 @@ public class ProjectProfileController {
         this.allEmployeesListView.getItems().setAll();
             if (candidate != null) {
                 allEmployeesListView.getSelectionModel().clearSelection();
-                allEmployeesListView.remove(candidate);
-                teamList.add(candidate);
+                //allEmployeesListView.remove(candidate);
+                //teamList.add(candidate);
             }
     }
 
