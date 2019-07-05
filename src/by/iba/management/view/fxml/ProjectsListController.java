@@ -123,7 +123,7 @@ public class ProjectsListController {
         int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
         fxProjectsListTable.getItems().remove(line);
         EditProjectImpl deleteProject = new EditProjectImpl();
-        //deleteProject.removeProject(line);
+        deleteProject.removeProject(line);
     }
 
     @FXML

@@ -3,8 +3,7 @@ package by.iba.management.view.fxml;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.EmployeesRepository;
 import by.iba.management.model.entity.Project;
-import by.iba.management.model.entity.ProjectsRepository;
-import by.iba.management.model.logic.impl.FindProjectImpl;
+import by.iba.management.model.logic.impl.EditProjectImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,14 +23,14 @@ public class ProjectProfileController {
 
     @FXML
     public void initialize() {
-        ArrayList<Employee> teamList = EmployeesRepository.getEmployeesList();
-        for (Employee e : teamList) {
+        ArrayList<Employee> allEmployeesList = EmployeesRepository.getEmployeesList();
+        for (Employee e : allEmployeesList) {
             employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
             firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         }
-        ObservableList<Employee> fxOTeamList = FXCollections.observableList(teamList);
-        fxTeamList.setItems(fxOTeamList);
+        ObservableList<Employee> fxOTeamList = FXCollections.observableList(allEmployeesList);
+        candidates.setItems(fxOTeamList);
     }
 
     @FXML
@@ -41,15 +40,37 @@ public class ProjectProfileController {
     @FXML
     TextField projectDescription;
     @FXML
+    TableView<Project> fxProjectsListTable;
+    @FXML
+    TableView<Employee> candidates;
+    @FXML
     TableColumn<Employee, String> employeeId;
     @FXML
     TableColumn<Employee, String> firstName;
     @FXML
     TableColumn<Employee, String> lastName;
     @FXML
-    TableView<Employee> fxTeamList;
+    TableView<Employee> teamList;
+    @FXML
+    TableColumn<Employee, String> teamEmployeeId;
+    @FXML
+    TableColumn<Employee, String> teamFirstName;
+    @FXML
+    TableColumn<Employee, String> teamLastName;
     @FXML
     Button fxCancelButton;
+    @FXML
+    Button fxAssignEmployeeButton;
+    @FXML
+    Button fxUnassignEmployeeButton;
+
+    @FXML
+    private void handleDeleteProject() {
+        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+        fxProjectsListTable.getItems().remove(line);
+        EditProjectImpl deleteProject = new EditProjectImpl();
+        deleteProject.removeProject(line);
+    }
 
     @FXML
     private void backToProjectsList(ActionEvent event) throws IOException {
@@ -59,5 +80,29 @@ public class ProjectProfileController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(projectsList);
         window.show();
+    }
+
+    @FXML
+    private void handleAssignEmployee() {
+        String candidate = fxOTeamList.getSelectionModel().getSelectedItem();
+        candidates.getItems().remove(candidate);
+        int selectedEmployee = teamList.getSelectionModel().getSelectedIndex();
+        //fxTeamList.getItems().add(selectedEmployee);
+
+
+
+        String potential = candidates.getSelectionModel().getSelectedItem();
+            if (potential != null) {
+                candidates.getSelectionModel().clearSelection();
+                candidates.remove(potential);
+                selected.add(potential);
+            }
+        });
+
+    }
+
+    @FXML
+    private void handleUnassignEmployee() {
+
     }
 }

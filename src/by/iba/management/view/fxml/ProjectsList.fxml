@@ -8,9 +8,9 @@
 
 <TitledPane fx:id="fxProjectsList" animated="false" text="Projects List" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.ProjectsListController">
    <content>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane>
          <children>
-            <TableView fx:id="fxProjectsListTable" layoutY="127.0" onMouseClicked="#openProjectProfile" prefHeight="207.0" prefWidth="1200.0">
+            <TableView fx:id="fxProjectsListTable" layoutY="127.0" onMouseClicked="#openProjectProfile" prefHeight="207.0">
                <columns>
                   <TableColumn fx:id="projectId" editable="false" prefWidth="76.0" text="ID" />
                   <TableColumn fx:id="projectName" prefWidth="248.0" text="Project Name" />
