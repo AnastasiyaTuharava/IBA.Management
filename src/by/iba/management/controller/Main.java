@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application implements Runnable{
+public class Main extends Application /*implements Runnable*/{
 
         public static void main(String[] args) {
 
@@ -34,10 +34,10 @@ public class Main extends Application implements Runnable{
 
                 launch(args);
         }
-        @Override
+        /*@Override
         public void run () {
 
-        }
+        }*/
         @Override
         public void start(Stage primaryStage) throws IOException {
                 Stage stage = new Stage();
