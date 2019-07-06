@@ -57,8 +57,7 @@ public class SampleMain extends Application {
 
         Button sendRightButton = new Button(" > ");
         sendRightButton.setOnAction((ActionEvent event) -> {
-            String potential = candidatesListView.getSelectionModel()
-                    .getSelectedItem();
+            String potential = candidatesListView.getSelectionModel().getSelectedItem();
             if (potential != null) {
                 candidatesListView.getSelectionModel().clearSelection();
                 candidates.remove(potential);
