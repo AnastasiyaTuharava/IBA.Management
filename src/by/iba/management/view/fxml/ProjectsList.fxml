@@ -8,7 +8,7 @@
 
 <TitledPane fx:id="fxProjectsList" animated="false" text="Projects List" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.ProjectsListController">
    <content>
-      <AnchorPane>
+      <AnchorPane prefHeight="565.0" prefWidth="1236.0">
          <children>
             <TableView fx:id="fxProjectsListTable" layoutY="127.0" onMouseClicked="#openProjectProfile" prefHeight="207.0">
                <columns>
@@ -27,9 +27,14 @@
                   <Button fx:id="fxClearlProjectSearchButton" layoutX="936.0" layoutY="20.0" mnemonicParsing="false" text="Clear" />
                </children>
             </Group>
-            <Button fx:id="addNewProjectButton" layoutX="731.0" layoutY="646.0" mnemonicParsing="false" onAction="#openProjectProfile" text="Add New Project" />
-            <Button fx:id="fxGoHomeButton" layoutX="77.0" layoutY="646.0" mnemonicParsing="false" onAction="#backToMain" text="&lt;&lt; Back" />
-            <Button fx:id="fxExportProjectsToExcelButton" layoutX="1080.0" layoutY="646.0" mnemonicParsing="false" text="Save to Excel" />
+            <Group layoutX="-11.0" layoutY="-72.0">
+               <children>
+                  <Button fx:id="fxGoHomeButton" layoutX="77.0" layoutY="646.0" mnemonicParsing="false" onAction="#backToMain" text="&lt;&lt; Back" />
+                  <Button fx:id="fxDeleteProjectButton" layoutX="532.0" layoutY="646.0" mnemonicParsing="false" onAction="#handleDeleteProject" text="Delete Project" />
+                  <Button fx:id="addNewProjectButton" layoutX="731.0" layoutY="646.0" mnemonicParsing="false" onAction="#openProjectProfile" text="Add New Project" />
+                  <Button fx:id="fxExportProjectsToExcelButton" layoutX="1080.0" layoutY="646.0" mnemonicParsing="false" text="Save to Excel" />
+               </children>
+            </Group>
             <Label fx:id="projectIdLabel" layoutX="273.0" layoutY="435.0" text="N/A" />
             <Label fx:id="projectNameLabel" layoutX="273.0" layoutY="463.0" text="N/A" />
             <Label fx:id="projectDescriptionLabel" layoutX="273.0" layoutY="489.0" text="N/A" />
@@ -37,7 +42,6 @@
             <Label layoutX="66.0" layoutY="463.0" text="Project Name:" />
             <Label layoutX="66.0" layoutY="435.0" text="Project ID:" />
             <Label layoutX="66.0" layoutY="388.0" text="PROJECT INFO:" />
-            <Button fx:id="fxDeleteProjectButton" layoutX="532.0" layoutY="646.0" mnemonicParsing="false" onAction="#handleDeleteProject" text="Delete Project" />
          </children>
       </AnchorPane>
    </content>
