@@ -1,11 +1,13 @@
 package by.iba.management.view.fxml;
 
+import by.iba.management.dao.ProjectDAO;
+import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Project;
-import by.iba.management.model.entity.ProjectsRepository;
 import by.iba.management.model.logic.impl.EditProjectImpl;
 import by.iba.management.model.logic.impl.FindProjectImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,35 +15,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import javafx.event.ActionEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProjectsListController {
 
-    @FXML
-    public void initialize() {
-        fxFindProjectTextField.setPromptText("Search");
-        ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
-        for (Project p : projectsList) {
-            projectId.setCellValueFactory(new PropertyValueFactory<>("projectId"));
-            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
-            projectDescription.setCellValueFactory(new PropertyValueFactory<>("projectDescription"));
-        }
-        ObservableList<Project> projectsOList = FXCollections.observableList(projectsList);
-        fxProjectsListTable.setItems(projectsOList);
-        showProjectDetails(null);
-        fxProjectsListTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) ->
-                        showProjectDetails(newValue));
-    }
+    private final ProjectDAO projectDAO = new ProjectDAOImpl();
 
     @FXML
     Button fxFindProjectButton;
@@ -69,6 +50,23 @@ public class ProjectsListController {
     Label projectDescriptionLabel;
 
     @FXML
+    public void initialize() {
+        fxFindProjectTextField.setPromptText("Search");
+        List<Project> projectsList = projectDAO.getProjects();
+        for (Project p : projectsList) {
+            projectId.setCellValueFactory(new PropertyValueFactory<>("projectId"));
+            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+            projectDescription.setCellValueFactory(new PropertyValueFactory<>("projectDescription"));
+        }
+        ObservableList<Project> projectsOList = FXCollections.observableList(projectsList);
+        fxProjectsListTable.setItems(projectsOList);
+        showProjectDetails(null);
+        fxProjectsListTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        showProjectDetails(newValue));
+    }
+
+    @FXML
     private void openProjectProfile(ActionEvent event) throws IOException {
         String projectProfileLink = "/by/iba/management/view/fxml/ProjectProfile.fxml";
         Parent projectsList = FXMLLoader.load(getClass().getResource(projectProfileLink));
@@ -84,8 +82,8 @@ public class ProjectsListController {
         ListView list = new ListView();
 
         list.setMaxHeight(180);
-        ArrayList<Project> projectsList = ProjectsRepository.getProjectList();
-        fxProjectsListTable.setItems((ObservableList) projectsList);
+        List<Project> projectsList = projectDAO.getProjects();
+        fxProjectsListTable.setItems(FXCollections.observableArrayList(projectsList));
 
         String searchField = fxFindProjectTextField.getText();
         ToggleGroup tg = new ToggleGroup();
@@ -93,12 +91,12 @@ public class ProjectsListController {
         fxSearchByProjectName.setToggleGroup(tg);
 
         fxFindProjectButton.setOnAction(event1 -> {
-            RadioButton rb = (RadioButton)tg.getSelectedToggle();
-            if (rb.equals(fxSearchByProjectId)){
+            RadioButton rb = (RadioButton) tg.getSelectedToggle();
+            if (rb.equals(fxSearchByProjectId)) {
                 FindProjectImpl searchReasultById = new FindProjectImpl();
                 searchReasultById.findProjectById(Long.parseLong(searchField));
             }
-            if (rb.equals(fxSearchByProjectName)){
+            if (rb.equals(fxSearchByProjectName)) {
                 FindProjectImpl searchResultByName = new FindProjectImpl();
                 searchResultByName.findProjectByName(searchField);
             }
@@ -110,8 +108,7 @@ public class ProjectsListController {
             projectIdLabel.setText(String.valueOf(project.getProjectId()));
             projectNameLabel.setText(project.getProjectName());
             projectDescriptionLabel.setText(project.getProjectDescription());
-        }
-        else {
+        } else {
             projectIdLabel.setText("empty");
             projectNameLabel.setText("empty");
             projectDescriptionLabel.setText("empty");

@@ -1,25 +1,16 @@
 package by.iba.management.view.fxml;
 
-import by.iba.management.model.entity.Employee;
-import by.iba.management.model.entity.EmployeesRepository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class mainPageController {
+public class MainPageController {
 
     @FXML
     public void initialize() {

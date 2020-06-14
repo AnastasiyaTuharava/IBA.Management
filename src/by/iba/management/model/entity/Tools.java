@@ -6,6 +6,9 @@ public class Tools {
     private boolean eclipse;
     private boolean netBeans;
 
+    public Tools() {
+    }
+
     public Tools(boolean visualStudio, boolean intellijIdea, boolean eclipse, boolean netBeans) {
         this.visualStudio = visualStudio;
         this.intellijIdea = intellijIdea;
@@ -17,16 +20,32 @@ public class Tools {
         return visualStudio;
     }
 
+    public void setVisualStudio(boolean visualStudio) {
+        this.visualStudio = visualStudio;
+    }
+
     public boolean isIntellijIdea() {
         return intellijIdea;
+    }
+
+    public void setIntellijIdea(boolean intellijIdea) {
+        this.intellijIdea = intellijIdea;
     }
 
     public boolean isEclipse() {
         return eclipse;
     }
 
+    public void setEclipse(boolean eclipse) {
+        this.eclipse = eclipse;
+    }
+
     public boolean isNetBeans() {
         return netBeans;
+    }
+
+    public void setNetBeans(boolean netBeans) {
+        this.netBeans = netBeans;
     }
 
     @Override
@@ -37,14 +56,24 @@ public class Tools {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Tools tools = (Tools) o;
 
-        if (visualStudio != tools.visualStudio) return false;
-        if (intellijIdea != tools.intellijIdea) return false;
-        if (eclipse != tools.eclipse) return false;
+        if (visualStudio != tools.visualStudio) {
+            return false;
+        }
+        if (intellijIdea != tools.intellijIdea) {
+            return false;
+        }
+        if (eclipse != tools.eclipse) {
+            return false;
+        }
         return netBeans == tools.netBeans;
     }
 

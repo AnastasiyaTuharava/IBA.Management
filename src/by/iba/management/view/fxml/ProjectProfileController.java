@@ -1,7 +1,8 @@
 package by.iba.management.view.fxml;
 
+import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.model.entity.Employee;
-import by.iba.management.model.entity.EmployeesRepository;
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.impl.EditProjectImpl;
 import javafx.collections.FXCollections;
@@ -12,26 +13,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectProfileController {
 
-    @FXML
-    public void initialize() {
-        ArrayList<Employee> allEmployeesList = EmployeesRepository.getEmployeesList();
-        for (Employee e : allEmployeesList) {
-            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
-            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        }
-        ObservableList<Employee> fxOTeamList = FXCollections.observableList(allEmployeesList);
-        this.allEmployeesListView.setItems(fxOTeamList);
-    }
+    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     @FXML
     TextField projectId;
@@ -65,6 +59,18 @@ public class ProjectProfileController {
     Button fxUnassignEmployeeButton;
 
     @FXML
+    public void initialize() {
+        List<Employee> allEmployeesList = employeeDAO.getEmployees();
+        for (Employee e : allEmployeesList) {
+            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        }
+        ObservableList<Employee> fxOTeamList = FXCollections.observableList(allEmployeesList);
+        this.allEmployeesListView.setItems(fxOTeamList);
+    }
+
+    @FXML
     private void handleDeleteProject() {
         int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
         fxProjectsListTable.getItems().remove(line);
@@ -86,11 +92,11 @@ public class ProjectProfileController {
     private void handleAssignEmployee() {
         String candidate = String.valueOf(allEmployeesListView.getSelectionModel().getSelectedItem());
         this.allEmployeesListView.getItems().setAll();
-            if (candidate != null) {
-                allEmployeesListView.getSelectionModel().clearSelection();
-                //allEmployeesListView.remove(candidate);
-                //teamList.add(candidate);
-            }
+        if (candidate != null) {
+            allEmployeesListView.getSelectionModel().clearSelection();
+            //allEmployeesListView.remove(candidate);
+            //teamList.add(candidate);
+        }
     }
 
     @FXML

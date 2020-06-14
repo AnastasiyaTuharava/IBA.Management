@@ -1,5 +1,6 @@
 package by.iba.management.util;
 
+import by.iba.management.model.entity.Position;
 import by.iba.management.model.entity.*;
 import java.util.ArrayList;
 

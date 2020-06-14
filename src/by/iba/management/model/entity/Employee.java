@@ -1,7 +1,5 @@
 package by.iba.management.model.entity;
 
-import by.iba.management.util.EmployeeIdGenerator;
-
 public class Employee {
     private long employeeId;
     private String firstName;
@@ -15,10 +13,12 @@ public class Employee {
     private Testing testing;
     private Tools tools;
 
+    public Employee() {
+    }
+
     public Employee(String firstName, String lastName, boolean teamLead, Position position,
                     EnglishLanguageLevel englishLanguageLevel, ProgrammingLanguage programmingLanguage, Skills skills,
                     Testing testing, Tools tools) {
-        this.employeeId = EmployeeIdGenerator.getEmployeeId();
         this.firstName = firstName;
         this.lastName = lastName;
         this.teamLead = teamLead;
@@ -70,77 +70,84 @@ public class Employee {
         return employeeId;
     }
 
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
+    }
+
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public long getProjectId() {
         return projectId;
     }
 
-    public long setProjectId(long projectId) {
+    public void setProjectId(long projectId) {
         this.projectId = projectId;
-        return projectId;
     }
 
     public boolean isTeamLead() {
         return teamLead;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public EnglishLanguageLevel getEnglishLanguageLevel() {
-        return englishLanguageLevel;
-    }
-
-    public ProgrammingLanguage getProgrammingLanguage() {
-        return programmingLanguage;
-    }
-
-    public Skills getSkills() {
-        return skills;
-    }
-
-    public Testing getTesting() {
-        return testing;
-    }
-
-    public Tools getTools() {
-        return tools;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public void setTeamLead(boolean teamLead) {
         this.teamLead = teamLead;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     public void setPosition(Position position) {
         this.position = position;
     }
 
+    public EnglishLanguageLevel getEnglishLanguageLevel() {
+        return englishLanguageLevel;
+    }
+
     public void setEnglishLanguageLevel(EnglishLanguageLevel englishLanguageLevel) {
         this.englishLanguageLevel = englishLanguageLevel;
+    }
+
+    public ProgrammingLanguage getProgrammingLanguage() {
+        return programmingLanguage;
     }
 
     public void setProgrammingLanguage(ProgrammingLanguage programmingLanguage) {
         this.programmingLanguage = programmingLanguage;
     }
 
+    public Skills getSkills() {
+        return skills;
+    }
+
     public void setSkills(Skills skills) {
         this.skills = skills;
     }
 
+    public Testing getTesting() {
+        return testing;
+    }
+
     public void setTesting(Testing testing) {
         this.testing = testing;
+    }
+
+    public Tools getTools() {
+        return tools;
     }
 
     public void setTools(Tools tools) {
@@ -153,7 +160,7 @@ public class Employee {
                 "ID " + employeeId +
                 ", first name " + firstName +
                 ", last name " + lastName +
-                ", project ID "  + projectId +
+                ", project ID " + projectId +
                 ", team lead " + teamLead +
                 ", position " + position +
                 ", English level " + englishLanguageLevel + ", " +
@@ -162,24 +169,46 @@ public class Employee {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Employee employee = (Employee) o;
 
-        if (employeeId != employee.employeeId) return false;
-        if (projectId != employee.projectId) return false;
-        if (teamLead != employee.teamLead) return false;
-        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
-        if (position != employee.position) return false;
-        if (englishLanguageLevel != employee.englishLanguageLevel) return false;
-        if (programmingLanguage != null ? !programmingLanguage.equals(employee.programmingLanguage) : employee.programmingLanguage != null)
+        if (employeeId != employee.employeeId) {
             return false;
-        if (skills != null ? !skills.equals(employee.skills) : employee.skills != null) return false;
-        if (testing != null ? !testing.equals(employee.testing) : employee.testing != null) return false;
+        }
+        if (projectId != employee.projectId) {
+            return false;
+        }
+        if (teamLead != employee.teamLead) {
+            return false;
+        }
+        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) {
+            return false;
+        }
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) {
+            return false;
+        }
+        if (position != employee.position) {
+            return false;
+        }
+        if (englishLanguageLevel != employee.englishLanguageLevel) {
+            return false;
+        }
+        if (programmingLanguage != null ? !programmingLanguage.equals(employee.programmingLanguage) : employee.programmingLanguage != null) {
+            return false;
+        }
+        if (skills != null ? !skills.equals(employee.skills) : employee.skills != null) {
+            return false;
+        }
+        if (testing != null ? !testing.equals(employee.testing) : employee.testing != null) {
+            return false;
+        }
         return tools != null ? tools.equals(employee.tools) : employee.tools == null;
-
     }
 
     @Override

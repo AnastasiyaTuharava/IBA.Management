@@ -1,7 +1,8 @@
 package by.iba.management.view.fxml;
 
+import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.model.entity.Employee;
-import by.iba.management.model.entity.EmployeesRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,23 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeesListController {
 
-    @FXML
-    public void initialize() {
-        ArrayList<Employee> employeesList = EmployeesRepository.getEmployeesList();
-        for (Employee e : employeesList) {
-            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
-            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
-            position.setCellValueFactory(new PropertyValueFactory<>("position"));
-        }
-        ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
-        this.employeesList.setItems(fxOEmployeesList);
-    }
+    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
     @FXML
     TableColumn<Employee, String> employeeId;
@@ -49,6 +38,20 @@ public class EmployeesListController {
     TableView<Employee> employeesList;
     @FXML
     Button fxGoHomeButton;
+
+    @FXML
+    public void initialize() {
+        List<Employee> employeesList = employeeDAO.getEmployees();
+        for (Employee e : employeesList) {
+            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+            position.setCellValueFactory(new PropertyValueFactory<>("position"));
+        }
+        ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
+        this.employeesList.setItems(fxOEmployeesList);
+    }
 
     @FXML
     private void backToMain(ActionEvent event) throws IOException {
