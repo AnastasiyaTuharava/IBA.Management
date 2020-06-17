@@ -6,7 +6,8 @@ import by.iba.management.model.logic.UpdateProjectTeamList;
 import java.util.ArrayList;
 
 public class UpdateProjectTeamListImpl implements UpdateProjectTeamList {
-    private ArrayList<Employee> teamList = new ArrayList<>();
+
+    private final ArrayList<Employee> teamList = new ArrayList<>();
 
     @Override
     public void addTeamMember(Employee employee) {

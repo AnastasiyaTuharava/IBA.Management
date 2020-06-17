@@ -1,14 +1,18 @@
 package by.iba.management.model.logic.impl;
 
+import by.iba.management.dao.ProjectDAO;
+import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Project;
-import by.iba.management.model.entity.ProjectsRepository;
 import by.iba.management.model.logic.FindProject;
 
 public class FindProjectImpl implements FindProject {
+
+    private final ProjectDAO projectDAO = new ProjectDAOImpl();
+
     @Override
     public Project findProjectById(long projectId) {
         Project result = new Project();
-        for (Project p : ProjectsRepository.getProjectList()) {
+        for (Project p : projectDAO.getProjects()) {
             if (p.getProjectId() == projectId) {
                 result = p;
             }
@@ -17,9 +21,9 @@ public class FindProjectImpl implements FindProject {
     }
 
     @Override
-    public Project findProjectByName (String projectName) {
+    public Project findProjectByName(String projectName) {
         Project result = new Project();
-        for (Project p : ProjectsRepository.getProjectList()) {
+        for (Project p : projectDAO.getProjects()) {
             if (p.getProjectName().equals(projectName)) {
                 result = p;
             }
@@ -27,5 +31,3 @@ public class FindProjectImpl implements FindProject {
         return result;
     }
 }
-
-

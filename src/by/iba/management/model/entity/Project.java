@@ -1,7 +1,5 @@
 package by.iba.management.model.entity;
 
-import by.iba.management.util.ProjectIdGenerator;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -15,11 +13,9 @@ public class Project {
     private ArrayList<Employee> teamList = new ArrayList<>();
 
     public Project() {
-        this.projectId = ProjectIdGenerator.getNewProjectId();
     }
 
     public Project(String projectName, String projectDescription) {
-        this.projectId = ProjectIdGenerator.getNewProjectId();
         this.projectName = projectName;
         this.projectDescription = projectDescription;
     }
