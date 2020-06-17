@@ -7,6 +7,9 @@ public class Skills {
     private boolean css;
     private boolean jQuery;
 
+    public Skills() {
+    }
+
     public Skills(boolean sql, boolean javaScript, boolean html, boolean css, boolean jQuery) {
         this.sql = sql;
         this.javaScript = javaScript;
@@ -19,20 +22,40 @@ public class Skills {
         return sql;
     }
 
+    public void setSql(boolean sql) {
+        this.sql = sql;
+    }
+
     public boolean isJavaScript() {
         return javaScript;
+    }
+
+    public void setJavaScript(boolean javaScript) {
+        this.javaScript = javaScript;
     }
 
     public boolean isHtml() {
         return html;
     }
 
+    public void setHtml(boolean html) {
+        this.html = html;
+    }
+
     public boolean isCss() {
         return css;
     }
 
+    public void setCss(boolean css) {
+        this.css = css;
+    }
+
     public boolean isjQuery() {
         return jQuery;
+    }
+
+    public void setjQuery(boolean jQuery) {
+        this.jQuery = jQuery;
     }
 
     @Override
@@ -47,15 +70,27 @@ public class Skills {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Skills skills = (Skills) o;
 
-        if (sql != skills.sql) return false;
-        if (javaScript != skills.javaScript) return false;
-        if (html != skills.html) return false;
-        if (css != skills.css) return false;
+        if (sql != skills.sql) {
+            return false;
+        }
+        if (javaScript != skills.javaScript) {
+            return false;
+        }
+        if (html != skills.html) {
+            return false;
+        }
+        if (css != skills.css) {
+            return false;
+        }
         return jQuery == skills.jQuery;
     }
 

@@ -1,9 +1,12 @@
 package by.iba.management.util;
 
-import by.iba.management.model.entity.*;
+import by.iba.management.model.entity.Employee;
+import by.iba.management.model.entity.Project;
 import by.iba.management.model.exception.FileNotFoundExceptionM;
 import by.iba.management.model.exception.ReadFileIOException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,7 +21,7 @@ public class DataWriterEmployee {
     private DataWriterEmployee() {
     }
 
-    public static void writeEmployeeToFile(List<Employee> employeeList, Project project){
+    public static void writeEmployeeToFile(List<Employee> employeeList, Project project) {
         ArrayList<String> employeesList = new ArrayList<>();
         File file = new File(FILE_PATH);
         try (FileInputStream in = new FileInputStream(file)) {
@@ -82,13 +85,9 @@ public class DataWriterEmployee {
             try (FileOutputStream fos = new FileOutputStream(FILE_PATH)) {
                 workbook.write(fos);
                 System.out.println(FILE_PATH + " is successfully written");
-            } catch (FileNotFoundExceptionM e) {
-                //logger.error("File error or IO error: ", e);
-            } catch (ReadFileIOException e) {
+            } catch (FileNotFoundExceptionM | ReadFileIOException e) {
                 //logger.error("File error or IO error: ", e);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

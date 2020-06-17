@@ -1,24 +1,28 @@
 package by.iba.management.model.entity;
 
-import java.io.IOException;
+import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.dao.impl.EmployeeDAOImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectTeamRepository {
-    private static ArrayList<Employee> teamList = new ArrayList<>();
+    private static final ArrayList<Employee> teamList = new ArrayList<>();
+    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-    private ProjectTeamRepository() {}
+    private ProjectTeamRepository() {
+    }
 
-    public static List<Employee> getTeamList(long projectId){
-        for (Employee e : EmployeesRepository.getEmployeesList()) {
+    public static int getTeamSize(long projectId) {
+        return teamList.size();
+    }
+
+    public List<Employee> getTeamList(long projectId) {
+        for (Employee e : employeeDAO.getEmployees()) {
             if (e.getProjectId() == projectId) {
                 teamList.add(e);
             }
         }
         return teamList;
-    }
-
-    public static int getTeamSize(long projectId){
-        return teamList.size();
     }
 }
