@@ -31,7 +31,7 @@
                 <HBox fx:id="okParent" alignment="CENTER" />
             </children>
         </HBox>
-        <Label fx:id="messageLabel" prefHeight="19.0" prefWidth="201.0" text="please make your choice!" textAlignment="LEFT" wrapText="true" GridPane.columnIndex="1">
+        <Label fx:id="messageLabel" prefHeight="19.0" prefWidth="201.0" text="Please make your choice!" textAlignment="LEFT" wrapText="true" GridPane.columnIndex="1">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>

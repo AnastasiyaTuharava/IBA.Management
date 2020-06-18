@@ -80,7 +80,7 @@ public class ProjectProfileController {
 
     @FXML
     private void backToProjectsList(ActionEvent event) throws IOException {
-        String projectProfileLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+        String projectProfileLink = "/by/iba/management/view/fxml/projects/ProjectsList.fxml";
         Parent projectProfile = FXMLLoader.load(getClass().getResource(projectProfileLink));
         Scene projectsList = new Scene(projectProfile);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

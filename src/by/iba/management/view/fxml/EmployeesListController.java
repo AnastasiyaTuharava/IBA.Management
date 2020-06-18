@@ -11,9 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -35,9 +33,29 @@ public class EmployeesListController {
     @FXML
     TableColumn<Employee, String> position;
     @FXML
-    TableView<Employee> employeesList;
+    TableView<Employee> employeesListTable;
+    @FXML
+    TextField fxFindEmployeeTextField;
     @FXML
     Button fxGoHomeButton;
+    @FXML
+    Button addNewEmployeeButton;
+    @FXML
+    Button deleteEmployeeButton;
+    @FXML
+    Button fxSearchByEmployeeNameButton;
+    @FXML
+    Button fxExportEmployeesToExcelButton;
+    @FXML
+    Label englishLevel;
+    @FXML
+    Label programming;
+    @FXML
+    Label testing;
+    @FXML
+    Label tools;
+    @FXML
+    Label otherSkills;
 
     @FXML
     public void initialize() {
@@ -50,7 +68,11 @@ public class EmployeesListController {
             position.setCellValueFactory(new PropertyValueFactory<>("position"));
         }
         ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
-        this.employeesList.setItems(fxOEmployeesList);
+        this.employeesListTable.setItems(fxOEmployeesList);
+        showEmployeeDetails(null);
+        employeesListTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        showEmployeeDetails(newValue));
     }
 
     @FXML
@@ -61,5 +83,56 @@ public class EmployeesListController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPage);
         window.show();
+    }
+
+    @FXML
+    private void openEmployeeProfile(ActionEvent event) throws IOException {
+        String employeeProfileLink = "/by/iba/management/view/fxml/EmployeeProfile.fxml";
+        Parent employeesList = FXMLLoader.load(getClass().getResource(employeeProfileLink));
+        Scene EmployeeProfile = new Scene(employeesList);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(EmployeeProfile);
+        window.show();
+    }
+
+    private void showEmployeeDetails(Employee employee) {
+        if (employee != null) {
+            englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
+            programming.setText(String.valueOf(employee.getProgrammingLanguage()));
+            testing.setText(String.valueOf(employee.getTesting()));
+            tools.setText(String.valueOf(employee.getTools()));
+            otherSkills.setText(String.valueOf(employee.getSkills()));
+        } else {
+            englishLevel.setText("empty");
+            programming.setText("empty");
+            testing.setText("empty");
+            tools.setText("empty");
+            otherSkills.setText("empty");
+        }
+    }
+
+    @FXML
+    private void deleteEmployee(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
+    private void addNewEmployee(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
+    private void getSearchText(ActionEvent event) throws IOException{
+
+    }
+
+    @FXML
+    private void findEmployeeByName(ActionEvent event) throws IOException{
+
+    }
+
+    @FXML
+    private void exportEmployeesToExcel(ActionEvent event) throws IOException{
+
     }
 }

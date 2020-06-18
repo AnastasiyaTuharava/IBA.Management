@@ -78,7 +78,7 @@ public class ProjectsListController {
 
     @FXML
     private void findProject(ActionEvent event) {
-        //fxFindProjectTextField.setPromptText("Search");
+        fxFindProjectTextField.setPromptText("Search");
         ListView list = new ListView();
 
         list.setMaxHeight(180);
@@ -131,5 +131,10 @@ public class ProjectsListController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPage);
         window.show();
+    }
+
+    @FXML
+    private void exportProjectsToExcel(ActionEvent event) throws IOException {
+
     }
 }
