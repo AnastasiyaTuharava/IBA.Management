@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane fx:id="fxProjectsList" animated="false" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1300.0" text="Projects List" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.ProjectsListController">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0">
+         <children>
+            <TableView fx:id="fxProjectsListTable" layoutY="127.0" onMouseClicked="#openProjectProfile" prefHeight="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <columns>
+                  <TableColumn fx:id="projectId" editable="false" prefWidth="76.0" text="ID" />
+                  <TableColumn fx:id="projectName" prefWidth="248.0" text="Project Name" />
+                  <TableColumn fx:id="projectDescription" prefWidth="792.0" text="Project Description" />
+               </columns>
+            </TableView>
+            <Group layoutX="-37.0" layoutY="-5.0" />
+            <Group layoutX="-11.0" layoutY="-72.0">
+               <children>
+                  <Button fx:id="fxGoHomeButton" layoutX="879.0" layoutY="707.0" mnemonicParsing="false" onAction="#backToMain" text="&lt;&lt; Back" />
+                  <Button fx:id="fxDeleteProjectButton" layoutX="994.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleDeleteProject" text="Delete Project" />
+                  <Button fx:id="addNewProjectButton" layoutX="1144.0" layoutY="707.0" mnemonicParsing="false" onAction="#openProjectProfile" text="Add New Project" />
+                  <Button fx:id="fxExportProjectsToExcelButton" layoutX="1140.0" layoutY="766.0" mnemonicParsing="false" onAction="#exportProjectsToExcel" text="Export all to Excel" />
+               </children>
+            </Group>
+            <Group layoutX="-38.0" layoutY="16.0">
+               <children>
+                  <Label fx:id="projectNameLabel" layoutX="273.0" layoutY="463.0" text="N/A" />
+                  <Label layoutX="66.0" layoutY="435.0" text="Project ID:" />
+                  <Label fx:id="projectDescriptionLabel" layoutX="273.0" layoutY="489.0" text="N/A" />
+                  <Label layoutX="66.0" layoutY="489.0" text="Project Description:" />
+                  <Label layoutX="66.0" layoutY="388.0" text="PROJECT INFO:" />
+                  <Label fx:id="projectIdLabel" layoutX="273.0" layoutY="435.0" text="N/A" />
+                  <Label layoutX="66.0" layoutY="463.0" text="Project Name:" />
+               </children>
+            </Group>
+            <Label layoutX="28.0" layoutY="67.0" text="Please Enter Project`s Name:" />
+            <TextField fx:id="fxFindProjectTextField" layoutX="262.0" layoutY="62.0" prefHeight="31.0" prefWidth="362.0" />
+            <Button fx:id="fxFindProjectButton" layoutX="660.0" layoutY="62.0" mnemonicParsing="false" onAction="#findProject" text="Find Project" />
+         </children>
+      </AnchorPane>
+   </content>
+</TitledPane>
