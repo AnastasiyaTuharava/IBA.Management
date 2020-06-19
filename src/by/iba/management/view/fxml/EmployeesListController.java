@@ -6,6 +6,7 @@ import by.iba.management.model.entity.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -56,9 +59,12 @@ public class EmployeesListController {
     Label tools;
     @FXML
     Label otherSkills;
+    @FXML
+    Button openEmployeeProfileButton;
 
     @FXML
     public void initialize() {
+        fxFindEmployeeTextField.setPromptText("Search");
         List<Employee> employeesList = employeeDAO.getEmployees();
         for (Employee e : employeesList) {
             employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));

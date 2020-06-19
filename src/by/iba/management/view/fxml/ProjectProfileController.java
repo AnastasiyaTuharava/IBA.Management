@@ -1,7 +1,9 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.dao.ProjectDAO;
 import by.iba.management.dao.impl.EmployeeDAOImpl;
+import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.impl.EditProjectImpl;
@@ -26,6 +28,7 @@ import java.util.List;
 public class ProjectProfileController {
 
     private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private final ProjectDAO projectDAO = new ProjectDAOImpl();
 
     @FXML
     TextField projectId;
@@ -57,6 +60,8 @@ public class ProjectProfileController {
     Button fxAssignEmployeeButton;
     @FXML
     Button fxUnassignEmployeeButton;
+    @FXML
+    Button fxSaveButton;
 
     @FXML
     public void initialize() {
@@ -76,6 +81,13 @@ public class ProjectProfileController {
         fxProjectsListTable.getItems().remove(line);
         EditProjectImpl deleteProject = new EditProjectImpl();
         deleteProject.removeProject(line);
+    }
+
+    @FXML
+    private void handleSaveProject() {
+        Project newProject = new Project();
+        newProject.setProjectName(projectName.getText());
+        //projectDAO.saveProject(newProject);
     }
 
     @FXML
