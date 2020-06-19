@@ -1,10 +1,7 @@
 package by.iba.management.view.fxml;
 
-import by.iba.management.dao.ProjectDAO;
-import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Project;
-import by.iba.management.model.logic.impl.EditProjectImpl;
-import by.iba.management.model.logic.impl.FindProjectImpl;
+import by.iba.management.model.logic.ProjectLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,8 +18,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class ProjectsListController {
-
-    private final ProjectDAO projectDAO = new ProjectDAOImpl();
 
     @FXML
     Button fxFindProjectButton;
@@ -52,7 +47,7 @@ public class ProjectsListController {
     @FXML
     public void initialize() {
         fxFindProjectTextField.setPromptText("Search");
-        List<Project> projectsList = projectDAO.getProjects();
+        List<Project> projectsList = ProjectLogic.getProjects();
         for (Project p : projectsList) {
             projectId.setCellValueFactory(new PropertyValueFactory<>("projectId"));
             projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
@@ -82,7 +77,7 @@ public class ProjectsListController {
         ListView list = new ListView();
 
         list.setMaxHeight(180);
-        List<Project> projectsList = projectDAO.getProjects();
+        List<Project> projectsList = ProjectLogic.getProjects();
         fxProjectsListTable.setItems(FXCollections.observableArrayList(projectsList));
 
         String searchField = fxFindProjectTextField.getText();
@@ -93,12 +88,14 @@ public class ProjectsListController {
         fxFindProjectButton.setOnAction(event1 -> {
             RadioButton rb = (RadioButton) tg.getSelectedToggle();
             if (rb.equals(fxSearchByProjectId)) {
-                FindProjectImpl searchReasultById = new FindProjectImpl();
-                searchReasultById.findProjectById(Long.parseLong(searchField));
+                try {
+                    ProjectLogic.getProject(Long.parseLong(searchField));
+                } catch (NumberFormatException e) {
+
+                }
             }
             if (rb.equals(fxSearchByProjectName)) {
-                FindProjectImpl searchResultByName = new FindProjectImpl();
-                searchResultByName.findProjectByName(searchField);
+                ProjectLogic.getProject(searchField);
             }
         });
     }
@@ -117,10 +114,10 @@ public class ProjectsListController {
 
     @FXML
     private void handleDeleteProject() {
+        // TODO: 19.06.2020  Does line equal projectId here?
         int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
         fxProjectsListTable.getItems().remove(line);
-        EditProjectImpl deleteProject = new EditProjectImpl();
-        deleteProject.removeProject(line);
+        ProjectLogic.removeProject(line);
     }
 
     @FXML

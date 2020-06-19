@@ -6,7 +6,7 @@ import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.Project;
-import by.iba.management.model.logic.impl.EditProjectImpl;
+import by.iba.management.model.logic.ProjectLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,8 +79,8 @@ public class ProjectProfileController {
     private void handleDeleteProject() {
         int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
         fxProjectsListTable.getItems().remove(line);
-        EditProjectImpl deleteProject = new EditProjectImpl();
-        deleteProject.removeProject(line);
+        // TODO: 19.06.2020 Does line equal projectId?
+        ProjectLogic.removeProject(line);
     }
 
     @FXML
