@@ -25,8 +25,8 @@ public class ProjectDAO {
                 project.setProjectDescription(rs.getString("description"));
                 projectList.add(project);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return projectList;
     }
@@ -45,15 +45,18 @@ public class ProjectDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            ResultSet rs = stmt.executeQuery("INSERT INTO PROJECT VALUES ("
+                    + project.getProjectId() + ", "
+                    + project.getProjectName() + ", "
+                    + project.getProjectDescription() + ")");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-
     }
 
     public static void editProject(Project project) {
+        //INSERT INTO <table_name>
+        //  VALUES (<value1>, <value2>, <value3>, …);
 
     }
 
@@ -66,8 +69,23 @@ public class ProjectDAO {
             project.setProjectId(rs.getInt("id"));
             project.setProjectName(rs.getString("name"));
             project.setProjectDescription(rs.getString("description"));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return project;
+    }
+
+    public static Project getProject(String projectName) {
+        Connection connection = DBConnector.getConnection();
+        Project project = new Project();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE NAME=" + projectName);
+            project.setProjectId(rs.getInt("id"));
+            project.setProjectName(rs.getString("name"));
+            project.setProjectDescription(rs.getString("description"));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return project;
     }

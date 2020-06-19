@@ -19,11 +19,11 @@ public class ProjectLogic {
     }
 
     public static Project getProject(long projectId) {
-        return null;
+        return ProjectDAO.getProject(projectId);
     }
 
     public static Project getProject(String projectName) {
-        return null;
+        return ProjectDAO.getProject(projectName);
     }
 
     public static List<Project> getProjects() {
