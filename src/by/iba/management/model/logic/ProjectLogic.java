@@ -7,15 +7,20 @@ import java.util.List;
 public class ProjectLogic {
 
     public static void editProject(Project project) {
-
+        ProjectDAO.editProject(project);
     }
 
     public static void removeProject(long projectId) {
         ProjectDAO.removeProject(projectId);
     }
 
-    public static void addProject(Project project) {
+    public static void removeProject(Project project) {
+        long id = ProjectLogic.getProject(project.getProjectName()).getProjectId();
+        ProjectDAO.removeProject(id);
+    }
 
+    public static void addProject(Project project) {
+        ProjectDAO.addProject(project);
     }
 
     public static Project getProject(long projectId) {
