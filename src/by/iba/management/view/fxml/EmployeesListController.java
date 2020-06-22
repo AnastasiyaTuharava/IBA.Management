@@ -6,7 +6,6 @@ import by.iba.management.model.entity.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,8 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -81,26 +78,6 @@ public class EmployeesListController {
                         showEmployeeDetails(newValue));
     }
 
-    @FXML
-    private void backToMain(ActionEvent event) throws IOException {
-        String mainPageLink = "/by/iba/management/view/fxml/mainPage.fxml";
-        Parent employeesList = FXMLLoader.load(getClass().getResource(mainPageLink));
-        Scene mainPage = new Scene(employeesList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(mainPage);
-        window.show();
-    }
-
-    @FXML
-    private void openEmployeeProfile(ActionEvent event) throws IOException {
-        String employeeProfileLink = "/by/iba/management/view/fxml/EmployeeProfile.fxml";
-        Parent employeesList = FXMLLoader.load(getClass().getResource(employeeProfileLink));
-        Scene EmployeeProfile = new Scene(employeesList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(EmployeeProfile);
-        window.show();
-    }
-
     private void showEmployeeDetails(Employee employee) {
         if (employee != null) {
             englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
@@ -117,24 +94,41 @@ public class EmployeesListController {
         }
     }
 
-    @FXML
-    private void deleteEmployee(ActionEvent event) throws IOException {
+    private void prepare(ActionEvent event, String link) throws IOException {
+        Parent employeesListPage = FXMLLoader.load(getClass().getResource(link));
+        Scene mainPageScene = new Scene(employeesListPage);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(mainPageScene);
+        window.show();
+    }
 
+    @FXML
+    private void openEmployeeProfile(ActionEvent event) throws IOException {
+        String employeeProfileLink = "/by/iba/management/view/fxml/EmployeeProfile.fxml";
+        prepare(event, employeeProfileLink);
     }
 
     @FXML
     private void addNewEmployee(ActionEvent event) throws IOException {
-
+        String addNewEmployeeLink = "/by/iba/management/view/fxml/AddNewEmployee.fxml";
+        prepare(event, addNewEmployeeLink);
     }
 
     @FXML
-    private void getSearchText(ActionEvent event) throws IOException{
-
+    private void deleteEmployee(ActionEvent event) throws IOException {
+        String popupLink = "/by/iba/management/view/fxml/DeleteEmployeeFromListConfirmation.fxml";
+        prepare(event, popupLink);
     }
 
     @FXML
     private void findEmployeeByName(ActionEvent event) throws IOException{
 
+    }
+
+    @FXML
+    private void backToMain(ActionEvent event) throws IOException {
+        String mainPageLink = "/by/iba/management/view/fxml/mainPage.fxml";
+        prepare(event, mainPageLink);
     }
 
     @FXML

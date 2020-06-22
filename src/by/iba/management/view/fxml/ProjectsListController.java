@@ -24,9 +24,15 @@ public class ProjectsListController {
     @FXML
     Button fxDeleteProjectButton;
     @FXML
+    Button openProjectButton;
+    @FXML
+    Button addNewProjectButton;
+    @FXML
     RadioButton fxSearchByProjectId;
     @FXML
     RadioButton fxSearchByProjectName;
+    @FXML
+    Button fxExportProjectsToExcelButton;
     @FXML
     TextField fxFindProjectTextField;
     @FXML
@@ -61,14 +67,50 @@ public class ProjectsListController {
                         showProjectDetails(newValue));
     }
 
+    private void showProjectDetails(Project project) {
+        if (project != null) {
+            projectIdLabel.setText(String.valueOf(project.getProjectId()));
+            projectNameLabel.setText(project.getProjectName());
+            projectDescriptionLabel.setText(project.getProjectDescription());
+        } else {
+            projectIdLabel.setText("empty");
+            projectNameLabel.setText("empty");
+            projectDescriptionLabel.setText("empty");
+        }
+    }
+
+    private void prepare(ActionEvent event, String link) throws IOException {
+        Parent projectsListPage = FXMLLoader.load(getClass().getResource(link));
+        Scene mainPageScene = new Scene(projectsListPage);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(mainPageScene);
+        window.show();
+    }
+
     @FXML
     private void openProjectProfile(ActionEvent event) throws IOException {
         String projectProfileLink = "/by/iba/management/view/fxml/ProjectProfile.fxml";
-        Parent projectsList = FXMLLoader.load(getClass().getResource(projectProfileLink));
-        Scene projectProfile = new Scene(projectsList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(projectProfile);
-        window.show();
+        prepare(event, projectProfileLink);
+    }
+
+    @FXML
+    private void addNewProject(ActionEvent event) throws IOException {
+        String addNewProjectLink = "/by/iba/management/view/fxml/AddNewProjectt.fxml";
+        prepare(event, addNewProjectLink);
+    }
+
+    @FXML
+    private void handleDeleteProject(ActionEvent event) throws IOException {
+        // TODO: 19.06.2020  Does line equal projectId here?
+        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+        fxProjectsListTable.getItems().remove(line);
+        ProjectLogic.removeProject(line);
+
+        //before DELETE project logic:
+        String popupLink = "/by/iba/management/view/fxml/DeleteProjectFromListConfirmation.fxml";
+        prepare(event, popupLink);
+
+        //proceed with logic:
     }
 
     @FXML
@@ -100,34 +142,10 @@ public class ProjectsListController {
         });
     }
 
-    private void showProjectDetails(Project project) {
-        if (project != null) {
-            projectIdLabel.setText(String.valueOf(project.getProjectId()));
-            projectNameLabel.setText(project.getProjectName());
-            projectDescriptionLabel.setText(project.getProjectDescription());
-        } else {
-            projectIdLabel.setText("empty");
-            projectNameLabel.setText("empty");
-            projectDescriptionLabel.setText("empty");
-        }
-    }
-
-    @FXML
-    private void handleDeleteProject() {
-        // TODO: 19.06.2020  Does line equal projectId here?
-        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
-        fxProjectsListTable.getItems().remove(line);
-        ProjectLogic.removeProject(line);
-    }
-
     @FXML
     private void backToMain(ActionEvent event) throws IOException {
         String mainPageLink = "/by/iba/management/view/fxml/mainPage.fxml";
-        Parent projectsList = FXMLLoader.load(getClass().getResource(mainPageLink));
-        Scene mainPage = new Scene(projectsList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(mainPage);
-        window.show();
+        prepare(event, mainPageLink);
     }
 
     @FXML

@@ -25,7 +25,7 @@
             <Group>
                <children>
                   <Label layoutX="28.0" layoutY="23.0" text="Please Enter Employee`s Name:" />
-                  <TextField fx:id="fxFindEmployeeTextField" layoutX="267.0" layoutY="17.0" onAction="#getSearchText" prefHeight="31.0" prefWidth="360.0" />
+                  <TextField fx:id="fxFindEmployeeTextField" layoutX="267.0" layoutY="17.0" prefHeight="31.0" prefWidth="360.0" />
                   <Button fx:id="fxSearchByEmployeeNameButton" layoutX="666.0" layoutY="17.0" mnemonicParsing="false" onAction="#findEmployeeByName" text="Find Employee" />
                </children>
             </Group>

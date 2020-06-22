@@ -3,7 +3,6 @@ package by.iba.management.view.fxml;
 import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.dao.ProjectDAO;
 import by.iba.management.dao.impl.EmployeeDAOImpl;
-import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.ProjectLogic;
@@ -28,7 +27,7 @@ import java.util.List;
 public class ProjectProfileController {
 
     private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    private final ProjectDAO projectDAO = new ProjectDAOImpl();
+    //private final ProjectDAO projectDAO = new ProjectDAOImpl();
 
     @FXML
     TextField projectId;
@@ -36,8 +35,6 @@ public class ProjectProfileController {
     TextField projectName;
     @FXML
     TextField projectDescription;
-    @FXML
-    TableView<Project> fxProjectsListTable;
     @FXML
     TableView<Employee> allEmployeesListView;
     @FXML
@@ -62,6 +59,8 @@ public class ProjectProfileController {
     Button fxUnassignEmployeeButton;
     @FXML
     Button fxSaveButton;
+    @FXML
+    Button fxDeleteButton;
 
     @FXML
     public void initialize() {
@@ -75,39 +74,63 @@ public class ProjectProfileController {
         this.allEmployeesListView.setItems(fxOTeamList);
     }
 
-    @FXML
-    private void handleDeleteProject() {
-        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
-        fxProjectsListTable.getItems().remove(line);
-        // TODO: 19.06.2020 Does line equal projectId?
-        ProjectLogic.removeProject(line);
-    }
-
-    @FXML
-    private void handleSaveProject() {
-        Project newProject = new Project();
-        newProject.setProjectName(projectName.getText());
-        //projectDAO.saveProject(newProject);
-    }
-
-    @FXML
-    private void backToProjectsList(ActionEvent event) throws IOException {
-        String projectProfileLink = "/by/iba/management/view/fxml/projects/ProjectsList.fxml";
-        Parent projectProfile = FXMLLoader.load(getClass().getResource(projectProfileLink));
+    private void prepare(ActionEvent event, String link) throws IOException {
+        Parent projectProfile = FXMLLoader.load(getClass().getResource(link));
         Scene projectsList = new Scene(projectProfile);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(projectsList);
         window.show();
     }
 
+    private void popup(ActionEvent event, String link) throws IOException {
+        Parent projectProfile = FXMLLoader.load(getClass().getResource(link));
+        Scene popup = new Scene(projectProfile);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(popup);
+        window.show();
+    }
+
+    @FXML
+    private void handleDeleteProject(ActionEvent event) throws IOException {
+        //int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+        //fxProjectsListTable.getItems().remove(line);
+        // TODO: 19.06.2020 Does line equal projectId?
+        //ProjectLogic.removeProject(line);
+
+        //before DELETE project logic:
+        String popupLink = "/by/iba/management/view/fxml/DeleteProjectConfirmation.fxml";
+        popup(event, popupLink);
+
+        //proceed with logic:
+    }
+
+    @FXML
+    private void handleSaveProject(ActionEvent event) throws IOException {
+        Project newProject = new Project();
+        newProject.setProjectName(projectName.getText());
+        //TO DO: add other fields
+        ProjectLogic.addProject(newProject);
+
+        String popupLink = "/by/iba/management/view/fxml/ProjectUpdatedConfirmation.fxml";
+        popup(event, popupLink);
+    }
+
+    @FXML
+    private void backToProjectsList(ActionEvent event) throws IOException {
+        String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+        prepare(event, projectsListLink);
+    }
+
     @FXML
     private void handleAssignEmployee() {
         String candidate = String.valueOf(allEmployeesListView.getSelectionModel().getSelectedItem());
+        String teamMember = String.valueOf(teamList.getSelectionModel().getSelectedItem());
         this.allEmployeesListView.getItems().setAll();
+        this.teamList.getItems().setAll();
         if (candidate != null) {
             allEmployeesListView.getSelectionModel().clearSelection();
             //allEmployeesListView.remove(candidate);
-            //teamList.add(candidate);
+            //teamList.getItems(candidate);
         }
     }
 
