@@ -22,6 +22,26 @@ public class EmployeeDAO {
         }
     }
 
+    public static void editEmployee(Employee employee) {
+        // TODO: 30.06.2020
+    }
+
+    public static Employee getEmployee(long id) {
+        Employee employee = new Employee();
+        // TODO: 30.06.2020
+        return employee;
+    }
+
+    public static List<Employee> getEmployee(String firstName, String lastName) {
+        List <Employee> employees = new ArrayList<>();
+        // TODO: 30.06.2020
+        return employees;
+    }
+
+    public static void addEmployee(Employee employee) {
+        // TODO: 30.06.2020
+    }
+
     public static List<Employee> getEmployees() {
         List<Employee> employeeList = new ArrayList<>();
         Connection connection = DBConnector.getConnection();

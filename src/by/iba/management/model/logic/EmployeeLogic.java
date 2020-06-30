@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EmployeeLogic {
     public static void editEmployee(Employee employee) {
-
+        EmployeeDAO.editEmployee(employee);
     }
 
     public static void removeEmployee(long employeeId) throws IOException {
@@ -17,14 +17,15 @@ public class EmployeeLogic {
     }
 
     public static void addEmployee(Employee employee) {
+        EmployeeDAO.addEmployee(employee);
     }
 
     public static Employee getEmployee(long employeeId) {
-        return null;
+        return EmployeeDAO.getEmployee(employeeId);
     }
 
     public static List<Employee> getEmployee(String firstName, String lastName) {
-        return null;
+        return EmployeeDAO.getEmployee(firstName, lastName);
     }
 
     public static List<Employee> getEmployees() {
