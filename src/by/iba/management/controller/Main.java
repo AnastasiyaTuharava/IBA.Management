@@ -1,6 +1,7 @@
 package by.iba.management.controller;
 
 import by.iba.management.db.DBConnector;
+import by.iba.management.model.logic.ProjectLogic;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         initDB();
+        // TODO: 22.06.2020 Test DB
+        //System.out.println(ProjectLogic.getProject(5));
+        //System.out.println((ProjectLogic.getProject("The")));
         launch(args);
     }
 

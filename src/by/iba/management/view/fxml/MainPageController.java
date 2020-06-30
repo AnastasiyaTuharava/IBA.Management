@@ -19,20 +19,21 @@ public class MainPageController {
     @FXML
     private void openEmployeesListPage(ActionEvent event) throws IOException {
         String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
-        Parent mainPage = FXMLLoader.load(getClass().getResource(employeesListLink));
-        Scene mainPageScene = new Scene(mainPage);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(mainPageScene);
-        window.show();
+        prepare(event, employeesListLink);
     }
 
     @FXML
     private void openProjectsListPage(ActionEvent event) throws IOException {
         String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
-        Parent mainPage = FXMLLoader.load(getClass().getResource(projectsListLink));
+        prepare(event, projectsListLink);
+    }
+
+    private void prepare(ActionEvent event, String link) throws IOException {
+        Parent mainPage = FXMLLoader.load(getClass().getResource(link));
         Scene mainPageScene = new Scene(mainPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
+        window.centerOnScreen();
         window.show();
     }
 }

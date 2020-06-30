@@ -60,8 +60,7 @@ public class Skills {
 
     @Override
     public String toString() {
-        return "Skills: " +
-                "sql " + sql +
+        return  "sql " + sql +
                 ", javaScript " + javaScript +
                 ", html " + html +
                 ", css " + css +

@@ -1,10 +1,7 @@
 package by.iba.management.view.fxml;
 
-import by.iba.management.dao.ProjectDAO;
-import by.iba.management.dao.impl.ProjectDAOImpl;
 import by.iba.management.model.entity.Project;
-import by.iba.management.model.logic.impl.EditProjectImpl;
-import by.iba.management.model.logic.impl.FindProjectImpl;
+import by.iba.management.model.logic.ProjectLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,19 +16,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class ProjectsListController {
-
-    private final ProjectDAO projectDAO = new ProjectDAOImpl();
 
     @FXML
     Button fxFindProjectButton;
     @FXML
     Button fxDeleteProjectButton;
     @FXML
+    Button openProjectButton;
+    @FXML
+    Button addNewProjectButton;
+    @FXML
     RadioButton fxSearchByProjectId;
     @FXML
     RadioButton fxSearchByProjectName;
+    @FXML
+    Button fxExportProjectsToExcelButton;
     @FXML
     TextField fxFindProjectTextField;
     @FXML
@@ -52,7 +54,7 @@ public class ProjectsListController {
     @FXML
     public void initialize() {
         fxFindProjectTextField.setPromptText("Search");
-        List<Project> projectsList = projectDAO.getProjects();
+        List<Project> projectsList = ProjectLogic.getProjects();
         for (Project p : projectsList) {
             projectId.setCellValueFactory(new PropertyValueFactory<>("projectId"));
             projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
@@ -64,43 +66,6 @@ public class ProjectsListController {
         fxProjectsListTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) ->
                         showProjectDetails(newValue));
-    }
-
-    @FXML
-    private void openProjectProfile(ActionEvent event) throws IOException {
-        String projectProfileLink = "/by/iba/management/view/fxml/ProjectProfile.fxml";
-        Parent projectsList = FXMLLoader.load(getClass().getResource(projectProfileLink));
-        Scene projectProfile = new Scene(projectsList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(projectProfile);
-        window.show();
-    }
-
-    @FXML
-    private void findProject(ActionEvent event) {
-        fxFindProjectTextField.setPromptText("Search");
-        ListView list = new ListView();
-
-        list.setMaxHeight(180);
-        List<Project> projectsList = projectDAO.getProjects();
-        fxProjectsListTable.setItems(FXCollections.observableArrayList(projectsList));
-
-        String searchField = fxFindProjectTextField.getText();
-        ToggleGroup tg = new ToggleGroup();
-        fxSearchByProjectId.setToggleGroup(tg);
-        fxSearchByProjectName.setToggleGroup(tg);
-
-        fxFindProjectButton.setOnAction(event1 -> {
-            RadioButton rb = (RadioButton) tg.getSelectedToggle();
-            if (rb.equals(fxSearchByProjectId)) {
-                FindProjectImpl searchReasultById = new FindProjectImpl();
-                searchReasultById.findProjectById(Long.parseLong(searchField));
-            }
-            if (rb.equals(fxSearchByProjectName)) {
-                FindProjectImpl searchResultByName = new FindProjectImpl();
-                searchResultByName.findProjectByName(searchField);
-            }
-        });
     }
 
     private void showProjectDetails(Project project) {
@@ -115,22 +80,80 @@ public class ProjectsListController {
         }
     }
 
+    private void prepare(ActionEvent event, String link) throws IOException {
+        Parent projectsListPage = FXMLLoader.load(getClass().getResource(link));
+        Scene mainPageScene = new Scene(projectsListPage);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(mainPageScene);
+        window.centerOnScreen();
+        window.show();
+    }
+
     @FXML
-    private void handleDeleteProject() {
-        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
-        fxProjectsListTable.getItems().remove(line);
-        EditProjectImpl deleteProject = new EditProjectImpl();
-        deleteProject.removeProject(line);
+    private void openProjectProfile(ActionEvent event) throws IOException {
+        String projectProfileLink = "/by/iba/management/view/fxml/ProjectProfile.fxml";
+        prepare(event, projectProfileLink);
+    }
+
+    @FXML
+    private void addNewProject(ActionEvent event) throws IOException {
+        String addNewProjectLink = "/by/iba/management/view/fxml/AddNewProject.fxml";
+        prepare(event, addNewProjectLink);
+    }
+
+    @FXML
+    private void handleDeleteProject(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want to delete this project from the system?");
+        alert.setContentText("Please note that data cannot be restored.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+            fxProjectsListTable.getItems().remove(line);
+            ProjectLogic.removeProject(line);
+            //project delete logic here
+            alert.close();
+            //String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+            //prepare(event, projectsPageLink);
+        } else {
+            alert.close();
+        }
+    }
+
+    @FXML
+    private void findProject(ActionEvent event) {
+        fxFindProjectTextField.setPromptText("Search");
+        ListView list = new ListView();
+
+        list.setMaxHeight(180);
+        List<Project> projectsList = ProjectLogic.getProjects();
+        fxProjectsListTable.setItems(FXCollections.observableArrayList(projectsList));
+
+        String searchField = fxFindProjectTextField.getText();
+        ToggleGroup tg = new ToggleGroup();
+        fxSearchByProjectId.setToggleGroup(tg);
+        fxSearchByProjectName.setToggleGroup(tg);
+
+        fxFindProjectButton.setOnAction(event1 -> {
+            RadioButton rb = (RadioButton) tg.getSelectedToggle();
+            if (rb.equals(fxSearchByProjectId)) {
+                try {
+                    ProjectLogic.getProject(Long.parseLong(searchField));
+                } catch (NumberFormatException e) {
+
+                }
+            }
+            if (rb.equals(fxSearchByProjectName)) {
+                ProjectLogic.getProject(searchField);
+            }
+        });
     }
 
     @FXML
     private void backToMain(ActionEvent event) throws IOException {
         String mainPageLink = "/by/iba/management/view/fxml/mainPage.fxml";
-        Parent projectsList = FXMLLoader.load(getClass().getResource(mainPageLink));
-        Scene mainPage = new Scene(projectsList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(mainPage);
-        window.show();
+        prepare(event, mainPageLink);
     }
 
     @FXML

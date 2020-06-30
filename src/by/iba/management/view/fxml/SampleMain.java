@@ -17,7 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-/*from  w w  w. j a  va 2 s .  co m*/
+
 public class SampleMain extends Application {
 
     @Override
@@ -82,9 +82,10 @@ public class SampleMain extends Application {
 
         GridPane.setVgrow(root, Priority.ALWAYS);
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
-    public static void main(String[] args) {
-        launch(args);
+   // public static void main(String[] args) {
+      //  launch(args);
     }
-}
+

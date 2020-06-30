@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeesListController {
 
@@ -56,9 +57,12 @@ public class EmployeesListController {
     Label tools;
     @FXML
     Label otherSkills;
+    @FXML
+    Button openEmployeeProfileButton;
 
     @FXML
     public void initialize() {
+        fxFindEmployeeTextField.setPromptText("Search");
         List<Employee> employeesList = employeeDAO.getEmployees();
         for (Employee e : employeesList) {
             employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
@@ -75,33 +79,23 @@ public class EmployeesListController {
                         showEmployeeDetails(newValue));
     }
 
-    @FXML
-    private void backToMain(ActionEvent event) throws IOException {
-        String mainPageLink = "/by/iba/management/view/fxml/mainPage.fxml";
-        Parent employeesList = FXMLLoader.load(getClass().getResource(mainPageLink));
-        Scene mainPage = new Scene(employeesList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(mainPage);
-        window.show();
-    }
-
-    @FXML
-    private void openEmployeeProfile(ActionEvent event) throws IOException {
-        String employeeProfileLink = "/by/iba/management/view/fxml/EmployeeProfile.fxml";
-        Parent employeesList = FXMLLoader.load(getClass().getResource(employeeProfileLink));
-        Scene EmployeeProfile = new Scene(employeesList);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(EmployeeProfile);
-        window.show();
-    }
-
     private void showEmployeeDetails(Employee employee) {
         if (employee != null) {
-            englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
-            programming.setText(String.valueOf(employee.getProgrammingLanguage()));
-            testing.setText(String.valueOf(employee.getTesting()));
-            tools.setText(String.valueOf(employee.getTools()));
-            otherSkills.setText(String.valueOf(employee.getSkills()));
+            if(String.valueOf(employee.getEnglishLanguageLevel()) != null) {
+                englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
+            } else englishLevel.setText("N/A");
+            if(String.valueOf(employee.getProgrammingLanguage()) != null) {
+                programming.setText(String.valueOf(employee.getProgrammingLanguage()));
+            } else programming.setText("N/A");
+            if(String.valueOf(employee.getTesting()) != null) {
+                testing.setText(String.valueOf(employee.getTesting()));
+            } else testing.setText("N/A");
+            if(String.valueOf(employee.getTools()) != null) {
+                tools.setText(String.valueOf(employee.getTesting()));
+            } else tools.setText("N/A");
+            if(String.valueOf(employee.getSkills()) != null) {
+                otherSkills.setText(String.valueOf(employee.getTesting()));
+            } else otherSkills.setText("N/A");
         } else {
             englishLevel.setText("empty");
             programming.setText("empty");
@@ -111,24 +105,53 @@ public class EmployeesListController {
         }
     }
 
-    @FXML
-    private void deleteEmployee(ActionEvent event) throws IOException {
+    private void prepare(ActionEvent event, String link) throws IOException {
+        Parent employeesListPage = FXMLLoader.load(getClass().getResource(link));
+        Scene mainPageScene = new Scene(employeesListPage);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(mainPageScene);
+        window.centerOnScreen();
+        window.show();
+    }
 
+    @FXML
+    private void openEmployeeProfile(ActionEvent event) throws IOException {
+        String employeeProfileLink = "/by/iba/management/view/fxml/EmployeeProfile.fxml";
+        prepare(event, employeeProfileLink);
     }
 
     @FXML
     private void addNewEmployee(ActionEvent event) throws IOException {
-
+        String addNewEmployeeLink = "/by/iba/management/view/fxml/AddNewEmployee.fxml";
+        prepare(event, addNewEmployeeLink);
     }
 
     @FXML
-    private void getSearchText(ActionEvent event) throws IOException{
-
+    private void deleteEmployee(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want to delete this employee from the system?");
+        alert.setContentText("Please note that data cannot be restored.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            //employee delete logic here
+            alert.close();
+            //String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
+            //prepare(event, employeesListLink);
+        } else {
+            alert.close();
+        }
     }
 
     @FXML
     private void findEmployeeByName(ActionEvent event) throws IOException{
 
+    }
+
+    @FXML
+    private void backToMain(ActionEvent event) throws IOException {
+        String mainPageLink = "/by/iba/management/view/fxml/mainPage.fxml";
+        prepare(event, mainPageLink);
     }
 
     @FXML
