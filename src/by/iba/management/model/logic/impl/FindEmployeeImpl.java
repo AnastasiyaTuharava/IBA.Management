@@ -1,7 +1,6 @@
 package by.iba.management.model.logic.impl;
 
 import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.model.entity.*;
 import by.iba.management.model.logic.FindEmployee;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class FindEmployeeImpl implements FindEmployee {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @Override
     public List<Employee> findEmployeeByName(String firstName, String lastName) {

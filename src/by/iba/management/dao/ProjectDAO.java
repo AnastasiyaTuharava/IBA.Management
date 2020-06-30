@@ -54,7 +54,7 @@ public class ProjectDAO {
     }
 
     public static void editProject(Project project) {
-
+        // TODO: 30.06.2020  
     }
 
     public static Project getProject(long projectId) {
@@ -63,9 +63,11 @@ public class ProjectDAO {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE ID=" + projectId);
-            project.setProjectId(rs.getInt("id"));
-            project.setProjectName(rs.getString("name"));
-            project.setProjectDescription(rs.getString("description"));
+            while (rs.next()) {
+                project.setProjectId(rs.getInt("id"));
+                project.setProjectName(rs.getString("name"));
+                project.setProjectDescription(rs.getString("description"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,9 +80,11 @@ public class ProjectDAO {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE NAME=\'" + projectName + "\'");
-            project.setProjectId(rs.getInt("id"));
-            project.setProjectName(rs.getString("name"));
-            project.setProjectDescription(rs.getString("description"));
+            while (rs.next()) {
+                project.setProjectId(rs.getInt("id"));
+                project.setProjectName(rs.getString("name"));
+                project.setProjectDescription(rs.getString("description"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
