@@ -1,5 +1,6 @@
 package by.iba.management.model.logic;
 
+import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.model.entity.Employee;
 
 import java.io.IOException;
@@ -11,11 +12,11 @@ public class EmployeeLogic {
     }
 
     public static void removeEmployee(long employeeId) throws IOException {
+        EmployeeDAO.removeEmployee(employeeId);
 
     }
 
     public static void addEmployee(Employee employee) {
-
     }
 
     public static Employee getEmployee(long employeeId) {
@@ -27,6 +28,6 @@ public class EmployeeLogic {
     }
 
     public static List<Employee> getEmployees() {
-        return null;
+        return EmployeeDAO.getEmployees();
     }
 }

@@ -1,7 +1,6 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.model.entity.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +20,7 @@ import java.util.Optional;
 
 public class EmployeesListController {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     TableColumn<Employee, String> employeeId;

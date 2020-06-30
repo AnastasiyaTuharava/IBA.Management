@@ -1,14 +1,13 @@
 package by.iba.management.model.entity;
 
 import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.dao.impl.EmployeeDAOImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectTeamRepository {
     private static final ArrayList<Employee> teamList = new ArrayList<>();
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     private ProjectTeamRepository() {
     }
