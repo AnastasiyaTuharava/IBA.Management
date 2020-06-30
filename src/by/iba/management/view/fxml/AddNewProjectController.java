@@ -1,7 +1,6 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.ProjectLogic;
@@ -23,8 +22,7 @@ import java.util.List;
 
 public class AddNewProjectController {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    //private final ProjectDAO projectDAO = new ProjectDAOImpl();
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     TextField projectId;

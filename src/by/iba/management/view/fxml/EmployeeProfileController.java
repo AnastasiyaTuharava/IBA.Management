@@ -1,7 +1,6 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.dao.impl.EmployeeDAOImpl;
 import by.iba.management.model.entity.Position;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -19,7 +18,7 @@ import java.util.Optional;
 
 public class EmployeeProfileController {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     TextField employeeId;
