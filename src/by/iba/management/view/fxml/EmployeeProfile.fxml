@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="EmployeeProfile" prefHeight="670.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.EmployeeProfileController">
+<AnchorPane fx:id="EmployeeProfileAnchorPane" prefHeight="670.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.iba.management.view.fxml.EmployeeProfileController">
    <children>
       <TitledPane fx:id="EmployeeProfile" animated="false" prefHeight="781.0" prefWidth="1100.0" text="Employee Profile">
         <content>
@@ -20,7 +20,7 @@
                   <Label layoutX="38.0" layoutY="50.0" text="Employee ID: " />
                   <TextField fx:id="firstName" layoutX="247.0" layoutY="90.0" />
                   <TextField fx:id="employeeId" layoutX="247.0" layoutY="45.0" />
-                  <Button fx:id="saveEmployee" onAction="#saveEmployee" layoutX="999.0" layoutY="663.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="saveEmployee" layoutX="999.0" layoutY="663.0" mnemonicParsing="false" onAction="#saveEmployee" text="Save" />
                   <Button fx:id="fxGoHomeButton" layoutX="877.0" layoutY="663.0" mnemonicParsing="false" onAction="#backToEmployeesList" text="Cancel" />
                   <TextField fx:id="lastName" layoutX="247.0" layoutY="135.0" />
                   <TextField fx:id="projectName" layoutX="247.0" layoutY="180.0" />

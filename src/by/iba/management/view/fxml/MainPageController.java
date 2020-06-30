@@ -33,6 +33,7 @@ public class MainPageController {
         Scene mainPageScene = new Scene(mainPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
+        window.centerOnScreen();
         window.show();
     }
 }

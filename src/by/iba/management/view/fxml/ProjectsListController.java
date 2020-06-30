@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class ProjectsListController {
 
@@ -84,6 +85,7 @@ public class ProjectsListController {
         Scene mainPageScene = new Scene(projectsListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
+        window.centerOnScreen();
         window.show();
     }
 
@@ -95,22 +97,28 @@ public class ProjectsListController {
 
     @FXML
     private void addNewProject(ActionEvent event) throws IOException {
-        String addNewProjectLink = "/by/iba/management/view/fxml/AddNewProjectt.fxml";
+        String addNewProjectLink = "/by/iba/management/view/fxml/AddNewProject.fxml";
         prepare(event, addNewProjectLink);
     }
 
     @FXML
     private void handleDeleteProject(ActionEvent event) throws IOException {
-        // TODO: 19.06.2020  Does line equal projectId here?
-        int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
-        fxProjectsListTable.getItems().remove(line);
-        ProjectLogic.removeProject(line);
-
-        //before DELETE project logic:
-        String popupLink = "/by/iba/management/view/fxml/DeleteProjectFromListConfirmation.fxml";
-        prepare(event, popupLink);
-
-        //proceed with logic:
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want to delete this project from the system?");
+        alert.setContentText("Please note that data cannot be restored.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+            fxProjectsListTable.getItems().remove(line);
+            ProjectLogic.removeProject(line);
+            //project delete logic here
+            alert.close();
+            //String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+            //prepare(event, projectsPageLink);
+        } else {
+            alert.close();
+        }
     }
 
     @FXML

@@ -8,15 +8,13 @@ import by.iba.management.model.logic.ProjectLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -44,6 +42,7 @@ public class AddNewProjectController {
         Scene mainPageScene = new Scene(newProjectPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
+        window.centerOnScreen();
         window.show();
     }
 
@@ -51,10 +50,18 @@ public class AddNewProjectController {
     private void handleSaveProject(ActionEvent event) throws IOException{
         Project newProject = new Project();
         newProject.setProjectName(projectName.getText());
+        newProject.setProjectDescription(projectDescription.getText());
         //TO DO: add other fields
 
-        String popup = "/by/iba/management/view/fxml/NewProjectAddedConfirmation.fxml";
-        prepare(event, popup);
+        //alert information
+        Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("The project is successfully added!");
+            alert.showAndWait();
+
+        String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+        prepare(event, projectsListLink);
 
         ProjectLogic.addProject(newProject);
 

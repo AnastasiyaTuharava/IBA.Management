@@ -15,9 +15,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         initDB();
         // TODO: 22.06.2020 Test DB
-        System.out.println(ProjectLogic.getProject(5));
-        System.out.println((ProjectLogic.getProject("The")));
-        //launch(args);
+        //System.out.println(ProjectLogic.getProject(5));
+        //System.out.println((ProjectLogic.getProject("The")));
+        launch(args);
     }
 
     private static void initDB() {

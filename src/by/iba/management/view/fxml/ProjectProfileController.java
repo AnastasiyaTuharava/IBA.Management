@@ -9,20 +9,19 @@ import by.iba.management.model.logic.ProjectLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class ProjectProfileController {
 
@@ -82,14 +81,6 @@ public class ProjectProfileController {
         window.show();
     }
 
-    private void popup(ActionEvent event, String link) throws IOException {
-        Parent projectProfile = FXMLLoader.load(getClass().getResource(link));
-        Scene popup = new Scene(projectProfile);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(popup);
-        window.show();
-    }
-
     @FXML
     private void handleDeleteProject(ActionEvent event) throws IOException {
         //int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
@@ -97,22 +88,39 @@ public class ProjectProfileController {
         // TODO: 19.06.2020 Does line equal projectId?
         //ProjectLogic.removeProject(line);
 
-        //before DELETE project logic:
-        String popupLink = "/by/iba/management/view/fxml/DeleteProjectConfirmation.fxml";
-        popup(event, popupLink);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want to delete this project from the system?");
+        alert.setContentText("Please note that data cannot be restored.");
 
-        //proceed with logic:
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            //project delete logic here
+            //alert.close();
+            String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+            prepare(event, projectsPageLink);
+        } else {
+            alert.close();
+        }
     }
 
     @FXML
     private void handleSaveProject(ActionEvent event) throws IOException {
         Project newProject = new Project();
         newProject.setProjectName(projectName.getText());
+        newProject.setProjectDescription(projectDescription.getText());
         //TO DO: add other fields
         ProjectLogic.addProject(newProject);
 
-        String popupLink = "/by/iba/management/view/fxml/ProjectUpdatedConfirmation.fxml";
-        popup(event, popupLink);
+        //alert information
+        Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("The project is successfully updated!");
+            alert.showAndWait();
+
+        String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+        prepare(event, projectsListLink);
     }
 
     @FXML
@@ -123,14 +131,21 @@ public class ProjectProfileController {
 
     @FXML
     private void handleAssignEmployee() {
-        String candidate = String.valueOf(allEmployeesListView.getSelectionModel().getSelectedItem());
-        String teamMember = String.valueOf(teamList.getSelectionModel().getSelectedItem());
-        this.allEmployeesListView.getItems().setAll();
-        this.teamList.getItems().setAll();
+//        // Candidates
+//        final ObservableList<String> candidates = FXCollections.observableArrayList("Z", "A", "B", "C", "D");
+//        final ListView<String> candidatesListView = new ListView<>(candidates);
+//        gridpane.add(candidatesListView, 0, 1);
+
+        Employee candidate = allEmployeesListView.getSelectionModel().getSelectedItem();
+        int candidateIndex = allEmployeesListView.getSelectionModel().getFocusedIndex();
+//        List<Employee> teamMembers = List<Employee>;
+//        String teamMember = String.valueOf(teamList.getSelectionModel().getSelectedItem());
+//        this.allEmployeesListView.getItems().setAll();
+
+//        ObservableList<Employee> list = FXCollections.observableList();
+//        this.teamList = new TableView<Employee>(list);
         if (candidate != null) {
-            allEmployeesListView.getSelectionModel().clearSelection();
-            //allEmployeesListView.remove(candidate);
-            //teamList.getItems(candidate);
+            this.teamList.getItems().add(candidate);
         }
     }
 

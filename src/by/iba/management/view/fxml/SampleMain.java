@@ -82,9 +82,10 @@ public class SampleMain extends Application {
 
         GridPane.setVgrow(root, Priority.ALWAYS);
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
-    public static void main(String[] args) {
-        launch(args);
+   // public static void main(String[] args) {
+      //  launch(args);
     }
-}
+

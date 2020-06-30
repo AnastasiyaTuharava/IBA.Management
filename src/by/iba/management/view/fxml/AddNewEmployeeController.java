@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -92,6 +89,7 @@ public class AddNewEmployeeController {
         Scene popup = new Scene(employeeProfile);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(popup);
+        window.centerOnScreen();
         window.show();
     }
 
@@ -103,7 +101,14 @@ public class AddNewEmployeeController {
 
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
-        String popupLink = "/by/iba/management/view/fxml/NewEmployeeAddedConfirmation.fxml";
-        popup(event, popupLink);
+        //alert information
+        Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("The employee is successfully added!");
+            alert.showAndWait();
+
+        String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
+        prepare(event, employeesListLink);
     }
 }
