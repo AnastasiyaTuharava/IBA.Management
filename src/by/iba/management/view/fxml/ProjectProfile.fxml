@@ -17,27 +17,28 @@
                   <Label layoutX="38.0" layoutY="50.0" text="Project ID: " />
                   <TextField fx:id="projectDescription" layoutX="247.0" layoutY="145.0" prefHeight="161.0" prefWidth="824.0" />
                   <TextField fx:id="projectName" layoutX="247.0" layoutY="94.0" />
-                  <TextField fx:id="projectId" layoutX="247.0" layoutY="44.0" />
-                  <Button fx:id="fxSaveButton" layoutX="1006.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleSaveProject" text="Save" />
-                  <Button fx:id="fxCancelButton" layoutX="885.0" layoutY="558.0" mnemonicParsing="false" onAction="#backToProjectsList" text="Cancel" />
-                  <Button fx:id="fxDeleteButton" layoutX="64.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleDeleteProject" prefHeight="39.0" prefWidth="183.0" text="Delete Project" />
-                  <Label layoutX="38.0" layoutY="320.0" text="Team members:" />
-                  <Button fx:id="fxAssignEmployeeButton" layoutX="606.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleAssignEmployee" text="Assign &gt;&gt;" />
-                  <Button fx:id="fxUnassignEmployeeButton" layoutX="596.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleUnassignEmployee" text="&lt;&lt; Unassign" />
-                  <TableView fx:id="allEmployeesListView" layoutX="247.0" layoutY="315.0" prefHeight="200.0" prefWidth="323.0">
+                  <TextField fx:id="projectId" editable="false" layoutX="247.0" layoutY="44.0" />
+                  <Button fx:id="fxSaveButton" layoutX="1006.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleSaveProject" text="Save" />
+                  <Button fx:id="fxCancelButton" layoutX="885.0" layoutY="574.0" mnemonicParsing="false" onAction="#backToProjectsList" text="Cancel" />
+                  <Button fx:id="fxDeleteButton" layoutX="64.0" layoutY="570.0" mnemonicParsing="false" onAction="#handleDeleteProject" prefHeight="39.0" prefWidth="183.0" text="Delete Project" />
+                  <Label layoutX="247.0" layoutY="319.0" text="Employees List:" />
+                  <Button fx:id="fxAssignEmployeeButton" layoutX="617.0" layoutY="429.0" mnemonicParsing="false" onAction="#handleAssignEmployee" text="Assign &gt;&gt;" />
+                  <Button fx:id="fxUnassignEmployeeButton" layoutX="607.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleUnassignEmployee" text="&lt;&lt; Unassign" />
+                  <TableView fx:id="allEmployeesListView" layoutX="247.0" layoutY="355.0" prefHeight="200.0" prefWidth="323.0">
                     <columns>
                       <TableColumn fx:id="employeeId" prefWidth="50.0" text="ID" />
                         <TableColumn fx:id="firstName" prefWidth="126.0" text="First Name" />
                       <TableColumn fx:id="lastName" prefWidth="143.0" text="Last Name" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="teamList" layoutX="748.0" layoutY="315.0" prefHeight="200.0" prefWidth="323.0">
+                  <TableView fx:id="teamList" layoutX="748.0" layoutY="355.0" prefHeight="200.0" prefWidth="323.0">
                      <columns>
                         <TableColumn fx:id="teamEmployeeId" prefWidth="50.0" text="ID" />
                         <TableColumn fx:id="teamFirstName" prefWidth="126.0" text="First Name" />
                         <TableColumn fx:id="teamLastName" prefWidth="143.0" text="Last Name" />
                      </columns>
                   </TableView>
+                  <Label layoutX="748.0" layoutY="319.0" text="Team Members:" />
                </children>
             </AnchorPane>
         </content>
