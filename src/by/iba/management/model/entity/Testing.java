@@ -17,16 +17,32 @@ public class Testing {
         return manual;
     }
 
+    public void setManual(boolean manual) {
+        this.manual = manual;
+    }
+
     public boolean isAutomation() {
         return automation;
+    }
+
+    public void setAutomation(boolean automation) {
+        this.automation = automation;
     }
 
     public boolean isTestingDeskTopApplications() {
         return testingDeskTopApplications;
     }
 
+    public void setTestingDeskTopApplications(boolean testingDeskTopApplications) {
+        this.testingDeskTopApplications = testingDeskTopApplications;
+    }
+
     public boolean isTestingMobileApplications() {
         return testingMobileApplications;
+    }
+
+    public void setTestingMobileApplications(boolean testingMobileApplications) {
+        this.testingMobileApplications = testingMobileApplications;
     }
 
     @Override
@@ -37,14 +53,24 @@ public class Testing {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Testing testing = (Testing) o;
 
-        if (manual != testing.manual) return false;
-        if (automation != testing.automation) return false;
-        if (testingDeskTopApplications != testing.testingDeskTopApplications) return false;
+        if (manual != testing.manual) {
+            return false;
+        }
+        if (automation != testing.automation) {
+            return false;
+        }
+        if (testingDeskTopApplications != testing.testingDeskTopApplications) {
+            return false;
+        }
         return testingMobileApplications == testing.testingMobileApplications;
     }
 

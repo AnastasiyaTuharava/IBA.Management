@@ -19,20 +19,40 @@ public class ProgrammingLanguage {
         return java;
     }
 
+    public void setJava(boolean java) {
+        this.java = java;
+    }
+
     public boolean iscPlusPlus() {
         return cPlusPlus;
+    }
+
+    public void setcPlusPlus(boolean cPlusPlus) {
+        this.cPlusPlus = cPlusPlus;
     }
 
     public boolean iscSharp() {
         return cSharp;
     }
 
+    public void setcSharp(boolean cSharp) {
+        this.cSharp = cSharp;
+    }
+
     public boolean isPhp() {
         return php;
     }
 
+    public void setPhp(boolean php) {
+        this.php = php;
+    }
+
     public boolean isDotNet() {
         return dotNet;
+    }
+
+    public void setDotNet(boolean dotNet) {
+        this.dotNet = dotNet;
     }
 
     @Override
@@ -43,15 +63,27 @@ public class ProgrammingLanguage {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ProgrammingLanguage that = (ProgrammingLanguage) o;
 
-        if (java != that.java) return false;
-        if (cPlusPlus != that.cPlusPlus) return false;
-        if (cSharp != that.cSharp) return false;
-        if (php != that.php) return false;
+        if (java != that.java) {
+            return false;
+        }
+        if (cPlusPlus != that.cPlusPlus) {
+            return false;
+        }
+        if (cSharp != that.cSharp) {
+            return false;
+        }
+        if (php != that.php) {
+            return false;
+        }
         return dotNet == that.dotNet;
     }
 
