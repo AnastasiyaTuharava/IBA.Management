@@ -141,5 +141,10 @@ public class EmployeeProfileController {
         isTeamLead.setSelected(employee.isTeamLead());
         position.setValue(employee.getPosition());
         englishLevel.setValue(employee.getEnglishLanguageLevel());
+        isJava.setSelected(employee.getProgrammingLanguage().isJava());
+        isCplusPlus.setSelected(employee.getProgrammingLanguage().iscPlusPlus());
+        isCsharp.setSelected(employee.getProgrammingLanguage().iscSharp());
+        isPhp.setSelected(employee.getProgrammingLanguage().isPhp());
+        isDotNet.setSelected(employee.getProgrammingLanguage().isDotNet());
     }
 }
