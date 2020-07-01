@@ -66,7 +66,7 @@ public class EmployeeDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE e INNER JOIN PROJECT p ON p.ID_PROJECT = e.PROJECT_ID");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE e LEFT JOIN PROJECT p ON p.ID_PROJECT = e.PROJECT_ID");
             while (rs.next()) {
                 Employee employee = new Employee();
                 employee.setEmployeeId(rs.getInt("id"));
