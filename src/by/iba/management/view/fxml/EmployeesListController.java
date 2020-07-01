@@ -20,8 +20,6 @@ import java.util.Optional;
 
 public class EmployeesListController {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
-
     @FXML
     TableColumn<Employee, String> employeeId;
     @FXML
@@ -62,7 +60,7 @@ public class EmployeesListController {
     @FXML
     public void initialize() {
         fxFindEmployeeTextField.setPromptText("Search");
-        List<Employee> employeesList = employeeDAO.getEmployees();
+        List<Employee> employeesList = EmployeeDAO.getEmployees();
         for (Employee e : employeesList) {
             employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
             firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -80,21 +78,31 @@ public class EmployeesListController {
 
     private void showEmployeeDetails(Employee employee) {
         if (employee != null) {
-            if(String.valueOf(employee.getEnglishLanguageLevel()) != null) {
+            if (String.valueOf(employee.getEnglishLanguageLevel()) != null) {
                 englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
-            } else englishLevel.setText("N/A");
-            if(String.valueOf(employee.getProgrammingLanguage()) != null) {
+            } else {
+                englishLevel.setText("N/A");
+            }
+            if (String.valueOf(employee.getProgrammingLanguage()) != null) {
                 programming.setText(String.valueOf(employee.getProgrammingLanguage()));
-            } else programming.setText("N/A");
-            if(String.valueOf(employee.getTesting()) != null) {
+            } else {
+                programming.setText("N/A");
+            }
+            if (String.valueOf(employee.getTesting()) != null) {
                 testing.setText(String.valueOf(employee.getTesting()));
-            } else testing.setText("N/A");
-            if(String.valueOf(employee.getTools()) != null) {
+            } else {
+                testing.setText("N/A");
+            }
+            if (String.valueOf(employee.getTools()) != null) {
                 tools.setText(String.valueOf(employee.getTesting()));
-            } else tools.setText("N/A");
-            if(String.valueOf(employee.getSkills()) != null) {
+            } else {
+                tools.setText("N/A");
+            }
+            if (String.valueOf(employee.getSkills()) != null) {
                 otherSkills.setText(String.valueOf(employee.getTesting()));
-            } else otherSkills.setText("N/A");
+            } else {
+                otherSkills.setText("N/A");
+            }
         } else {
             englishLevel.setText("empty");
             programming.setText("empty");
@@ -132,7 +140,7 @@ public class EmployeesListController {
         alert.setHeaderText("Are you sure you want to delete this employee from the system?");
         alert.setContentText("Please note that data cannot be restored.");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             //employee delete logic here
             alert.close();
             //String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
@@ -143,7 +151,7 @@ public class EmployeesListController {
     }
 
     @FXML
-    private void findEmployeeByName(ActionEvent event) throws IOException{
+    private void findEmployeeByName(ActionEvent event) throws IOException {
 
     }
 
@@ -154,7 +162,7 @@ public class EmployeesListController {
     }
 
     @FXML
-    private void exportEmployeesToExcel(ActionEvent event) throws IOException{
+    private void exportEmployeesToExcel(ActionEvent event) throws IOException {
 
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EmployeeLogic {
     public static void editEmployee(Employee employee) {
-        EmployeeDAO.editEmployee(employee);
+        EmployeeDAO.updateEmployee(employee);
     }
 
     public static void removeEmployee(long employeeId) throws IOException {

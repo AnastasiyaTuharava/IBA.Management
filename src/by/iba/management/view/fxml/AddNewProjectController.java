@@ -1,28 +1,21 @@
 package by.iba.management.view.fxml;
 
-import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.ProjectLogic;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class AddNewProjectController {
-
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     TextField projectId;
@@ -45,24 +38,22 @@ public class AddNewProjectController {
     }
 
     @FXML
-    private void handleSaveProject(ActionEvent event) throws IOException{
+    private void handleSaveProject(ActionEvent event) throws IOException {
         Project newProject = new Project();
         newProject.setProjectName(projectName.getText());
         newProject.setProjectDescription(projectDescription.getText());
-        //TO DO: add other fields
 
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("The project is successfully added!");
-            alert.showAndWait();
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("The project is successfully added!");
+        alert.showAndWait();
 
         String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
         prepare(event, projectsListLink);
 
         ProjectLogic.addProject(newProject);
-
     }
 
     @FXML
@@ -70,5 +61,4 @@ public class AddNewProjectController {
         String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
         prepare(event, projectsListLink);
     }
-
 }

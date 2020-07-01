@@ -1,13 +1,16 @@
 package by.iba.management.model.logic;
 
+import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.dao.ProjectDAO;
 import by.iba.management.model.entity.Project;
+
 import java.util.List;
 
 public class ProjectLogic {
 
-    public static void editProject(Project project) {
-        ProjectDAO.editProject(project);
+    public static void updateProject(Project project, List<Long> employeeIds, List<Long> teamEmployeeIds) {
+        ProjectDAO.updateProject(project);
+        EmployeeDAO.removeProjectFormEmployee(project.getProjectId(), employeeIds, teamEmployeeIds);
     }
 
     public static void removeProject(long projectId) {

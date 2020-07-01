@@ -81,7 +81,12 @@ public class ProjectsListController {
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
-        Parent projectsListPage = FXMLLoader.load(getClass().getResource(link));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(link));
+        Parent projectsListPage = loader.load();
+        Object mainPageController = loader.getController();
+        if (mainPageController instanceof ProjectProfileController) {
+            ((ProjectProfileController) mainPageController).initProject(Integer.parseInt(projectIdLabel.getText()));
+        }
         Scene mainPageScene = new Scene(projectsListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
@@ -108,7 +113,7 @@ public class ProjectsListController {
         alert.setHeaderText("Are you sure you want to delete this project from the system?");
         alert.setContentText("Please note that data cannot be restored.");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
             fxProjectsListTable.getItems().remove(line);
             ProjectLogic.removeProject(line);

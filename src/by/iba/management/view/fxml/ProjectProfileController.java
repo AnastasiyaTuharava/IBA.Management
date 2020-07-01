@@ -8,7 +8,6 @@ import by.iba.management.model.logic.ProjectLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,13 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class ProjectProfileController {
-
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
-    //private final ProjectDAO projectDAO = new ProjectDAOImpl();
 
     @FXML
     TextField projectId;
@@ -62,14 +59,7 @@ public class ProjectProfileController {
 
     @FXML
     public void initialize() {
-        List<Employee> allEmployeesList = employeeDAO.getEmployees();
-        for (Employee e : allEmployeesList) {
-            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
-            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        }
-        ObservableList<Employee> fxOTeamList = FXCollections.observableList(allEmployeesList);
-        this.allEmployeesListView.setItems(fxOTeamList);
+
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
@@ -93,7 +83,7 @@ public class ProjectProfileController {
         alert.setContentText("Please note that data cannot be restored.");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             //project delete logic here
             //alert.close();
             String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
@@ -108,15 +98,26 @@ public class ProjectProfileController {
         Project newProject = new Project();
         newProject.setProjectName(projectName.getText());
         newProject.setProjectDescription(projectDescription.getText());
-        //TO DO: add other fields
-        ProjectLogic.addProject(newProject);
+        newProject.setProjectId(Long.parseLong(projectId.getText()));
+        ObservableList<Employee> observableList = allEmployeesListView.getItems();
+        List<Long> employeeIds = new ArrayList<>(observableList.size());
+        for (Employee employee : observableList) {
+            employeeIds.add(employee.getEmployeeId());
+        }
+
+        ObservableList<Employee> observableTeamList = teamList.getItems();
+        List<Long> teamEmployeeIds = new ArrayList<>(observableTeamList.size());
+        for (Employee employee : observableTeamList) {
+            teamEmployeeIds.add(employee.getEmployeeId());
+        }
+        ProjectLogic.updateProject(newProject, employeeIds, teamEmployeeIds);
 
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("The project is successfully updated!");
-            alert.showAndWait();
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("The project is successfully updated!");
+        alert.showAndWait();
 
         String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
         prepare(event, projectsListLink);
@@ -144,12 +145,46 @@ public class ProjectProfileController {
 //        ObservableList<Employee> list = FXCollections.observableList();
 //        this.teamList = new TableView<Employee>(list);
         if (candidate != null) {
-            this.teamList.getItems().add(candidate);
+            teamList.getItems().add(candidate);
+            allEmployeesListView.getItems().remove(candidate);
         }
     }
 
     @FXML
     private void handleUnassignEmployee() {
+        Employee candidate = teamList.getSelectionModel().getSelectedItem();
+        if (candidate != null) {
+            allEmployeesListView.getItems().add(candidate);
+            teamList.getItems().remove(candidate);
+        }
+    }
 
+    public void initProject(int currentProjectId) {
+        Project project = ProjectDAO.getProject(currentProjectId);
+        projectId.setText(String.valueOf(project.getProjectId()));
+        projectName.setText(project.getProjectName());
+        projectDescription.setText(project.getProjectDescription());
+
+        List<Employee> allEmployeesList = EmployeeDAO.getEmployees();
+        List<Employee> assignTeamList = new ArrayList<>();
+        List<Employee> notAssignTeamList = new ArrayList<>();
+        for (Employee e : allEmployeesList) {
+            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            teamEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+            teamFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            teamLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
+            if (e.getProjectId() != 0 && currentProjectId == e.getProjectId()) {
+                assignTeamList.add(e);
+            } else if (e.getProjectId() == 0) {
+                notAssignTeamList.add(e);
+            }
+        }
+        ObservableList<Employee> fxOTeamList = FXCollections.observableList(notAssignTeamList);
+        ObservableList<Employee> fxOAssignTeamList = FXCollections.observableList(assignTeamList);
+        this.allEmployeesListView.setItems(fxOTeamList);
+        this.teamList.setItems(fxOAssignTeamList);
     }
 }

@@ -45,16 +45,25 @@ public class ProjectDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            stmt.execute("INSERT INTO PROJECT (name, description) VALUES (\'"
-                    + project.getProjectName() + "\', \'"
-                    + project.getProjectDescription() + "\')");
+            stmt.execute("INSERT INTO PROJECT (name, description) VALUES ('"
+                    + project.getProjectName() + "', '"
+                    + project.getProjectDescription() + "')");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void editProject(Project project) {
-        // TODO: 30.06.2020  
+    public static void updateProject(Project project) {
+        Connection connection = DBConnector.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute("UPDATE PROJECT SET " +
+                    "NAME='" + project.getProjectName() + "' , " +
+                    "DESCRIPTION='" + project.getProjectDescription() + "' " +
+                    "WHERE ID=" + project.getProjectId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Project getProject(long projectId) {
@@ -79,7 +88,7 @@ public class ProjectDAO {
         Project project = new Project();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE NAME=\'" + projectName + "\'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE NAME='" + projectName + "'");
             while (rs.next()) {
                 project.setProjectId(rs.getInt("id"));
                 project.setProjectName(rs.getString("name"));

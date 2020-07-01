@@ -16,14 +16,33 @@ public class EmployeeDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("delete FROM EMPLOYEE where id = " + id);
+            stmt.executeQuery("delete FROM EMPLOYEE where id = " + id);
         } catch (SQLException ec) {
-
+            ec.printStackTrace();
         }
     }
 
-    public static void editEmployee(Employee employee) {
+    public static void updateEmployee(Employee employee) {
         // TODO: 30.06.2020
+    }
+
+    public static void removeProjectFormEmployee(long projectId, List<Long> employeeIds, List<Long> teamEmployeeIds) {
+        Connection connection = DBConnector.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            for (Long id : employeeIds) {
+                stmt.executeUpdate("UPDATE EMPLOYEE SET " +
+                        "PROJECT_ID = NULL " +
+                        "WHERE ID=" + id);
+            }
+            for (Long id : teamEmployeeIds) {
+                stmt.executeUpdate("UPDATE EMPLOYEE SET " +
+                        "PROJECT_ID = '" + projectId + "'" +
+                        "WHERE ID=" + id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Employee getEmployee(long id) {
@@ -33,7 +52,7 @@ public class EmployeeDAO {
     }
 
     public static List<Employee> getEmployee(String firstName, String lastName) {
-        List <Employee> employees = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
         // TODO: 30.06.2020
         return employees;
     }
