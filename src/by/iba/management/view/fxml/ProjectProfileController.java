@@ -84,8 +84,7 @@ public class ProjectProfileController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            //project delete logic here
-            //alert.close();
+            ProjectLogic.removeProject(Long.parseLong(projectId.getText()));
             String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
             prepare(event, projectsPageLink);
         } else {
