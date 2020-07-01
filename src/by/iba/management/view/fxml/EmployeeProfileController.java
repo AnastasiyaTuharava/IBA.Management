@@ -82,6 +82,7 @@ public class EmployeeProfileController {
     @FXML
     public void initialize() {
         position.setItems(FXCollections.observableArrayList(Position.values()));
+        englishLevel.setItems(FXCollections.observableArrayList(EnglishLanguageLevel.values()));
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
@@ -139,5 +140,6 @@ public class EmployeeProfileController {
         projectName.setText(employee.getProjectName());
         isTeamLead.setSelected(employee.isTeamLead());
         position.setValue(employee.getPosition());
+        englishLevel.setValue(employee.getEnglishLanguageLevel());
     }
 }
