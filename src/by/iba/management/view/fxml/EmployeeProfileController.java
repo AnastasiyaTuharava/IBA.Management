@@ -1,6 +1,8 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.model.entity.Employee;
+import by.iba.management.model.entity.EnglishLanguageLevel;
 import by.iba.management.model.entity.Position;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -10,15 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public class EmployeeProfileController {
-
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     TextField employeeId;
@@ -31,9 +30,9 @@ public class EmployeeProfileController {
     @FXML
     CheckBox isTeamLead;
     @FXML
-    ChoiceBox position;
+    ChoiceBox<Position> position;
     @FXML
-    ChoiceBox englishLevel;
+    ChoiceBox<EnglishLanguageLevel> englishLevel;
     @FXML
     CheckBox isJava;
     @FXML
@@ -81,30 +80,8 @@ public class EmployeeProfileController {
     private Position ObservableList;
 
     @FXML
-    public void initialize(Position p) {
-        //Employee employee = employeeDAO.setEmployeeData();
-        //employeeId.setText(String.valueOf(employee.setEmployeeId());
-        //firstName.setText(String.valueOf(employee.setFirstName());
-        //lastName.setText(String.valueOf(employee.getLastName()));
-        //projectName.setText(String.valueOf(employee.getProjectId())); //how set Project Name by Project Id?
-        //isTeamLead.setSelected(employee.isTeamLead());
-
-        String positionList[] = { "JUNIOR_QA",
-                        "MIDDLE_QA",
-                        "SENIOR_QA",
-                        "LEAD_QA",
-                        "JUNIOR_DEV",
-                        "MIDDLE_DEV",
-                        "SENIOR_DEV",
-                        "LEAD_DEV"
-        };
-
-        // Create a combo box
-        ComboBox positionDropDown =
-                new ComboBox(FXCollections
-                        .observableArrayList(positionList));
-        TilePane tile_pane = new TilePane(positionDropDown);
-        position.setItems((javafx.collections.ObservableList) positionDropDown);
+    public void initialize() {
+        position.setItems(FXCollections.observableArrayList(Position.values()));
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
@@ -122,7 +99,6 @@ public class EmployeeProfileController {
         prepare(event, employeesListLink);
     }
 
-
     @FXML
     private void deleteEmployee(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -131,7 +107,7 @@ public class EmployeeProfileController {
         alert.setContentText("Please note that data cannot be restored.");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             //employee delete logic here
             //alert.close();
             String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
@@ -141,18 +117,27 @@ public class EmployeeProfileController {
         }
     }
 
-
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
         //logic to be written here
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("The employee is successfully updated!");
-            alert.showAndWait();
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("The employee is successfully updated!");
+        alert.showAndWait();
 
         String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
         prepare(event, employeesListLink);
+    }
+
+    public void initEmployee(long emplId) {
+        Employee employee = EmployeeDAO.getEmployee(emplId);
+        employeeId.setText(String.valueOf(employee.getEmployeeId()));
+        firstName.setText(employee.getFirstName());
+        lastName.setText(employee.getLastName());
+        projectName.setText(employee.getProjectName());
+        isTeamLead.setSelected(employee.isTeamLead());
+        position.setValue(employee.getPosition());
     }
 }

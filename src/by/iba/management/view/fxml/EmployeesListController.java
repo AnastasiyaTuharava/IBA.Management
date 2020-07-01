@@ -113,7 +113,12 @@ public class EmployeesListController {
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
-        Parent employeesListPage = FXMLLoader.load(getClass().getResource(link));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(link));
+        Parent employeesListPage = loader.load();
+        Object mainPageController = loader.getController();
+        if (mainPageController instanceof EmployeeProfileController) {
+            ((EmployeeProfileController) mainPageController).initEmployee(employeesListTable.getSelectionModel().selectedItemProperty().get().getEmployeeId());
+        }
         Scene mainPageScene = new Scene(employeesListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);

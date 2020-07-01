@@ -46,8 +46,39 @@ public class EmployeeDAO {
     }
 
     public static Employee getEmployee(long id) {
+        Connection connection = DBConnector.getConnection();
         Employee employee = new Employee();
-        // TODO: 30.06.2020
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE ID = " + id);
+            while (rs.next()) {
+
+                employee.setEmployeeId(rs.getInt("id"));
+                employee.setFirstName(rs.getString("name"));
+                employee.setLastName(rs.getString("surname"));
+                employee.setProjectId(rs.getInt("project_id"));
+                employee.setTeamLead(rs.getBoolean("is_teamlead"));
+                employee.setPosition(Position.valueOf(rs.getString("position")));
+                employee.setEnglishLanguageLevel(EnglishLanguageLevel.valueOf(rs.getString("english_level")));
+
+                Skills skills = new Skills();
+                skills.setCss(rs.getBoolean("css"));
+                skills.setHtml(rs.getBoolean("html"));
+                skills.setJavaScript(rs.getBoolean("js"));
+                skills.setjQuery(rs.getBoolean("j_query"));
+                skills.setSql(rs.getBoolean("sql"));
+                employee.setSkills(skills);
+
+                Tools tools = new Tools();
+                tools.setEclipse(rs.getBoolean("eclipse"));
+                tools.setIntellijIdea(rs.getBoolean("intellij_idea"));
+                tools.setNetBeans(rs.getBoolean("net_beans"));
+                tools.setVisualStudio(rs.getBoolean("visual_studio"));
+                employee.setTools(tools);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return employee;
     }
 
