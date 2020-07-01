@@ -67,18 +67,86 @@ public class DBConnector {
                 stmt.executeUpdate(employeeSql);
                 LOGGER.log(Level.INFO, "Created table in given database...");
 
-                String insertProjectSQL = "INSERT INTO PROJECT(name_project, description_project) VALUES ('The', 'Dream'); " +
-                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Guardians', 'of'); " +
-                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Infinity', 'War'); " +
-                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Ragnarok', 'Thor'); " +
-                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Venom', 'Venom'); " +
-                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('HeroesMix', 'Ungrouped'); ";
+                String insertProjectSQL = "INSERT INTO PROJECT(name_project, description_project) VALUES ('USS Enterprise', 'NCC-1701'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Big Ben Theory','Math, science, history, unraveling the mysteries\n" +
+                        "That all started with the big bang! Hey!'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Spider Man', 'A fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Star Wars', 'Lucasfilm'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Superman', 'Superman was born on the planet Krypton and was given the name Kal-El at birth'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Dream Team', 'A team of a dream'); ";
                 stmt.executeUpdate(insertProjectSQL);
 
                 String insertEmployeeSQL = "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
-                        "VALUES ('Anastasiya', 'Tuharava', 1, 0, 'JUNIOR_DEV', 'B1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "VALUES ('Robert', 'April', 1, 1, 'SENIOR_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
                         "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
-                        "VALUES ('Katya', 'Mikhailovich', 1, 1, 'JUNIOR_DEV', 'C1', 0,0,1,1,0,0,1,1,1,0,1,0,1,0,1,0,1,1); ";
+                        "VALUES ('Christopher', 'Pike', 1, 1, 'JUNIOR_DEV', 'C1', 0,0,1,1,0,0,0,1,0,0,1,0,1,0,1,1,1,1); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('James', 'T.Kirk', 1, 1, 'MIDDLE_DEV', 'B2', 0,0,1,0,1,0,1,0,1,0,0,1,1,1,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Spock', 'Vulcan', 1, 1, 'SENIOR_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Leonard', 'Hofstadter', 2, 1, 'SENIOR_DEV', 'C2', 0,0,1,0,1,0,1,0,1,0,0,1,1,1,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Sheldon', 'Cooper', 2, 1, 'SENIOR_DEV', 'B2', 1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Penny', 'Penny', 2, 1, 'MIDDLE_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,0,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Howard', 'Wolowitz', 2, 1, 'SENIOR_DEV', 'C2', 1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Raj', 'Koothrappali', 2, 1, 'SENIOR_DEV', 'B2', 1,0,0,0,1,0,1,0,1,0,0,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Ami', 'Farrah Fowler', 2, 1, 'SENIOR_DEV', 'B2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Bernadette', 'Rostenkowski-Wolowitz', 2, 1, 'SENIOR_DEV', 'C2', 1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Peter', 'Parker', 3, 1, 'SENIOR_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Iron', 'Man', 3, 1, 'MIDDLE_DEV', 'C2', 1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Mary Jane', 'Watson', 3, 0, 'MIDDLE_DEV', 'B2', 1,0,1,0,1,0,1,0,0,0,1,1,1,0,0,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Luke', 'Skywalker', 4, 1, 'MIDDLE_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Han', 'Solo', 4, 1, 'MIDDLE_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Leia', 'The Princess', 4, 1, 'SENIOR_DEV', 'C2', 1,0,0,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Obi-One', 'Kinobi', 4, 1, 'MIDDLE_DEV', 'C2', 0,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('C-3PO', 'Droid', 4, 0, 'SENIOR_DEV', 'A1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('R2D2', 'Droid', 4, 0, 'MIDDLE_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Chewbacca', 'Chewy', 4, 1, 'SENIOR_DEV', 'B2', 1,0,1,0,1,0,1,0,0,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Clark', 'Kent', 5, 0, 'SENIOR_DEV', 'A1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Lois', 'Lane', 5, 0, 'SENIOR_DEV', 'C2', 1,0,1,1,1,0,1,0,1,1,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Katsiaryna', 'Mikhailovich', 6, 1, 'JUNIOR_DEV', 'A1', 1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Anastasiya', 'Tuharava', 6, 0, 'JUNIOR_DEV', 'C1', 1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Jack', 'Daniels', 5, 0, 'MIDDLE_DEV', 'A1', 1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Johnny', 'Walker', 5, 1, 'MIDDLE_DEV', 'B1', 1,0,0,0,1,0,1,0,0,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Famous', 'Grouse', 5, 1, 'MIDDLE_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Jameson', 'Caskmates', 5, 0, 'JUNIOR_DEV', 'B1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Paul John', 'Peated', 5, 1, 'SENIOR_DEV', 'C1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Dillon`s', 'Rye', 5, 1, 'JUNIOR_DEV', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,1); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Mickey', 'Mouse', 5, 1, 'MIDDLE_QA', 'B1', 1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,1); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Donald', 'Duck', 5, 0, 'MIDDLE_QA', 'B1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Minnie', 'Mouse', 5, 1, 'JUNIOR_QA', 'C1', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); " +
+                        "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +
+                        "VALUES ('Pluto', 'The Dog', 5, 1, 'JUNIOR_QA', 'C2', 1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0); ";
+
                 stmt.executeUpdate(insertEmployeeSQL);
                 LOGGER.log(Level.INFO, "Tables were created");
             }
