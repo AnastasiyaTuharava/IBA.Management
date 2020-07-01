@@ -78,28 +78,28 @@ public class EmployeesListController {
 
     private void showEmployeeDetails(Employee employee) {
         if (employee != null) {
-            if (String.valueOf(employee.getEnglishLanguageLevel()) != null) {
+            if (employee.getEnglishLanguageLevel() != null) {
                 englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
             } else {
                 englishLevel.setText("N/A");
             }
-            if (String.valueOf(employee.getProgrammingLanguage()) != null) {
+            if (employee.getProgrammingLanguage() != null) {
                 programming.setText(String.valueOf(employee.getProgrammingLanguage()));
             } else {
                 programming.setText("N/A");
             }
-            if (String.valueOf(employee.getTesting()) != null) {
+            if (employee.getTesting() != null) {
                 testing.setText(String.valueOf(employee.getTesting()));
             } else {
                 testing.setText("N/A");
             }
-            if (String.valueOf(employee.getTools()) != null) {
-                tools.setText(String.valueOf(employee.getTesting()));
+            if (employee.getTools() != null) {
+                tools.setText(String.valueOf(employee.getTools()));
             } else {
                 tools.setText("N/A");
             }
-            if (String.valueOf(employee.getSkills()) != null) {
-                otherSkills.setText(String.valueOf(employee.getTesting()));
+            if (employee.getSkills() != null) {
+                otherSkills.setText(String.valueOf(employee.getSkills()));
             } else {
                 otherSkills.setText("N/A");
             }
