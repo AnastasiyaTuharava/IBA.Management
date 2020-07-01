@@ -60,7 +60,7 @@ public class EmployeesListController {
     @FXML
     public void initialize() {
         fxFindEmployeeTextField.setPromptText("Search");
-        List<Employee> employeesList = EmployeeDAO.getEmployees();
+        List<Employee> employeesList = EmployeeDAO.getEmployeesAndProject();
         for (Employee e : employeesList) {
             employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
             firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
