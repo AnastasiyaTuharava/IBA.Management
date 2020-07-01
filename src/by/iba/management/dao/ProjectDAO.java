@@ -20,9 +20,9 @@ public class ProjectDAO {
             ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT");
             while (rs.next()) {
                 Project project = new Project();
-                project.setProjectId(rs.getInt("id"));
-                project.setProjectName(rs.getString("name"));
-                project.setProjectDescription(rs.getString("description"));
+                project.setProjectId(rs.getInt("id_project"));
+                project.setProjectName(rs.getString("name_project"));
+                project.setProjectDescription(rs.getString("description_project"));
                 projectList.add(project);
             }
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class ProjectDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            stmt.execute("DELETE FROM PROJECT WHERE ID=" + projectId);
+            stmt.execute("DELETE FROM PROJECT WHERE id_project=" + projectId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class ProjectDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            stmt.execute("INSERT INTO PROJECT (name, description) VALUES ('"
+            stmt.execute("INSERT INTO PROJECT (name_project, description_project) VALUES ('"
                     + project.getProjectName() + "', '"
                     + project.getProjectDescription() + "')");
         } catch (SQLException e) {
@@ -58,9 +58,9 @@ public class ProjectDAO {
         try {
             Statement stmt = connection.createStatement();
             stmt.execute("UPDATE PROJECT SET " +
-                    "NAME='" + project.getProjectName() + "' , " +
-                    "DESCRIPTION='" + project.getProjectDescription() + "' " +
-                    "WHERE ID=" + project.getProjectId());
+                    "name_project='" + project.getProjectName() + "' , " +
+                    "description_project='" + project.getProjectDescription() + "' " +
+                    "WHERE id_project=" + project.getProjectId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,11 +71,11 @@ public class ProjectDAO {
         Project project = new Project();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE ID=" + projectId);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE id_project=" + projectId);
             while (rs.next()) {
-                project.setProjectId(rs.getInt("id"));
-                project.setProjectName(rs.getString("name"));
-                project.setProjectDescription(rs.getString("description"));
+                project.setProjectId(rs.getInt("id_project"));
+                project.setProjectName(rs.getString("name_project"));
+                project.setProjectDescription(rs.getString("description_project"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,11 +88,11 @@ public class ProjectDAO {
         Project project = new Project();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE NAME='" + projectName + "'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE name_project='" + projectName + "'");
             while (rs.next()) {
-                project.setProjectId(rs.getInt("id"));
-                project.setProjectName(rs.getString("name"));
-                project.setProjectDescription(rs.getString("description"));
+                project.setProjectId(rs.getInt("id_project"));
+                project.setProjectName(rs.getString("name_project"));
+                project.setProjectDescription(rs.getString("description_project"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

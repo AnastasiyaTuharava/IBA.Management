@@ -32,9 +32,9 @@ public class DBConnector {
             ResultSet tables = dbm.getTables(null, null, "EMPLOYEE", null);
             if (!tables.next()) {
                 String projectSql = "CREATE TABLE PROJECT " +
-                        "(id INTEGER not NULL PRIMARY KEY AUTO_INCREMENT," +
-                        " name VARCHAR(255), " +
-                        " description VARCHAR(500));";
+                        "(id_project INTEGER not NULL PRIMARY KEY AUTO_INCREMENT," +
+                        " name_project VARCHAR(255), " +
+                        " description_project VARCHAR(500));";
                 stmt.executeUpdate(projectSql);
 
                 String employeeSql = "CREATE TABLE EMPLOYEE " +
@@ -63,16 +63,16 @@ public class DBConnector {
                         " intellij_idea BIT , " +
                         " eclipse BIT , " +
                         " net_beans BIT , " +
-                        " FOREIGN KEY (project_id) REFERENCES PROJECT(id));";
+                        " FOREIGN KEY (project_id) REFERENCES PROJECT(id_project));";
                 stmt.executeUpdate(employeeSql);
                 LOGGER.log(Level.INFO, "Created table in given database...");
 
-                String insertProjectSQL = "INSERT INTO PROJECT(name, description) VALUES ('The', 'Dream'); " +
-                        "INSERT INTO PROJECT(name, description) VALUES ('Guardians', 'of'); " +
-                        "INSERT INTO PROJECT(name, description) VALUES ('Infinity', 'War'); " +
-                        "INSERT INTO PROJECT(name, description) VALUES ('Ragnarok', 'Thor'); " +
-                        "INSERT INTO PROJECT(name, description) VALUES ('Venom', 'Venom'); " +
-                        "INSERT INTO PROJECT(name, description) VALUES ('HeroesMix', 'Ungrouped'); ";
+                String insertProjectSQL = "INSERT INTO PROJECT(name_project, description_project) VALUES ('The', 'Dream'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Guardians', 'of'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Infinity', 'War'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Ragnarok', 'Thor'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Venom', 'Venom'); " +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('HeroesMix', 'Ungrouped'); ";
                 stmt.executeUpdate(insertProjectSQL);
 
                 String insertEmployeeSQL = "INSERT INTO EMPLOYEE(name, surname, project_id, is_teamLead, position, english_level, java, c_plus_plus, c_sharp,php, dot_net, sql,js,html,css,j_query,manual_qa, auto_qa,desktop_testing,mobile_testing,visual_studio,intellij_idea,eclipse,net_beans) " +

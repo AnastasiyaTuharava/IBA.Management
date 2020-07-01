@@ -5,6 +5,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private long projectId;
+    private String projectName;
     private boolean teamLead;
     private Position position;
     private EnglishLanguageLevel englishLanguageLevel;
@@ -152,6 +153,14 @@ public class Employee {
 
     public void setTools(Tools tools) {
         this.tools = tools;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     @Override
