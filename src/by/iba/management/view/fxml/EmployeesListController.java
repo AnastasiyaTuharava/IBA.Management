@@ -45,6 +45,8 @@ public class EmployeesListController {
     @FXML
     Button fxExportEmployeesToExcelButton;
     @FXML
+    Label employeeIdLabel;
+    @FXML
     Label englishLevel;
     @FXML
     Label programming;
@@ -78,6 +80,7 @@ public class EmployeesListController {
 
     private void showEmployeeDetails(Employee employee) {
         if (employee != null) {
+            employeeIdLabel.setText(String.valueOf(employee.getEmployeeId()));
             if (employee.getEnglishLanguageLevel() != null) {
                 englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
             } else {
@@ -116,9 +119,13 @@ public class EmployeesListController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(link));
         Parent employeesListPage = loader.load();
         Object mainPageController = loader.getController();
-        if (mainPageController instanceof EmployeeProfileController) {
-            ((EmployeeProfileController) mainPageController).initEmployee(employeesListTable.getSelectionModel().selectedItemProperty().get().getEmployeeId());
-        }
+        //if (mainPageController instanceof EmployeeProfileController) {
+        //    ((EmployeeProfileController) mainPageController).initEmployee(employeesListTable.getSelectionModel().selectedItemProperty().get().getEmployeeId());
+        //}
+        //OR? :
+        //if (mainPageController instanceof EmployeeProfileController) {
+        //    ((EmployeeProfileController) mainPageController).initEmployee(Integer.parseInt(employeeIdLabel.getText()));
+        //}
         Scene mainPageScene = new Scene(employeesListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
