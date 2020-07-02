@@ -31,4 +31,8 @@ public class EmployeeLogic {
     public static List<Employee> getEmployees() {
         return EmployeeDAO.getEmployees();
     }
+
+    public static List<Employee> findEmployeesByName(String employeeName) {
+        return EmployeeDAO.findEmployeesByName(employeeName);
+    }
 }

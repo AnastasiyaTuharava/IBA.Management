@@ -2,6 +2,7 @@ package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.model.entity.Employee;
+import by.iba.management.model.logic.EmployeeLogic;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,7 +72,7 @@ public class EmployeesListController {
             position.setCellValueFactory(new PropertyValueFactory<>("position"));
         }
         ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
-        this.employeesListTable.setItems(fxOEmployeesList);
+        employeesListTable.setItems(fxOEmployeesList);
         showEmployeeDetails(null);
         employeesListTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) ->
@@ -159,8 +160,11 @@ public class EmployeesListController {
     }
 
     @FXML
-    private void findEmployeeByName(ActionEvent event) throws IOException {
-
+    private void findEmployeeByName() {
+        String searchField = fxFindEmployeeTextField.getText();
+        List<Employee> employeesList = EmployeeLogic.findEmployeesByName(searchField);
+        ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
+        employeesListTable.setItems(fxOEmployeesList);
     }
 
     @FXML
