@@ -119,13 +119,9 @@ public class EmployeesListController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(link));
         Parent employeesListPage = loader.load();
         Object mainPageController = loader.getController();
-        //if (mainPageController instanceof EmployeeProfileController) {
-        //    ((EmployeeProfileController) mainPageController).initEmployee(employeesListTable.getSelectionModel().selectedItemProperty().get().getEmployeeId());
-        //}
-        //OR? :
-        //if (mainPageController instanceof EmployeeProfileController) {
-        //    ((EmployeeProfileController) mainPageController).initEmployee(Integer.parseInt(employeeIdLabel.getText()));
-        //}
+        if (mainPageController instanceof EmployeeProfileController) {
+            ((EmployeeProfileController) mainPageController).initEmployee(employeesListTable.getSelectionModel().selectedItemProperty().get().getEmployeeId());
+        }
         Scene mainPageScene = new Scene(employeesListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
