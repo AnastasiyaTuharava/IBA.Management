@@ -99,4 +99,23 @@ public class ProjectDAO {
         }
         return project;
     }
+
+    public static List<Project> findProjectsByName(String projectName) {
+        Connection connection = DBConnector.getConnection();
+        List<Project> projectList = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE name_project LIKE '%" + projectName + "%'");
+            while (rs.next()) {
+                Project project = new Project();
+                project.setProjectId(rs.getInt("id_project"));
+                project.setProjectName(rs.getString("name_project"));
+                project.setProjectDescription(rs.getString("description_project"));
+                projectList.add(project);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return projectList;
+    }
 }

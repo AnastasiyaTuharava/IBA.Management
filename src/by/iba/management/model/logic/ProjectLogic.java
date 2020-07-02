@@ -37,4 +37,8 @@ public class ProjectLogic {
     public static List<Project> getProjects() {
         return ProjectDAO.getProjects();
     }
+
+    public static List<Project> findProjectsByName(String name) {
+        return ProjectDAO.findProjectsByName(name);
+    }
 }

@@ -127,32 +127,11 @@ public class ProjectsListController {
     }
 
     @FXML
-    private void findProject(ActionEvent event) {
-        fxFindProjectTextField.setPromptText("Search");
-        ListView list = new ListView();
-
-        list.setMaxHeight(180);
-        List<Project> projectsList = ProjectLogic.getProjects();
-        fxProjectsListTable.setItems(FXCollections.observableArrayList(projectsList));
-
+    private void findProject() {
         String searchField = fxFindProjectTextField.getText();
-        ToggleGroup tg = new ToggleGroup();
-        fxSearchByProjectId.setToggleGroup(tg);
-        fxSearchByProjectName.setToggleGroup(tg);
-
-        fxFindProjectButton.setOnAction(event1 -> {
-            RadioButton rb = (RadioButton) tg.getSelectedToggle();
-            if (rb.equals(fxSearchByProjectId)) {
-                try {
-                    ProjectLogic.getProject(Long.parseLong(searchField));
-                } catch (NumberFormatException e) {
-
-                }
-            }
-            if (rb.equals(fxSearchByProjectName)) {
-                ProjectLogic.getProject(searchField);
-            }
-        });
+        List<Project> projectList = ProjectLogic.findProjectsByName(searchField);
+        ObservableList<Project> projectsOList = FXCollections.observableList(projectList);
+        fxProjectsListTable.setItems(projectsOList);
     }
 
     @FXML
