@@ -7,6 +7,9 @@ public class ProgrammingLanguage {
     private boolean php;
     private boolean dotNet;
 
+    public ProgrammingLanguage() {
+    }
+
     public ProgrammingLanguage(boolean java, boolean cPlusPlus, boolean cSharp, boolean php, boolean dotNet) {
         this.java = java;
         this.cPlusPlus = cPlusPlus;

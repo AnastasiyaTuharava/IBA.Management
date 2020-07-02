@@ -61,7 +61,13 @@ public class EmployeeDAO {
                 employee.setPosition(Position.valueOf(rs.getString("position")));
                 employee.setEnglishLanguageLevel(EnglishLanguageLevel.valueOf(rs.getString("english_level")));
 
-                // todo: set ProgrammingLanguage
+                ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+                programmingLanguage.setJava(rs.getBoolean("java"));
+                programmingLanguage.setcPlusPlus(rs.getBoolean("c_plus_plus"));
+                programmingLanguage.setcSharp(rs.getBoolean("c_sharp"));
+                programmingLanguage.setDotNet(rs.getBoolean("dot_net"));
+                programmingLanguage.setPhp(rs.getBoolean("php"));
+                employee.setProgrammingLanguage(programmingLanguage);
 
                 Skills skills = new Skills();
                 skills.setCss(rs.getBoolean("css"));
