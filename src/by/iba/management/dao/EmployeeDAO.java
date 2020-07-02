@@ -83,6 +83,13 @@ public class EmployeeDAO {
                 tools.setNetBeans(rs.getBoolean("net_beans"));
                 tools.setVisualStudio(rs.getBoolean("visual_studio"));
                 employee.setTools(tools);
+
+                Testing testing = new Testing();
+                testing.setAutomation(rs.getBoolean("auto_qa"));
+                testing.setManual(rs.getBoolean("manual_qa"));
+                testing.setTestingDeskTopApplications(rs.getBoolean("desktop_testing"));
+                testing.setTestingMobileApplications(rs.getBoolean("mobile_testing"));
+                employee.setTesting(testing);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -6,6 +6,9 @@ public class Testing {
     private boolean testingDeskTopApplications;
     private boolean testingMobileApplications;
 
+    public Testing() {
+    }
+
     public Testing(boolean manual, boolean automation, boolean testingDeskTopApplications, boolean testingMobileApplications) {
         this.manual = manual;
         this.automation = automation;

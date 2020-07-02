@@ -146,5 +146,18 @@ public class EmployeeProfileController {
         isCsharp.setSelected(employee.getProgrammingLanguage().iscSharp());
         isPhp.setSelected(employee.getProgrammingLanguage().isPhp());
         isDotNet.setSelected(employee.getProgrammingLanguage().isDotNet());
+        isSql.setSelected(employee.getSkills().isSql());
+        isJavaScript.setSelected(employee.getSkills().isJavaScript());
+        isHtml.setSelected(employee.getSkills().isHtml());
+        isCss.setSelected(employee.getSkills().isCss());
+        isJquery.setSelected(employee.getSkills().isjQuery());
+        isVisualStudio.setSelected(employee.getTools().isVisualStudio());
+        isIdea.setSelected(employee.getTools().isIntellijIdea());
+        isEclipse.setSelected(employee.getTools().isEclipse());
+        isNetBeans.setSelected(employee.getTools().isNetBeans());
+        isAutomation.setSelected(employee.getTesting().isAutomation());
+        isManual.setSelected(employee.getTesting().isManual());
+        isDesktop.setSelected(employee.getTesting().isTestingDeskTopApplications());
+        isMobile.setSelected(employee.getTesting().isTestingMobileApplications());
     }
 }
