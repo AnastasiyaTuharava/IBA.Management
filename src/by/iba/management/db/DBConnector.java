@@ -68,7 +68,7 @@ public class DBConnector {
                 LOGGER.log(Level.INFO, "Created table in given database...");
 
                 String insertProjectSQL = "INSERT INTO PROJECT(name_project, description_project) VALUES ('USS Enterprise', 'NCC-1701'); " +
-                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Big Ben Theory','Math, science, history, unraveling the mysteries\n" +
+                        "INSERT INTO PROJECT(name_project, description_project) VALUES ('Big Bang Theory','Math, science, history, unraveling the mysteries\n" +
                         "That all started with the big bang! Hey!'); " +
                         "INSERT INTO PROJECT(name_project, description_project) VALUES ('Spider Man', 'A fictional superhero created by writer-editor Stan Lee and writer-artist Steve Ditko'); " +
                         "INSERT INTO PROJECT(name_project, description_project) VALUES ('Star Wars', 'Lucasfilm'); " +
