@@ -2,6 +2,7 @@ package by.iba.management.view.fxml;
 
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.ProjectLogic;
+import by.iba.management.util.DataWriterProject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +16,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectsListController {
+public class
+ProjectsListController {
 
     @FXML
     Button fxFindProjectButton;
@@ -157,7 +160,14 @@ public class ProjectsListController {
     }
 
     @FXML
-    private void exportProjectsToExcel(ActionEvent event) throws IOException {
+    private void exportProjectsToExcel() throws SQLException {
+        Project project = new Project();
+        DataWriterProject.writeProjectToFile(project);
 
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("Employees list is successfully exported to excel file!");
+        alert.showAndWait();
     }
 }

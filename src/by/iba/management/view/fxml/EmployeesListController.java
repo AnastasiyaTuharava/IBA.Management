@@ -2,6 +2,8 @@ package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.model.entity.Employee;
+import by.iba.management.model.logic.EmployeeLogic;
+import by.iba.management.util.DataWriterEmployee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +17,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class EmployeesListController {
-
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
     @FXML
     TableColumn<Employee, String> employeeId;
@@ -47,6 +48,8 @@ public class EmployeesListController {
     @FXML
     Button fxExportEmployeesToExcelButton;
     @FXML
+    Label employeeIdLabel;
+    @FXML
     Label englishLevel;
     @FXML
     Label programming;
@@ -62,7 +65,7 @@ public class EmployeesListController {
     @FXML
     public void initialize() {
         fxFindEmployeeTextField.setPromptText("Search");
-        List<Employee> employeesList = employeeDAO.getEmployees();
+        List<Employee> employeesList = EmployeeDAO.getEmployeesAndProject();
         for (Employee e : employeesList) {
             employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
             firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -71,7 +74,7 @@ public class EmployeesListController {
             position.setCellValueFactory(new PropertyValueFactory<>("position"));
         }
         ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
-        this.employeesListTable.setItems(fxOEmployeesList);
+        employeesListTable.setItems(fxOEmployeesList);
         showEmployeeDetails(null);
         employeesListTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) ->
@@ -80,21 +83,32 @@ public class EmployeesListController {
 
     private void showEmployeeDetails(Employee employee) {
         if (employee != null) {
-            if(String.valueOf(employee.getEnglishLanguageLevel()) != null) {
+            employeeIdLabel.setText(String.valueOf(employee.getEmployeeId()));
+            if (employee.getEnglishLanguageLevel() != null) {
                 englishLevel.setText(String.valueOf(employee.getEnglishLanguageLevel()));
-            } else englishLevel.setText("N/A");
-            if(String.valueOf(employee.getProgrammingLanguage()) != null) {
+            } else {
+                englishLevel.setText("N/A");
+            }
+            if (employee.getProgrammingLanguage() != null) {
                 programming.setText(String.valueOf(employee.getProgrammingLanguage()));
-            } else programming.setText("N/A");
-            if(String.valueOf(employee.getTesting()) != null) {
+            } else {
+                programming.setText("N/A");
+            }
+            if (employee.getTesting() != null) {
                 testing.setText(String.valueOf(employee.getTesting()));
-            } else testing.setText("N/A");
-            if(String.valueOf(employee.getTools()) != null) {
-                tools.setText(String.valueOf(employee.getTesting()));
-            } else tools.setText("N/A");
-            if(String.valueOf(employee.getSkills()) != null) {
-                otherSkills.setText(String.valueOf(employee.getTesting()));
-            } else otherSkills.setText("N/A");
+            } else {
+                testing.setText("N/A");
+            }
+            if (employee.getTools() != null) {
+                tools.setText(String.valueOf(employee.getTools()));
+            } else {
+                tools.setText("N/A");
+            }
+            if (employee.getSkills() != null) {
+                otherSkills.setText(String.valueOf(employee.getSkills()));
+            } else {
+                otherSkills.setText("N/A");
+            }
         } else {
             englishLevel.setText("empty");
             programming.setText("empty");
@@ -105,7 +119,12 @@ public class EmployeesListController {
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
-        Parent employeesListPage = FXMLLoader.load(getClass().getResource(link));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(link));
+        Parent employeesListPage = loader.load();
+        Object mainPageController = loader.getController();
+        if (mainPageController instanceof EmployeeProfileController) {
+            ((EmployeeProfileController) mainPageController).initEmployee(employeesListTable.getSelectionModel().selectedItemProperty().get().getEmployeeId());
+        }
         Scene mainPageScene = new Scene(employeesListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
@@ -132,7 +151,7 @@ public class EmployeesListController {
         alert.setHeaderText("Are you sure you want to delete this employee from the system?");
         alert.setContentText("Please note that data cannot be restored.");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             //employee delete logic here
             alert.close();
             //String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
@@ -143,8 +162,11 @@ public class EmployeesListController {
     }
 
     @FXML
-    private void findEmployeeByName(ActionEvent event) throws IOException{
-
+    private void findEmployeeByName() {
+        String searchField = fxFindEmployeeTextField.getText();
+        List<Employee> employeesList = EmployeeLogic.findEmployeesByName(searchField);
+        ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
+        employeesListTable.setItems(fxOEmployeesList);
     }
 
     @FXML
@@ -154,7 +176,15 @@ public class EmployeesListController {
     }
 
     @FXML
-    private void exportEmployeesToExcel(ActionEvent event) throws IOException{
+    private void exportEmployeesToExcel() throws IOException, SQLException {
 
+        Employee employee = new Employee();
+        DataWriterEmployee.writeEmployeeToFile(employee);
+
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("Employees list is successfully exported to excel file!");
+        alert.showAndWait();
     }
 }
