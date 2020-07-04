@@ -13,8 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -145,10 +146,22 @@ public class ProjectsListController {
     private void exportProjectsToExcel() {
         DataWriterProject.writeProjectToFile();
 
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setContentText("Employees list is successfully exported to excel file!");
-        alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Projects list is successfully exported to excel file!");
+        alert.setHeaderText("Open file?");
+        alert.setContentText("Open file or click Cancel, and file will be stored in your downloads.");
+        ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonOpen = new ButtonType("Open");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonCancel){
+            alert.close();
+        } else {
+            DirectoryChooser dc = new DirectoryChooser();
+            File file = dc.showDialog(null);
+            if (file != null) {
+                file = new File(file.getAbsolutePath() + "/Projects.xlsx");
+            }
+        }
     }
 }

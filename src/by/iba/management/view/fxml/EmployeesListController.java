@@ -3,6 +3,7 @@ package by.iba.management.view.fxml;
 import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.logic.EmployeeLogic;
+import by.iba.management.util.DataWriterEmployee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -174,7 +175,13 @@ public class EmployeesListController {
     }
 
     @FXML
-    private void exportEmployeesToExcel(ActionEvent event) throws IOException {
+    private void exportEmployeesToExcel() throws IOException {
+        DataWriterEmployee.writeEmployeeToFile();
 
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("Employees list is successfully exported to excel file!");
+        alert.showAndWait();
     }
 }
