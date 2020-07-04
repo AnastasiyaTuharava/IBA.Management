@@ -104,11 +104,6 @@ public class DataWriterEmployee {
             }
 
             FileOutputStream out = new FileOutputStream(new File(FILE_PATH));
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("Employees list is successfully exported to excel file!");
-            alert.showAndWait();
             workbook.write(out);
             out.close();
         } catch (Exception e) {

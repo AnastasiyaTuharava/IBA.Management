@@ -1,5 +1,7 @@
 package by.iba.management.view.fxml;
 
+import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.dao.ProjectDAO;
 import by.iba.management.model.entity.Project;
 import by.iba.management.model.logic.ProjectLogic;
 import by.iba.management.util.DataWriterProject;
@@ -109,7 +111,7 @@ public class ProjectsListController {
     }
 
     @FXML
-    private void handleDeleteProject(ActionEvent event) throws IOException {
+    private void handleDeleteProject(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Are you sure you want to delete this project from the system?");
@@ -118,11 +120,9 @@ public class ProjectsListController {
         if (result.get() == ButtonType.OK) {
             int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
             fxProjectsListTable.getItems().remove(line);
-            ProjectLogic.removeProject(line);
-            //project delete logic here
+            //ProjectDAO.removeProject(projectId);
+            //EmployeeDAO.removeProjectFormEmployee();
             alert.close();
-            //String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
-            //prepare(event, projectsPageLink);
         } else {
             alert.close();
         }
@@ -131,9 +131,7 @@ public class ProjectsListController {
     @FXML
     private void findProject() {
         String searchField = fxFindProjectTextField.getText();
-        List<Project> projectList = ProjectLogic.findProjectsByName(searchField);
-        ObservableList<Project> projectsOList = FXCollections.observableList(projectList);
-        fxProjectsListTable.setItems(projectsOList);
+        ProjectDAO.findProjectsByName(searchField);
     }
 
     @FXML

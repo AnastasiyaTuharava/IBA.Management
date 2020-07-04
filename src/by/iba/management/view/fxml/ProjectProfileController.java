@@ -84,7 +84,8 @@ public class ProjectProfileController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            ProjectLogic.removeProject(Long.parseLong(projectId.getText()));
+            //ProjectDAO.removeProject();
+            //EmployeeDAO.removeProjectFormEmployee();
             String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
             prepare(event, projectsPageLink);
         } else {
@@ -130,19 +131,8 @@ public class ProjectProfileController {
 
     @FXML
     private void handleAssignEmployee() {
-//        // Candidates
-//        final ObservableList<String> candidates = FXCollections.observableArrayList("Z", "A", "B", "C", "D");
-//        final ListView<String> candidatesListView = new ListView<>(candidates);
-//        gridpane.add(candidatesListView, 0, 1);
-
         Employee candidate = allEmployeesListView.getSelectionModel().getSelectedItem();
         int candidateIndex = allEmployeesListView.getSelectionModel().getFocusedIndex();
-//        List<Employee> teamMembers = List<Employee>;
-//        String teamMember = String.valueOf(teamList.getSelectionModel().getSelectedItem());
-//        this.allEmployeesListView.getItems().setAll();
-
-//        ObservableList<Employee> list = FXCollections.observableList();
-//        this.teamList = new TableView<Employee>(list);
         if (candidate != null) {
             teamList.getItems().add(candidate);
             allEmployeesListView.getItems().remove(candidate);
