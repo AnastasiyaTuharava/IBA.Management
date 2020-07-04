@@ -1,54 +1,50 @@
 package by.iba.management.util;
 
-import by.iba.management.model.entity.Project;
-import by.iba.management.model.exception.FileNotFoundExceptionM;
-import by.iba.management.model.exception.ReadFileIOException;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import static by.iba.management.db.DBConnector.getConnection;
 
 public class DataWriterProject {
     private static final String FILE_PATH = "data/ProjectsList.xlsx";
-    private static final Logger LOGGER = Logger.getLogger(FileReader.class.getName());
 
     private DataWriterProject() {
     }
 
-    public static void writeProjectToFile(List<Project> projectList) {
-        File file = new File(FILE_PATH);
-        try (FileInputStream in = new FileInputStream(file)) {
-            XSSFWorkbook workbook = new XSSFWorkbook(in);
-            XSSFSheet mySheet = workbook.getSheetAt(0);
+    public static void writeProjectToFile() {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
 
-            int rowIndex = 0;
-            //mySheet.getLastRowNum();
-            for (Project project : projectList) {
-                Row row = mySheet.createRow(rowIndex++);
+            XSSFSheet sheet = workbook.createSheet("Projects");
+
+            XSSFRow header = sheet.createRow(0);
+            header.createCell(0).setCellValue("ID");
+            header.createCell(1).setCellValue("Project Name");
+            header.createCell(2).setCellValue("Description");
+
+            Statement statement = getConnection().createStatement();
+            String query = "SELECT * FROM PROJECT";
+            ResultSet result = statement.executeQuery(query);
+            int rowIndex = 1;
+
+            while (result.next()) {
+                Row row = sheet.createRow(rowIndex++);
                 int cellIndex = 0;
-                row.createCell(cellIndex++).setCellValue(String.valueOf(project.getProjectId()));
-                row.createCell(cellIndex++).setCellValue(project.getProjectName());
-                row.createCell(cellIndex++).setCellValue(project.getProjectDescription());
+                row.createCell(cellIndex++).setCellValue(result.getInt("id_project"));
+                row.createCell(cellIndex++).setCellValue(result.getString("name_project"));
+                row.createCell(cellIndex++).setCellValue(result.getString("description_project"));
             }
-
-
-            //write this workbook in excel file.
-            try {
-                FileOutputStream fos = new FileOutputStream(FILE_PATH);
-                workbook.write(fos);
-                //fos.close();
-                LOGGER.log(Level.FINE, FILE_PATH + " is successfully written");
-            } catch (FileNotFoundExceptionM | ReadFileIOException e) {
-                LOGGER.log(Level.ALL, "File error or IO error: ", e);
-            }
-        } catch (IOException e) {
+            FileOutputStream out = new FileOutputStream(new File(FILE_PATH));
+            workbook.write(out);
+            out.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

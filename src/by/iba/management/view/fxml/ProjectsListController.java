@@ -16,12 +16,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class
-ProjectsListController {
+public class ProjectsListController {
 
     @FXML
     Button fxFindProjectButton;
@@ -84,7 +82,12 @@ ProjectsListController {
     }
 
     private void prepare(ActionEvent event, String link) throws IOException {
-        Parent projectsListPage = FXMLLoader.load(getClass().getResource(link));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(link));
+        Parent projectsListPage = loader.load();
+        Object mainPageController = loader.getController();
+        if (mainPageController instanceof ProjectProfileController) {
+            ((ProjectProfileController) mainPageController).initProject(Integer.parseInt(projectIdLabel.getText()));
+        }
         Scene mainPageScene = new Scene(projectsListPage);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(mainPageScene);
@@ -111,7 +114,7 @@ ProjectsListController {
         alert.setHeaderText("Are you sure you want to delete this project from the system?");
         alert.setContentText("Please note that data cannot be restored.");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
             fxProjectsListTable.getItems().remove(line);
             ProjectLogic.removeProject(line);
@@ -125,32 +128,11 @@ ProjectsListController {
     }
 
     @FXML
-    private void findProject(ActionEvent event) {
-        fxFindProjectTextField.setPromptText("Search");
-        ListView list = new ListView();
-
-        list.setMaxHeight(180);
-        List<Project> projectsList = ProjectLogic.getProjects();
-        fxProjectsListTable.setItems(FXCollections.observableArrayList(projectsList));
-
+    private void findProject() {
         String searchField = fxFindProjectTextField.getText();
-        ToggleGroup tg = new ToggleGroup();
-        fxSearchByProjectId.setToggleGroup(tg);
-        fxSearchByProjectName.setToggleGroup(tg);
-
-        fxFindProjectButton.setOnAction(event1 -> {
-            RadioButton rb = (RadioButton) tg.getSelectedToggle();
-            if (rb.equals(fxSearchByProjectId)) {
-                try {
-                    ProjectLogic.getProject(Long.parseLong(searchField));
-                } catch (NumberFormatException e) {
-
-                }
-            }
-            if (rb.equals(fxSearchByProjectName)) {
-                ProjectLogic.getProject(searchField);
-            }
-        });
+        List<Project> projectList = ProjectLogic.findProjectsByName(searchField);
+        ObservableList<Project> projectsOList = FXCollections.observableList(projectList);
+        fxProjectsListTable.setItems(projectsOList);
     }
 
     @FXML
@@ -160,14 +142,13 @@ ProjectsListController {
     }
 
     @FXML
-    private void exportProjectsToExcel() throws SQLException {
-        Project project = new Project();
-        DataWriterProject.writeProjectToFile(project);
+    private void exportProjectsToExcel() {
+        DataWriterProject.writeProjectToFile();
 
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setAlertType(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
-        alert.setContentText("Projects list is successfully exported to excel file!");
+        alert.setContentText("Employees list is successfully exported to excel file!");
         alert.showAndWait();
     }
 }
