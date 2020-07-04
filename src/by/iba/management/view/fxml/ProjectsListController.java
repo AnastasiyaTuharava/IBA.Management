@@ -145,23 +145,5 @@ public class ProjectsListController {
     @FXML
     private void exportProjectsToExcel() {
         DataWriterProject.writeProjectToFile();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Projects list is successfully exported to excel file!");
-        alert.setHeaderText("Open file?");
-        alert.setContentText("Open file or click Cancel, and file will be stored in your downloads.");
-        ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        ButtonType buttonOpen = new ButtonType("Open");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonCancel){
-            alert.close();
-        } else {
-            DirectoryChooser dc = new DirectoryChooser();
-            File file = dc.showDialog(null);
-            if (file != null) {
-                file = new File(file.getAbsolutePath() + "/Projects.xlsx");
-            }
         }
-    }
 }

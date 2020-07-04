@@ -177,11 +177,5 @@ public class EmployeesListController {
     @FXML
     private void exportEmployeesToExcel() throws IOException {
         DataWriterEmployee.writeEmployeeToFile();
-
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setContentText("Employees list is successfully exported to excel file!");
-        alert.showAndWait();
     }
 }

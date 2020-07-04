@@ -1,5 +1,7 @@
 package by.iba.management.util;
 
+import javafx.scene.control.Alert;
+import javafx.stage.DirectoryChooser;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,7 +15,9 @@ import java.sql.Statement;
 import static by.iba.management.db.DBConnector.getConnection;
 
 public class DataWriterProject {
-    private static final String FILE_PATH = "data/ProjectsList.xlsx";
+    private static DirectoryChooser dc = new DirectoryChooser();
+    static File file = dc.showDialog(null);
+    private static final String FILE_PATH = file.getAbsolutePath() + "/Projects.xlsx";
 
     private DataWriterProject() {
     }
@@ -42,6 +46,11 @@ public class DataWriterProject {
                 row.createCell(cellIndex++).setCellValue(result.getString("description_project"));
             }
             FileOutputStream out = new FileOutputStream(new File(FILE_PATH));
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("Projects list is successfully exported to excel file!");
+            alert.showAndWait();
             workbook.write(out);
             out.close();
         } catch (Exception e) {
