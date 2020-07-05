@@ -33,7 +33,39 @@ public class EmployeeDAO {
     }
 
     public static void updateEmployee(Employee employee) {
-        // TODO: 30.06.2020
+        Connection connection = DBConnector.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute("UPDATE EMPLOYEE SET " +
+                    "NAME ='" + employee.getFirstName() + "' , " +
+                    "SURNAME ='" + employee.getLastName() + "' , " +
+                    "PROJECT_ID ='" + employee.getProjectId() + "' , " +
+                    "IS_TEAMLEAD ='" + employee.isTeamLead() + "' , " +
+                    "POSITION ='" + employee.getFirstName() + "' , " +
+                    "ENGLISH_LEVEL ='" + employee.getEnglishLanguageLevel() + "' , " +
+                    "JAVA ='" + employee.getProgrammingLanguage().isJava() + "' , " +
+                    "C_PLUS_PLUS ='" + employee.getProgrammingLanguage().iscPlusPlus() + "' , " +
+                    "C_SHARP ='" + employee.getProgrammingLanguage().iscSharp() + "' , " +
+                    "PHP ='" + employee.getProgrammingLanguage().isPhp() + "' , " +
+                    "DOT_NET ='" + employee.getProgrammingLanguage().isDotNet() + "' , " +
+                    "SQL ='" + employee.getSkills().isSql() + "' , " +
+                    "JS ='" + employee.getSkills().isJavaScript() + "' , " +
+                    "HTML ='" + employee.getSkills().isHtml() + "' , " +
+                    "CSS ='" + employee.getSkills().isCss() + "' , " +
+                    "J_QUERY ='" + employee.getSkills().isjQuery() + "' , " +
+                    "MANUAL_QA ='" + employee.getTesting().isManual() + "' , " +
+                    "AUTO_QA ='" + employee.getTesting().isAutomation() + "' , " +
+                    "DESKTOP_TESTING ='" + employee.getTesting().isTestingDeskTopApplications() + "' , " +
+                    "MOBILE_TESTING ='" + employee.getTesting().isTestingMobileApplications() + "' , " +
+                    "VISUAL_STUDIO ='" + employee.getTools().isVisualStudio() + "' , " +
+                    "INTELLIJ_IDEA ='" + employee.getTools().isIntellijIdea() + "' , " +
+                    "ECLIPSE ='" + employee.getTools().isEclipse() + "' , " +
+                    "NET_BEANS ='" + employee.getTools().isNetBeans() + "' " +
+
+                    "WHERE ID =" + employee.getEmployeeId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void removeProjectFormEmployee(long projectId, List<Long> employeeIds, List<Long> teamEmployeeIds) {
@@ -114,7 +146,26 @@ public class EmployeeDAO {
     }
 
     public static void addEmployee(Employee employee) {
-        // TODO: 30.06.2020
+            Connection connection = DBConnector.getConnection();
+            try {
+                Statement stmt = connection.createStatement();
+                stmt.execute("INSERT INTO EMPLOYEE (name, surname, project_id, is_teamLead, position, " +
+                        "english_level, java, c_plus_plus, c_sharp,php, dot_net, sql, js, html, css, j_query, " +
+                        "manual_qa, auto_qa,desktop_testing,mobile_testing, visual_studio,intellij_idea,eclipse,net_beans) " + "VALUES ('"
+                                + employee.getFirstName() + "', '" + employee.getLastName() + "', '" + employee.getProjectId() + "', '" +
+                                        employee.isTeamLead() + "', '" + employee.getPosition() + "', '" +
+                                        employee.getEnglishLanguageLevel() + "', '" + employee.getProgrammingLanguage().isJava() + "', '" +
+                                        employee.getProgrammingLanguage().iscPlusPlus() + "', '" + employee.getProgrammingLanguage().iscSharp() + "', '" +
+                                        employee.getProgrammingLanguage().isPhp() + "', '" + employee.getProgrammingLanguage().isDotNet() + "', '" +
+                                        employee.getSkills().isSql() + "', '" + employee.getSkills().isJavaScript() + "', '" +
+                                        employee.getSkills().isHtml() + "', '" + employee.getSkills().isCss() + "', '" + employee.getSkills().isjQuery() + "', '" +
+                                        employee.getTesting().isManual() + "', '" + employee.getTesting().isAutomation() + "', '" +
+                                        employee.getTesting().isTestingDeskTopApplications() + "', '" + employee.getTesting().isTestingMobileApplications() + "', '" +
+                                        employee.getTools().isVisualStudio() + "', '" +  employee.getTools().isIntellijIdea() + "', '" +
+                                employee.getTools().isEclipse() + "', '" + employee.getTools().isNetBeans() + "')");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 
     public static List<Employee> getEmployeesAndProject() {

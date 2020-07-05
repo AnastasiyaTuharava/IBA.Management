@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class EmployeeLogic {
-    public static void editEmployee(Employee employee) {
+    public static void updateEmployee(Employee employee) {
         EmployeeDAO.updateEmployee(employee);
     }
 
     public static void removeEmployee(long employeeId) throws IOException {
         EmployeeDAO.removeEmployee(employeeId);
     }
+
 
     public static void addEmployee(Employee employee) {
         EmployeeDAO.addEmployee(employee);

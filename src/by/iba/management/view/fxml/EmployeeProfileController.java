@@ -121,8 +121,26 @@ public class EmployeeProfileController {
 
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
-        //logic to be written here
-        //alert information
+        /*
+        Employee newEmployee = new Employee();
+        newEmployee.setProjectId(0);
+        newEmployee.setFirstName(firstName.getText());
+        newEmployee.setLastName(lastName.getText());
+        newEmployee.setTeamLead(isTeamLead.isSelected());
+        newEmployee.setPosition(position.getValue());
+        newEmployee.setEnglishLanguageLevel(englishLevel.getValue());
+        newEmployee.setProgrammingLanguage(isJava.setSelected());
+        newEmployee.setFirstName(firstName.isSelected());
+        newEmployee.setLastName(lastName.isSelected());
+        newEmployee.setFirstName(firstName.isSelected());
+        newEmployee.setLastName(lastName.isSelected());
+        newEmployee.setFirstName(firstName.isSelected());
+        newEmployee.setLastName(lastName.isSelected());
+
+
+        EmployeeLogic.updateEmployee(newEmployee);
+         */
+
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setAlertType(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");

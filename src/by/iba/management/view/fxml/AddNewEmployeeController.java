@@ -1,7 +1,9 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
+import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.Position;
+import by.iba.management.model.logic.EmployeeLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,15 +85,6 @@ public class AddNewEmployeeController {
         window.show();
     }
 
-    private void popup(ActionEvent event, String link) throws IOException {
-        Parent employeeProfile = FXMLLoader.load(getClass().getResource(link));
-        Scene popup = new Scene(employeeProfile);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(popup);
-        window.centerOnScreen();
-        window.show();
-    }
-
     @FXML
     private void backToEmployeesList(ActionEvent event) throws IOException {
         String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
@@ -100,6 +93,26 @@ public class AddNewEmployeeController {
 
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
+        /*
+        Employee newEmployee = new Employee();
+        newEmployee.setProjectId(0);
+        newEmployee.setFirstName(firstName.getText());
+        newEmployee.setLastName(lastName.getText());
+        newEmployee.setTeamLead(isTeamLead.isSelected());
+        newEmployee.setPosition(position.getValue(newEmployee.getPosition()));
+        newEmployee.setEnglishLanguageLevel(englishLevel.getValue());
+        newEmployee.setProgrammingLanguage(isJava.isSelected());
+        newEmployee.setFirstName(firstName.isSelected());
+        newEmployee.setLastName(lastName.isSelected());
+        newEmployee.setFirstName(firstName.isSelected());
+        newEmployee.setLastName(lastName.isSelected());
+        newEmployee.setFirstName(firstName.isSelected());
+        newEmployee.setLastName(lastName.isSelected());
+
+        EmployeeLogic.addEmployee(newEmployee);
+
+         */
+
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setAlertType(Alert.AlertType.INFORMATION);
