@@ -71,12 +71,7 @@ public class ProjectProfileController {
     }
 
     @FXML
-    private void handleDeleteProject(ActionEvent event) throws IOException {
-        //int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
-        //fxProjectsListTable.getItems().remove(line);
-        // TODO: 19.06.2020 Does line equal projectId?
-        //ProjectLogic.removeProject(line);
-
+    public void handleDeleteProject(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Are you sure you want to delete this project from the system?");
@@ -84,8 +79,8 @@ public class ProjectProfileController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            //ProjectDAO.removeProject();
-            //EmployeeDAO.removeProjectFormEmployee();
+            ProjectLogic.unassignEmployee(Long.parseLong(projectId.getText()));
+            ProjectLogic.removeProject(Long.parseLong(projectId.getText()));
             String projectsPageLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
             prepare(event, projectsPageLink);
         } else {

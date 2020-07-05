@@ -22,6 +22,16 @@ public class EmployeeDAO {
         }
     }
 
+    public static void unassignEmployee(long projectId){
+        Connection connection = DBConnector.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate("update EMPLOYEE set PROJECT_ID = null where project_id = " + projectId);
+        } catch (SQLException ec) {
+            ec.printStackTrace();
+        }
+    }
+
     public static void updateEmployee(Employee employee) {
         // TODO: 30.06.2020
     }

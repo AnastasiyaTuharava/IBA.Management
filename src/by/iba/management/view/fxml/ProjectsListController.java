@@ -119,9 +119,10 @@ public class ProjectsListController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             int line = fxProjectsListTable.getSelectionModel().getSelectedIndex();
+            Project project = fxProjectsListTable.getItems().get(line);
+            ProjectLogic.unassignEmployee(project.getProjectId());
+            ProjectLogic.removeProject(project);
             fxProjectsListTable.getItems().remove(line);
-            //ProjectDAO.removeProject(projectId);
-            //EmployeeDAO.removeProjectFormEmployee();
             alert.close();
         } else {
             alert.close();
@@ -131,8 +132,20 @@ public class ProjectsListController {
     @FXML
     private void findProject() {
         String searchField = fxFindProjectTextField.getText();
-        ProjectDAO.findProjectsByName(searchField);
+        List<Project> searchResult = ProjectLogic.findProjectsByName(searchField);
+        for (Project p : searchResult) {
+            projectId.setCellValueFactory(new PropertyValueFactory<>("projectId"));
+            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+            projectDescription.setCellValueFactory(new PropertyValueFactory<>("projectDescription"));
+        }
+        ObservableList<Project> projectsOList = FXCollections.observableList(searchResult);
+        fxProjectsListTable.setItems(projectsOList);
+        showProjectDetails(null);
+        fxProjectsListTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        showProjectDetails(newValue));
     }
+
 
     @FXML
     private void backToMain(ActionEvent event) throws IOException {

@@ -22,6 +22,10 @@ public class ProjectLogic {
         ProjectDAO.removeProject(id);
     }
 
+    public static void unassignEmployee(long projectId){
+        EmployeeDAO.unassignEmployee(projectId);
+    }
+
     public static void addProject(Project project) {
         ProjectDAO.addProject(project);
     }
