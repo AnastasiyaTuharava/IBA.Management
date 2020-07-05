@@ -45,6 +45,8 @@ public class EmployeesListController {
     @FXML
     Button fxSearchByEmployeeNameButton;
     @FXML
+    Button clearSearchButton;
+    @FXML
     Button fxExportEmployeesToExcelButton;
     @FXML
     Label employeeIdLabel;
@@ -163,9 +165,26 @@ public class EmployeesListController {
     @FXML
     private void findEmployeeByName() {
         String searchField = fxFindEmployeeTextField.getText();
-        List<Employee> employeesList = EmployeeLogic.findEmployeesByName(searchField);
-        ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(employeesList);
+        List<Employee> searchResult = EmployeeLogic.findEmployeesByName(searchField);
+        for (Employee e : searchResult) {
+            employeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+            firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            projectName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+            position.setCellValueFactory(new PropertyValueFactory<>("position"));
+        }
+        ObservableList<Employee> fxOEmployeesList = FXCollections.observableList(searchResult);
         employeesListTable.setItems(fxOEmployeesList);
+        showEmployeeDetails(null);
+        employeesListTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) ->
+                        showEmployeeDetails(newValue));
+    }
+
+    @FXML
+    private void clearSearchResults(){
+        initialize();
+        fxFindEmployeeTextField.clear();
     }
 
     @FXML

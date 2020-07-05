@@ -157,6 +157,8 @@ public class EmployeeDAO {
         return employeeList;
     }
 
+
+
     public static List<Employee> getEmployees() {
         List<Employee> employeeList = new ArrayList<>();
         Connection connection = DBConnector.getConnection();
@@ -201,7 +203,9 @@ public class EmployeeDAO {
         List<Employee> employeeList = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE name LIKE '%" + employeeName + "%'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE NAME LIKE '%" + employeeName.toLowerCase() + "%' OR " +
+                    "NAME LIKE '%" + employeeName.toUpperCase() + "%' OR SURNAME LIKE '%" + employeeName.toLowerCase() + "%' OR " +
+                    "SURNAME LIKE '%" + employeeName.toUpperCase() + "%'");
             while (rs.next()) {
                 Employee employee = new Employee();
                 employee.setEmployeeId(rs.getInt("id"));

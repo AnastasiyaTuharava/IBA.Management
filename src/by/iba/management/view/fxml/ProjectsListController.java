@@ -39,6 +39,8 @@ public class ProjectsListController {
     @FXML
     Button fxExportProjectsToExcelButton;
     @FXML
+    Button clearSearchButton;
+    @FXML
     TextField fxFindProjectTextField;
     @FXML
     TableView<Project> fxProjectsListTable;
@@ -144,6 +146,12 @@ public class ProjectsListController {
         fxProjectsListTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) ->
                         showProjectDetails(newValue));
+    }
+
+    @FXML
+    private void clearSearchResults(){
+        initialize();
+        fxFindProjectTextField.clear();
     }
 
 

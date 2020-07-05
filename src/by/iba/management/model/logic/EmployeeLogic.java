@@ -32,7 +32,7 @@ public class EmployeeLogic {
         return EmployeeDAO.getEmployees();
     }
 
-    public static List<Employee> findEmployeesByName(String employeeName) {
-        return EmployeeDAO.findEmployeesByName(employeeName);
+    public static List<Employee> findEmployeesByName(String name) {
+        return EmployeeDAO.findEmployeesByName(name);
     }
 }

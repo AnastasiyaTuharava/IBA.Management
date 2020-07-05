@@ -41,6 +41,7 @@
             <Button fx:id="fxFindProjectButton" layoutX="660.0" layoutY="62.0" mnemonicParsing="false" onAction="#findProject" text="Find Project" />
             <Button fx:id="fxDeleteProjectButton" layoutX="27.0" layoutY="634.0" mnemonicParsing="false" onAction="#handleDeleteProject" text="Delete" />
             <Button fx:id="openProjectButton" layoutX="206.0" layoutY="634.0" mnemonicParsing="false" onAction="#openProjectProfile" text="Open" />
+            <Button fx:id="clearSearchButton" layoutX="800.0" layoutY="62.0" mnemonicParsing="false" onAction="#clearSearchResults" text="Clear" />
          </children>
       </AnchorPane>
    </content>

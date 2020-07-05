@@ -47,6 +47,7 @@
             <Button fx:id="openEmployeeProfileButton" layoutX="207.0" layoutY="584.0" mnemonicParsing="false" onAction="#openEmployeeProfile" text="Open" />
             <Label fx:id="programming" layoutX="235.0" layoutY="456.0" text="N/A" />
             <Label layoutX="27.0" layoutY="456.0" text="Programmimg:" />
+            <Button fx:id="clearSearchButton" layoutX="818.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearSearchResults" text="Clear" />
          </children>
       </AnchorPane>
   </content>
