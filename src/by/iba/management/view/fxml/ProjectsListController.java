@@ -33,10 +33,6 @@ public class ProjectsListController {
     @FXML
     Button addNewProjectButton;
     @FXML
-    RadioButton fxSearchByProjectId;
-    @FXML
-    RadioButton fxSearchByProjectName;
-    @FXML
     Button fxExportProjectsToExcelButton;
     @FXML
     Button clearSearchButton;

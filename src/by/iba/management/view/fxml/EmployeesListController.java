@@ -153,10 +153,10 @@ public class EmployeesListController {
         alert.setContentText("Please note that data cannot be restored.");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            //employee delete logic here
-            alert.close();
-            //String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
-            //prepare(event, employeesListLink);
+            int line = employeesListTable.getSelectionModel().getSelectedIndex();
+            Employee employee = employeesListTable.getItems().get(line);
+            EmployeeLogic.removeEmployee(employee.getEmployeeId());
+            employeesListTable.getItems().remove(line);
         } else {
             alert.close();
         }

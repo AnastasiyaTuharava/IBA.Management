@@ -16,7 +16,7 @@ public class EmployeeDAO {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("delete FROM EMPLOYEE where id = " + id);
+            stmt.execute("delete FROM EMPLOYEE where id = " + id);
         } catch (SQLException ec) {
             ec.printStackTrace();
         }

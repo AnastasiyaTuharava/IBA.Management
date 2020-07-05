@@ -13,7 +13,6 @@ public class EmployeeLogic {
 
     public static void removeEmployee(long employeeId) throws IOException {
         EmployeeDAO.removeEmployee(employeeId);
-
     }
 
     public static void addEmployee(Employee employee) {

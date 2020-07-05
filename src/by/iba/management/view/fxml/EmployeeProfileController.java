@@ -4,6 +4,7 @@ import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.model.entity.Employee;
 import by.iba.management.model.entity.EnglishLanguageLevel;
 import by.iba.management.model.entity.Position;
+import by.iba.management.model.logic.EmployeeLogic;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -109,8 +110,9 @@ public class EmployeeProfileController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            //employee delete logic here
-            //alert.close();
+            Employee employee = new Employee();
+            EmployeeLogic.removeEmployee(employee.getEmployeeId());
+            alert.close();
             String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
             prepare(event, employeesListLink);
         } else {
