@@ -110,8 +110,7 @@ public class EmployeeProfileController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            Employee employee = new Employee();
-            EmployeeLogic.removeEmployee(employee.getEmployeeId());
+            EmployeeLogic.removeEmployee(Long.parseLong(employeeId.getText()));
             alert.close();
             String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
             prepare(event, employeesListLink);
