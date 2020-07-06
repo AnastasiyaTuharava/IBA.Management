@@ -1,8 +1,7 @@
 package by.iba.management.view.fxml;
 
 import by.iba.management.dao.EmployeeDAO;
-import by.iba.management.model.entity.Employee;
-import by.iba.management.model.entity.Position;
+import by.iba.management.model.entity.*;
 import by.iba.management.model.logic.EmployeeLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,9 +29,9 @@ public class AddNewEmployeeController {
     @FXML
     CheckBox isTeamLead;
     @FXML
-    ChoiceBox position;
+    ChoiceBox <Position>  position;
     @FXML
-    ChoiceBox englishLevel;
+    ChoiceBox <EnglishLanguageLevel> englishLevel;
     @FXML
     CheckBox isJava;
     @FXML
@@ -93,25 +92,46 @@ public class AddNewEmployeeController {
 
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
-        /*
+
         Employee newEmployee = new Employee();
         newEmployee.setProjectId(0);
         newEmployee.setFirstName(firstName.getText());
         newEmployee.setLastName(lastName.getText());
         newEmployee.setTeamLead(isTeamLead.isSelected());
-        newEmployee.setPosition(position.getValue(newEmployee.getPosition()));
+        newEmployee.setPosition(position.getValue());
         newEmployee.setEnglishLanguageLevel(englishLevel.getValue());
-        newEmployee.setProgrammingLanguage(isJava.isSelected());
-        newEmployee.setFirstName(firstName.isSelected());
-        newEmployee.setLastName(lastName.isSelected());
-        newEmployee.setFirstName(firstName.isSelected());
-        newEmployee.setLastName(lastName.isSelected());
-        newEmployee.setFirstName(firstName.isSelected());
-        newEmployee.setLastName(lastName.isSelected());
+
+        ProgrammingLanguage pl = new ProgrammingLanguage();
+        pl.setcPlusPlus(isCplusPlus.isSelected());
+        pl.setcSharp(isCsharp.isSelected());
+        pl.setDotNet(isDotNet.isSelected());
+        pl.setJava(isJava.isSelected());
+        pl.setcSharp(isCsharp.isSelected());
+        newEmployee.setProgrammingLanguage(pl);
+
+        Skills skills = new Skills();
+        skills.setSql(isSql.isSelected());
+        skills.setJavaScript(isJavaScript.isSelected());
+        skills.setHtml(isHtml.isSelected());
+        skills.setCss(isCss.isSelected());
+        skills.setjQuery(isJquery.isSelected());
+        newEmployee.setSkills(skills);
+
+        Tools tools = new Tools();
+        tools.setEclipse(isEclipse.isSelected());
+        tools.setIntellijIdea(isIdea.isSelected());
+        tools.setNetBeans(isDotNet.isSelected());
+        tools.setVisualStudio(isVisualStudio.isSelected());
+        newEmployee.setTools(tools);
+
+        Testing testing = new Testing();
+        testing.setAutomation(isAutomation.isSelected());
+        testing.setManual(isManual.isSelected());
+        testing.setTestingDeskTopApplications(isDesktop.isSelected());
+        testing.setTestingMobileApplications(isMobile.isSelected());
+        newEmployee.setTesting(testing);
 
         EmployeeLogic.addEmployee(newEmployee);
-
-         */
 
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
