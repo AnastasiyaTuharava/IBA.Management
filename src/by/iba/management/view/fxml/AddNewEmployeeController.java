@@ -1,8 +1,8 @@
 package by.iba.management.view.fxml;
 
-import by.iba.management.dao.EmployeeDAO;
 import by.iba.management.model.entity.*;
 import by.iba.management.model.logic.EmployeeLogic;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +16,6 @@ import java.io.IOException;
 
 public class AddNewEmployeeController {
 
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
-
     @FXML
     TextField employeeId;
     @FXML
@@ -29,9 +27,9 @@ public class AddNewEmployeeController {
     @FXML
     CheckBox isTeamLead;
     @FXML
-    ChoiceBox <Position>  position;
+    ChoiceBox<Position> position;
     @FXML
-    ChoiceBox <EnglishLanguageLevel> englishLevel;
+    ChoiceBox<EnglishLanguageLevel> englishLevel;
     @FXML
     CheckBox isJava;
     @FXML
@@ -75,6 +73,12 @@ public class AddNewEmployeeController {
     Button saveProfile;
 
     private Position ObservableList;
+
+    @FXML
+    public void initialize() {
+        position.setItems(FXCollections.observableArrayList(Position.values()));
+        englishLevel.setItems(FXCollections.observableArrayList(EnglishLanguageLevel.values()));
+    }
 
     private void prepare(ActionEvent event, String link) throws IOException {
         Parent employeeProfile = FXMLLoader.load(getClass().getResource(link));
@@ -135,10 +139,10 @@ public class AddNewEmployeeController {
 
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("The employee is successfully added!");
-            alert.showAndWait();
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("The employee is successfully added!");
+        alert.showAndWait();
 
         String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
         prepare(event, employeesListLink);

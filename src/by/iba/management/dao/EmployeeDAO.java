@@ -22,7 +22,7 @@ public class EmployeeDAO {
         }
     }
 
-    public static void unassignEmployee(long projectId){
+    public static void unassignEmployee(long projectId) {
         Connection connection = DBConnector.getConnection();
         try {
             Statement stmt = connection.createStatement();
@@ -146,26 +146,26 @@ public class EmployeeDAO {
     }
 
     public static void addEmployee(Employee employee) {
-            Connection connection = DBConnector.getConnection();
-            try {
-                Statement stmt = connection.createStatement();
-                stmt.execute("INSERT INTO EMPLOYEE (name, surname, project_id, is_teamLead, position, " +
-                        "english_level, java, c_plus_plus, c_sharp,php, dot_net, sql, js, html, css, j_query, " +
-                        "manual_qa, auto_qa,desktop_testing,mobile_testing, visual_studio,intellij_idea,eclipse,net_beans) " + "VALUES ('"
-                                + employee.getFirstName() + "', '" + employee.getLastName() + "', '" + employee.getProjectId() + "', '" +
-                                        employee.isTeamLead() + "', '" + employee.getPosition() + "', '" +
-                                        employee.getEnglishLanguageLevel() + "', '" + employee.getProgrammingLanguage().isJava() + "', '" +
-                                        employee.getProgrammingLanguage().iscPlusPlus() + "', '" + employee.getProgrammingLanguage().iscSharp() + "', '" +
-                                        employee.getProgrammingLanguage().isPhp() + "', '" + employee.getProgrammingLanguage().isDotNet() + "', '" +
-                                        employee.getSkills().isSql() + "', '" + employee.getSkills().isJavaScript() + "', '" +
-                                        employee.getSkills().isHtml() + "', '" + employee.getSkills().isCss() + "', '" + employee.getSkills().isjQuery() + "', '" +
-                                        employee.getTesting().isManual() + "', '" + employee.getTesting().isAutomation() + "', '" +
-                                        employee.getTesting().isTestingDeskTopApplications() + "', '" + employee.getTesting().isTestingMobileApplications() + "', '" +
-                                        employee.getTools().isVisualStudio() + "', '" +  employee.getTools().isIntellijIdea() + "', '" +
-                                employee.getTools().isEclipse() + "', '" + employee.getTools().isNetBeans() + "')");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        Connection connection = DBConnector.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute("INSERT INTO EMPLOYEE (name, surname, is_teamLead, position, " +
+                    "english_level, java, c_plus_plus, c_sharp,php, dot_net, sql, js, html, css, j_query, " +
+                    "manual_qa, auto_qa,desktop_testing,mobile_testing, visual_studio,intellij_idea,eclipse,net_beans) " + "VALUES ('"
+                    + employee.getFirstName() + "', '" + employee.getLastName() + "', '" +
+                    employee.isTeamLead() + "', '" + employee.getPosition() + "', '" +
+                    employee.getEnglishLanguageLevel() + "', '" + employee.getProgrammingLanguage().isJava() + "', '" +
+                    employee.getProgrammingLanguage().iscPlusPlus() + "', '" + employee.getProgrammingLanguage().iscSharp() + "', '" +
+                    employee.getProgrammingLanguage().isPhp() + "', '" + employee.getProgrammingLanguage().isDotNet() + "', '" +
+                    employee.getSkills().isSql() + "', '" + employee.getSkills().isJavaScript() + "', '" +
+                    employee.getSkills().isHtml() + "', '" + employee.getSkills().isCss() + "', '" + employee.getSkills().isjQuery() + "', '" +
+                    employee.getTesting().isManual() + "', '" + employee.getTesting().isAutomation() + "', '" +
+                    employee.getTesting().isTestingDeskTopApplications() + "', '" + employee.getTesting().isTestingMobileApplications() + "', '" +
+                    employee.getTools().isVisualStudio() + "', '" + employee.getTools().isIntellijIdea() + "', '" +
+                    employee.getTools().isEclipse() + "', '" + employee.getTools().isNetBeans() + "')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static List<Employee> getEmployeesAndProject() {
@@ -207,7 +207,6 @@ public class EmployeeDAO {
         }
         return employeeList;
     }
-
 
 
     public static List<Employee> getEmployees() {
