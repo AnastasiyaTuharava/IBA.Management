@@ -118,6 +118,7 @@ public class EmployeeProfileController {
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
         Employee newEmployee = new Employee();
+        newEmployee.setEmployeeId(Long.parseLong(employeeId.getText()));
         newEmployee.setFirstName(firstName.getText());
         newEmployee.setLastName(lastName.getText());
         newEmployee.setTeamLead(isTeamLead.isSelected());
@@ -130,6 +131,7 @@ public class EmployeeProfileController {
         pl.setDotNet(isDotNet.isSelected());
         pl.setJava(isJava.isSelected());
         pl.setcSharp(isCsharp.isSelected());
+        pl.setPhp(isPhp.isSelected());
         newEmployee.setProgrammingLanguage(pl);
 
         Skills skills = new Skills();
