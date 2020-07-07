@@ -76,8 +76,6 @@ public class EmployeeProfileController {
     @FXML
     Button saveEmployee;
 
-    private Position ObservableList;
-
     @FXML
     public void initialize() {
         position.setItems(FXCollections.observableArrayList(Position.values()));
@@ -120,7 +118,6 @@ public class EmployeeProfileController {
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
         Employee newEmployee = new Employee();
-        newEmployee.setProjectId(0);
         newEmployee.setFirstName(firstName.getText());
         newEmployee.setLastName(lastName.getText());
         newEmployee.setTeamLead(isTeamLead.isSelected());

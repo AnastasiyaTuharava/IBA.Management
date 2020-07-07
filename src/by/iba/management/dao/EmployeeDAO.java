@@ -92,13 +92,14 @@ public class EmployeeDAO {
         Employee employee = new Employee();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE ID = " + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE e LEFT JOIN PROJECT p ON p.ID_PROJECT = e.PROJECT_ID WHERE e.ID = " + id);
             while (rs.next()) {
 
                 employee.setEmployeeId(rs.getInt("id"));
                 employee.setFirstName(rs.getString("name"));
                 employee.setLastName(rs.getString("surname"));
                 employee.setProjectId(rs.getInt("project_id"));
+                employee.setProjectName(rs.getString("name_project"));
                 employee.setTeamLead(rs.getBoolean("is_teamlead"));
                 employee.setPosition(Position.valueOf(rs.getString("position")));
                 employee.setEnglishLanguageLevel(EnglishLanguageLevel.valueOf(rs.getString("english_level")));
