@@ -14,8 +14,8 @@
                     <children>
                         <Label layoutX="38.0" layoutY="64.0" text="Project Name: " />
                         <Label layoutX="38.0" layoutY="114.0" text="Project Description: " />
-                        <TextField fx:id="projectDescription" alignment="TOP_LEFT" layoutX="247.0" layoutY="109.0" prefHeight="262.0" prefWidth="668.0" />
-                        <TextField fx:id="projectName" layoutX="247.0" layoutY="58.0" />
+                        <TextField fx:id="projectDescription" alignment="TOP_LEFT" layoutX="247.0" layoutY="109.0" prefHeight="262.0" prefWidth="668.0" promptText="Enter Project Description..."/>
+                        <TextField fx:id="projectName" layoutX="247.0" layoutY="58.0" promptText="Enter Project Name..."/>
                         <Button fx:id="fxSaveButton" layoutX="1007.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleSaveProject" text="Save" />
                         <Button fx:id="fxCancelButton" layoutX="885.0" layoutY="557.0" mnemonicParsing="false" onAction="#backToProjectsList" text="Cancel" />
                     </children>

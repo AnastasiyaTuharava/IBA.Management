@@ -19,7 +19,7 @@
                         <Label layoutX="38.0" layoutY="96.0" text="First Name: " />
                         <Label layoutX="38.0" layoutY="50.0" text="Employee ID: " />
                         <TextField fx:id="firstName" layoutX="247.0" layoutY="90.0" />
-                        <TextField fx:id="employeeId" editable="false" layoutX="247.0" layoutY="45.0" />
+                        <TextField fx:id="employeeId" disable="true" editable="false" focusTraversable="false" opacity="0.7" layoutX="247.0" layoutY="45.0" />
                         <Button fx:id="saveEmployee" layoutX="999.0" layoutY="663.0" mnemonicParsing="false" onAction="#saveEmployee" text="Save" />
                         <Button fx:id="fxGoHomeButton" layoutX="877.0" layoutY="663.0" mnemonicParsing="false" onAction="#backToEmployeesList" text="Cancel" />
                         <TextField fx:id="lastName" layoutX="247.0" layoutY="135.0" />
@@ -52,7 +52,7 @@
                         <Label layoutX="34.0" layoutY="307.0" text="English Level:" />
                         <Label layoutX="35.0" layoutY="225.0" text="Team Lead?" />
                         <CheckBox fx:id="isTeamLead" layoutX="247.0" layoutY="225.0" mnemonicParsing="false" text=" " />
-                        <ChoiceBox fx:id="englishLevel" layoutX="247.0" layoutY="305.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="englishLevel" layoutX="247.0" layoutY="305.0" prefWidth="60.0" />
                         <Group fx:id="fxQaGroup">
                             <children>
                                 <Label layoutX="583.0" layoutY="483.0" text="For QA only:" />

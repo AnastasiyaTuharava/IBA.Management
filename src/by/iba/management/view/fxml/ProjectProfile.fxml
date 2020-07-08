@@ -17,7 +17,7 @@
                   <Label layoutX="38.0" layoutY="50.0" text="Project ID: " />
                   <TextField fx:id="projectDescription" alignment="TOP_LEFT" layoutX="247.0" layoutY="145.0" prefHeight="161.0" prefWidth="824.0" />
                   <TextField fx:id="projectName" layoutX="247.0" layoutY="94.0" />
-                  <TextField fx:id="projectId" editable="false" layoutX="247.0" layoutY="44.0" />
+                  <TextField fx:id="projectId" disable="true" editable="false" focusTraversable="false" layoutX="247.0" layoutY="44.0" opacity="0.7" />
                   <Button fx:id="fxSaveButton" layoutX="1006.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleSaveProject" text="Save" />
                   <Button fx:id="fxCancelButton" layoutX="885.0" layoutY="574.0" mnemonicParsing="false" onAction="#backToProjectsList" text="Cancel" />
                   <Button fx:id="fxDeleteButton" layoutX="64.0" layoutY="570.0" mnemonicParsing="false" onAction="#handleDeleteProject" prefHeight="39.0" prefWidth="183.0" text="Delete Project" />

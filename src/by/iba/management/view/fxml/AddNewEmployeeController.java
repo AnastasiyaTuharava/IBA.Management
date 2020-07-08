@@ -17,7 +17,9 @@ import java.io.IOException;
 public class AddNewEmployeeController {
 
     @FXML
-    TextField employeeId;
+    Label firstNameLabel;
+    @FXML
+    Label lastNameLabel;
     @FXML
     TextField firstName;
     @FXML
@@ -97,6 +99,7 @@ public class AddNewEmployeeController {
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
 
+
         Employee newEmployee = new Employee();
         newEmployee.setProjectId(0);
         newEmployee.setFirstName(firstName.getText());
@@ -135,16 +138,23 @@ public class AddNewEmployeeController {
         testing.setTestingMobileApplications(isMobile.isSelected());
         newEmployee.setTesting(testing);
 
-        EmployeeLogic.addEmployee(newEmployee);
+        /*if ((firstName.getText() != null && !firstName.getText().isEmpty())) {
+            firstNameLabel.setText("First Name cannot be empty!");
+        } else if ((lastName.getText() != null && !lastName.getText().isEmpty())) {
+            lastNameLabel.setText("Last Name cannot be empty!");
+        } else {
+                 */
+            EmployeeLogic.addEmployee(newEmployee);
 
-        //alert information
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setContentText("The employee is successfully added!");
-        alert.showAndWait();
+            //alert information
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("The employee is successfully added!");
+            alert.showAndWait();
 
-        String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
-        prepare(event, employeesListLink);
+            String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
+            prepare(event, employeesListLink);
+        }
     }
-}
+
