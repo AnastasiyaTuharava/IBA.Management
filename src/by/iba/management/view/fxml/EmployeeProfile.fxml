@@ -23,7 +23,7 @@
                         <Button fx:id="saveEmployee" layoutX="999.0" layoutY="663.0" mnemonicParsing="false" onAction="#saveEmployee" text="Save" />
                         <Button fx:id="fxGoHomeButton" layoutX="877.0" layoutY="663.0" mnemonicParsing="false" onAction="#backToEmployeesList" text="Cancel" />
                         <TextField fx:id="lastName" layoutX="247.0" layoutY="135.0" />
-                        <TextField fx:id="projectName" layoutX="247.0" layoutY="180.0" />
+                        <TextField fx:id="projectName" editable="false" layoutX="247.0" layoutY="180.0" />
                         <Label layoutX="38.0" layoutY="141.0" text="Last Name" />
                         <Label layoutX="36.0" layoutY="186.0" text="Project assigned (if any):" />
                         <Group fx:id="fxDevGroup">
