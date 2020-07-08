@@ -100,8 +100,10 @@ public class EmployeeDAO {
                 employee.setProjectId(rs.getInt("project_id"));
                 employee.setProjectName(rs.getString("name_project"));
                 employee.setTeamLead(rs.getBoolean("is_teamlead"));
-                employee.setPosition(Position.valueOf(rs.getString("position")));
-                employee.setEnglishLanguageLevel(EnglishLanguageLevel.valueOf(rs.getString("english_level")));
+                String position = rs.getString("position");
+                employee.setPosition(position == null || position.equals("null") ? null : Position.valueOf(position));
+                String englishLevel = rs.getString("english_level");
+                employee.setEnglishLanguageLevel(englishLevel == null || englishLevel.equals("null") ? null : EnglishLanguageLevel.valueOf(englishLevel));
 
                 ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
                 programmingLanguage.setJava(rs.getBoolean("java"));
@@ -182,8 +184,10 @@ public class EmployeeDAO {
                 employee.setProjectId(rs.getInt("project_id"));
                 employee.setProjectName(rs.getString("name_project"));
                 employee.setTeamLead(rs.getBoolean("is_teamlead"));
-                employee.setPosition(Position.valueOf(rs.getString("position")));
-                employee.setEnglishLanguageLevel(EnglishLanguageLevel.valueOf(rs.getString("english_level")));
+                String position = rs.getString("position");
+                employee.setPosition(position == null || position.equals("null") ? null : Position.valueOf(position));
+                String englishLvlv = rs.getString("english_level");
+                employee.setEnglishLanguageLevel(englishLvlv == null || englishLvlv.equals("null") ? null : EnglishLanguageLevel.valueOf(englishLvlv));
 
                 Skills skills = new Skills();
                 skills.setCss(rs.getBoolean("css"));
@@ -222,8 +226,10 @@ public class EmployeeDAO {
                 employee.setLastName(rs.getString("surname"));
                 employee.setProjectId(rs.getInt("project_id"));
                 employee.setTeamLead(rs.getBoolean("is_teamlead"));
-                employee.setPosition(Position.valueOf(rs.getString("position")));
-                employee.setEnglishLanguageLevel(EnglishLanguageLevel.valueOf(rs.getString("english_level")));
+                String position = rs.getString("position");
+                employee.setPosition(position == null || position.equals("null") ? null : Position.valueOf(position));
+                String englishLevel = rs.getString("english_level");
+                employee.setEnglishLanguageLevel(englishLevel == null || englishLevel.equals("null") ? null : EnglishLanguageLevel.valueOf(englishLevel));
 
                 Skills skills = new Skills();
                 skills.setCss(rs.getBoolean("css"));
