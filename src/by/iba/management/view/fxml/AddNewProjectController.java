@@ -42,7 +42,7 @@ public class AddNewProjectController {
         Project newProject = new Project();
         newProject.setProjectName(projectName.getText());
         newProject.setProjectDescription(projectDescription.getText());
-
+        ProjectLogic.addProject(newProject);
         //alert information
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setAlertType(Alert.AlertType.INFORMATION);
@@ -52,8 +52,6 @@ public class AddNewProjectController {
 
         String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
         prepare(event, projectsListLink);
-
-        ProjectLogic.addProject(newProject);
     }
 
     @FXML
