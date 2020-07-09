@@ -105,8 +105,9 @@ public class ProjectDAO {
         List<Project> projectList = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE name_project LIKE '%" + projectName.toLowerCase() + "%' OR " +
-                    "name_project LIKE '%" + projectName.toUpperCase() + "%'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROJECT WHERE " +
+                    "UPPER(NAME_PROJECT) LIKE '%" + projectName.toUpperCase() + "%'"
+            );
             while (rs.next()) {
                 Project project = new Project();
                 project.setProjectId(rs.getInt("id_project"));
