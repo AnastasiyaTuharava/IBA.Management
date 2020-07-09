@@ -259,9 +259,12 @@ public class EmployeeDAO {
         List<Employee> employeeList = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEE WHERE NAME LIKE '%" + employeeName.toLowerCase() + "%' OR " +
-                    "NAME LIKE '%" + employeeName.toUpperCase() + "%' OR SURNAME LIKE '%" + employeeName.toLowerCase() + "%' OR " +
-                    "SURNAME LIKE '%" + employeeName.toUpperCase() + "%'");
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT * FROM EMPLOYEE WHERE " +
+                            "UPPER(NAME) LIKE '%" + employeeName.toUpperCase() + "%' " +
+                            "OR " +
+                            "UPPER(SURNAME) LIKE '%" + employeeName.toUpperCase() + "%'"
+            );
             while (rs.next()) {
                 Employee employee = new Employee();
                 employee.setEmployeeId(rs.getInt("id"));
