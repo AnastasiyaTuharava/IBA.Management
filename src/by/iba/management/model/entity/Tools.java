@@ -50,8 +50,20 @@ public class Tools {
 
     @Override
     public String toString() {
-        return "Visual Studio " + visualStudio + ", Intellij Idea " + intellijIdea + ", Eclipse "
-                + eclipse + ", Net Beans " + netBeans;
+        StringBuilder sb = new StringBuilder();
+        if (isVisualStudio()) {
+            sb.append("Visual Studio, ");
+        }
+        if (isIntellijIdea()) {
+            sb.append("Intellij Idea, ");
+        }
+        if (isEclipse()) {
+            sb.append("Eclipse, ");
+        }
+        if (isNetBeans()) {
+            sb.append("Net Beans");
+        }
+        return sb.toString();
     }
 
     @Override

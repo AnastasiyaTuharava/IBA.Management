@@ -60,8 +60,23 @@ public class ProgrammingLanguage {
 
     @Override
     public String toString() {
-        return "ProgrammingLanguage: " + "java " + java + ", cPlusPlus " + cPlusPlus + ", cSharp " + cSharp
-                + ", php " + php + ", dotNet " + dotNet;
+        StringBuilder sb = new StringBuilder();
+        if (isJava()) {
+            sb.append("Java, ");
+        }
+        if (iscPlusPlus()) {
+            sb.append("C++, ");
+        }
+        if (iscSharp()) {
+            sb.append("C#, ");
+        }
+        if (isPhp()) {
+            sb.append("PHP, ");
+        }
+        if (isDotNet()) {
+            sb.append(".NET ");
+        }
+        return sb.toString();
     }
 
     @Override

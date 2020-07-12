@@ -50,8 +50,20 @@ public class Testing {
 
     @Override
     public String toString() {
-        return "manual " + manual + ", automation " + automation + ", testing DeskTop Applications "
-                + testingDeskTopApplications + ", testing Mobile Applications " + testingMobileApplications;
+        StringBuilder sb = new StringBuilder();
+        if (isManual()) {
+            sb.append("Manual, ");
+        }
+        if (isAutomation()) {
+            sb.append("Automation, ");
+        }
+        if (isTestingDeskTopApplications()) {
+            sb.append("Testing DeskTop Applications, ");
+        }
+        if (isTestingMobileApplications()) {
+            sb.append("Testing Mobile Applications ");
+        }
+        return sb.toString();
     }
 
     @Override

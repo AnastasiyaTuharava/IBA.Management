@@ -60,11 +60,23 @@ public class Skills {
 
     @Override
     public String toString() {
-        return  "sql " + sql +
-                ", javaScript " + javaScript +
-                ", html " + html +
-                ", css " + css +
-                ", jQuery " + jQuery;
+        StringBuilder sb = new StringBuilder();
+        if (isSql()) {
+            sb.append("SQL, ");
+        }
+        if (isCss()) {
+            sb.append("CSS, ");
+        }
+        if (isHtml()) {
+            sb.append("HTML, ");
+        }
+        if (isJavaScript()) {
+            sb.append("JavaScript, ");
+        }
+        if (isjQuery()) {
+            sb.append("jQuery ");
+        }
+        return sb.toString();
     }
 
     @Override
