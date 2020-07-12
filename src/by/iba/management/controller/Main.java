@@ -14,9 +14,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         initDB();
-        // TODO: 22.06.2020 Test DB
-        //System.out.println(ProjectLogic.getProject(5));
-        //System.out.println((ProjectLogic.getProject("The")));
         launch(args);
     }
 
@@ -29,7 +26,7 @@ public class Main extends Application {
         Stage stage = new Stage();
         String fxmlLink = "/by/iba/management/view/fxml/mainPage.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(fxmlLink));
-        stage.setTitle("Management Tool");
+        stage.setTitle("HR Tool");
         stage.setScene(new Scene(root));
         stage.sizeToScene();
         stage.show();
