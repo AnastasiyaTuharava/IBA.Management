@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,7 +19,7 @@ import java.io.IOException;
 public class AddNewProjectController {
 
     @FXML
-    TextField projectId;
+    Label projectNameLabel;
     @FXML
     TextField projectName;
     @FXML
@@ -42,16 +43,25 @@ public class AddNewProjectController {
         Project newProject = new Project();
         newProject.setProjectName(projectName.getText());
         newProject.setProjectDescription(projectDescription.getText());
-        ProjectLogic.addProject(newProject);
-        //alert information
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setAlertType(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setContentText("The project is successfully added!");
-        alert.showAndWait();
 
-        String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
-        prepare(event, projectsListLink);
+        if ((projectName.getText() == null && projectName.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Project Name is empty!");
+            alert.showAndWait();
+        } else {
+            ProjectLogic.addProject(newProject);
+            //alert information
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("The project is successfully added!");
+            alert.showAndWait();
+
+            String projectsListLink = "/by/iba/management/view/fxml/ProjectsList.fxml";
+            prepare(event, projectsListLink);
+        }
     }
 
     @FXML

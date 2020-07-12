@@ -99,7 +99,6 @@ public class AddNewEmployeeController {
     @FXML
     private void saveEmployee(ActionEvent event) throws IOException {
 
-
         Employee newEmployee = new Employee();
         newEmployee.setProjectId(0);
         newEmployee.setFirstName(firstName.getText());
@@ -138,12 +137,14 @@ public class AddNewEmployeeController {
         testing.setTestingMobileApplications(isMobile.isSelected());
         newEmployee.setTesting(testing);
 
-        /*if ((firstName.getText() != null && !firstName.getText().isEmpty())) {
-            firstNameLabel.setText("First Name cannot be empty!");
-        } else if ((lastName.getText() != null && !lastName.getText().isEmpty())) {
-            lastNameLabel.setText("Last Name cannot be empty!");
+        if ((firstName.getText() == null && firstName.getText().isEmpty())
+                & (lastName.getText() == null && lastName.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Employee`s First and/or Last Name is empty!");
+            alert.showAndWait();
         } else {
-                 */
             EmployeeLogic.addEmployee(newEmployee);
 
             //alert information
@@ -158,3 +159,4 @@ public class AddNewEmployeeController {
         }
     }
 
+}
