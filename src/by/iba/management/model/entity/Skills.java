@@ -1,5 +1,7 @@
 package by.iba.management.model.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Skills {
     private boolean sql;
     private boolean javaScript;
@@ -62,21 +64,21 @@ public class Skills {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (isSql()) {
-            sb.append("SQL, ");
+            sb.append("SQL,");
         }
         if (isCss()) {
-            sb.append("CSS, ");
+            sb.append(" CSS,");
         }
         if (isHtml()) {
-            sb.append("HTML, ");
+            sb.append(" HTML,");
         }
         if (isJavaScript()) {
-            sb.append("JavaScript, ");
+            sb.append(" JavaScript,");
         }
         if (isjQuery()) {
-            sb.append("jQuery ");
+            sb.append(" jQuery,");
         }
-        return sb.toString();
+        return StringUtils.chop(sb.toString());
     }
 
     @Override

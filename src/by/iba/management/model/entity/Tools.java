@@ -1,5 +1,7 @@
 package by.iba.management.model.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Tools {
     private boolean visualStudio;
     private boolean intellijIdea;
@@ -52,18 +54,18 @@ public class Tools {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (isVisualStudio()) {
-            sb.append("Visual Studio, ");
+            sb.append("Visual Studio,");
         }
         if (isIntellijIdea()) {
-            sb.append("Intellij Idea, ");
+            sb.append(" Intellij Idea,");
         }
         if (isEclipse()) {
-            sb.append("Eclipse, ");
+            sb.append(" Eclipse,");
         }
         if (isNetBeans()) {
-            sb.append("Net Beans");
+            sb.append(" Net Beans,");
         }
-        return sb.toString();
+        return StringUtils.chop(sb.toString());
     }
 
     @Override

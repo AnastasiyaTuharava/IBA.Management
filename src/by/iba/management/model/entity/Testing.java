@@ -1,5 +1,7 @@
 package by.iba.management.model.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Testing {
     private boolean manual;
     private boolean automation;
@@ -52,18 +54,18 @@ public class Testing {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (isManual()) {
-            sb.append("Manual, ");
+            sb.append("Manual,");
         }
         if (isAutomation()) {
-            sb.append("Automation, ");
+            sb.append(" Automation,");
         }
         if (isTestingDeskTopApplications()) {
-            sb.append("Testing DeskTop Applications, ");
+            sb.append(" Testing DeskTop Applications,");
         }
         if (isTestingMobileApplications()) {
-            sb.append("Testing Mobile Applications ");
+            sb.append(" Testing Mobile Applications,");
         }
-        return sb.toString();
+        return StringUtils.chop(sb.toString());
     }
 
     @Override

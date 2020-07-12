@@ -1,5 +1,7 @@
 package by.iba.management.model.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ProgrammingLanguage {
     private boolean java;
     private boolean cPlusPlus;
@@ -62,21 +64,21 @@ public class ProgrammingLanguage {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (isJava()) {
-            sb.append("Java, ");
+            sb.append("Java,");
         }
         if (iscPlusPlus()) {
-            sb.append("C++, ");
+            sb.append(" C++,");
         }
         if (iscSharp()) {
-            sb.append("C#, ");
+            sb.append(" C#,");
         }
         if (isPhp()) {
-            sb.append("PHP, ");
+            sb.append(" PHP,");
         }
         if (isDotNet()) {
-            sb.append(".NET ");
+            sb.append(" .NET,");
         }
-        return sb.toString();
+        return StringUtils.chop(sb.toString());
     }
 
     @Override
