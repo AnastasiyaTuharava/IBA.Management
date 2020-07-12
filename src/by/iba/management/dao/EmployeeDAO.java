@@ -204,6 +204,21 @@ public class EmployeeDAO {
                 tools.setVisualStudio(rs.getBoolean("visual_studio"));
                 employee.setTools(tools);
 
+                ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+                programmingLanguage.setPhp(rs.getBoolean("php"));
+                programmingLanguage.setJava(rs.getBoolean("java"));
+                programmingLanguage.setDotNet(rs.getBoolean("dot_net"));
+                programmingLanguage.setcSharp(rs.getBoolean("c_sharp"));
+                programmingLanguage.setcPlusPlus(rs.getBoolean("c_plus_plus"));
+                employee.setProgrammingLanguage(programmingLanguage);
+
+                Testing testing = new Testing();
+                testing.setAutomation(rs.getBoolean("auto_qa"));
+                testing.setManual(rs.getBoolean("manual_qa"));
+                testing.setTestingDeskTopApplications(rs.getBoolean("desktop_testing"));
+                testing.setTestingMobileApplications(rs.getBoolean("mobile_testing"));
+                employee.setTesting(testing);
+
                 employeeList.add(employee);
             }
         } catch (SQLException ex) {
@@ -245,6 +260,21 @@ public class EmployeeDAO {
                 tools.setNetBeans(rs.getBoolean("net_beans"));
                 tools.setVisualStudio(rs.getBoolean("visual_studio"));
                 employee.setTools(tools);
+
+                ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+                programmingLanguage.setPhp(rs.getBoolean("php"));
+                programmingLanguage.setJava(rs.getBoolean("java"));
+                programmingLanguage.setDotNet(rs.getBoolean("dot_net"));
+                programmingLanguage.setcSharp(rs.getBoolean("c_sharp"));
+                programmingLanguage.setcPlusPlus(rs.getBoolean("c_plus_plus"));
+                employee.setProgrammingLanguage(programmingLanguage);
+
+                Testing testing = new Testing();
+                testing.setAutomation(rs.getBoolean("auto_qa"));
+                testing.setManual(rs.getBoolean("manual_qa"));
+                testing.setTestingDeskTopApplications(rs.getBoolean("desktop_testing"));
+                testing.setTestingMobileApplications(rs.getBoolean("mobile_testing"));
+                employee.setTesting(testing);
 
                 employeeList.add(employee);
             }
