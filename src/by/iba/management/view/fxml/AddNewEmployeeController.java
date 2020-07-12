@@ -100,6 +100,17 @@ public class AddNewEmployeeController {
     private void saveEmployee(ActionEvent event) throws IOException {
 
         Employee newEmployee = new Employee();
+        firstName.getText();
+        lastName.getText();
+        case1: if ((firstName.getText() == null || firstName.getText().isEmpty())
+                & (lastName.getText() == null || lastName.getText().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Employee`s First and/or Last Name is empty!");
+            alert.showAndWait();
+            break case1;
+        } else {
         newEmployee.setProjectId(0);
         newEmployee.setFirstName(firstName.getText());
         newEmployee.setLastName(lastName.getText());
@@ -137,26 +148,16 @@ public class AddNewEmployeeController {
         testing.setTestingMobileApplications(isMobile.isSelected());
         newEmployee.setTesting(testing);
 
-        if ((firstName.getText() == null && firstName.getText().isEmpty())
-                & (lastName.getText() == null && lastName.getText().isEmpty())) {
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setContentText("Employee`s First and/or Last Name is empty!");
-            alert.showAndWait();
-        } else {
-            EmployeeLogic.addEmployee(newEmployee);
+        EmployeeLogic.addEmployee(newEmployee);
 
-            //alert information
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setContentText("The employee is successfully added!");
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setContentText("The employee is successfully added!");
+        alert.showAndWait();
 
-            String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
-            prepare(event, employeesListLink);
+        String employeesListLink = "/by/iba/management/view/fxml/EmployeesList.fxml";
+        prepare(event, employeesListLink);
         }
     }
-
 }

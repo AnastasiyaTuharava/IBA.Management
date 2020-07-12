@@ -41,18 +41,19 @@ public class AddNewProjectController {
     @FXML
     private void handleSaveProject(ActionEvent event) throws IOException {
         Project newProject = new Project();
-        newProject.setProjectName(projectName.getText());
-        newProject.setProjectDescription(projectDescription.getText());
-
-        if ((projectName.getText() == null && projectName.getText().isEmpty())) {
+        projectName.getText();
+        case1: if ((projectName.getText() == null || projectName.getText().isEmpty())) {
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setContentText("Project Name is empty!");
             alert.showAndWait();
+            break case1;
         } else {
+            newProject.setProjectName(projectName.getText());
+            newProject.setProjectDescription(projectDescription.getText());
             ProjectLogic.addProject(newProject);
-            //alert information
+
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
