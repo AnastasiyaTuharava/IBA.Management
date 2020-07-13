@@ -91,22 +91,22 @@ public class EmployeesListController {
                 englishLevel.setText("N/A");
             }
             if (employee.getProgrammingLanguage() != null) {
-                programming.setText(String.valueOf(employee.getProgrammingLanguage()));
+                programming.setText(String.valueOf(employee.getProgrammingLanguage()).trim());
             } else {
                 programming.setText("N/A");
             }
             if (employee.getTesting() != null) {
-                testing.setText(String.valueOf(employee.getTesting()));
+                testing.setText(String.valueOf(employee.getTesting()).trim());
             } else {
                 testing.setText("N/A");
             }
             if (employee.getTools() != null) {
-                tools.setText(String.valueOf(employee.getTools()));
+                tools.setText(String.valueOf(employee.getTools()).trim());
             } else {
                 tools.setText("N/A");
             }
             if (employee.getSkills() != null) {
-                otherSkills.setText(String.valueOf(employee.getSkills()));
+                otherSkills.setText(String.valueOf(employee.getSkills()).trim());
             } else {
                 otherSkills.setText("N/A");
             }
